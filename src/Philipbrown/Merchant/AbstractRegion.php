@@ -8,6 +8,11 @@ abstract class AbstractRegion {
   protected $name;
 
   /**
+   * @var string
+   */
+  protected $currency;
+
+  /**
    * Get Name
    *
    * @return string
@@ -15,6 +20,16 @@ abstract class AbstractRegion {
   public function getNameParameter()
   {
     return $this->name;
+  }
+
+  /**
+   * Get Currency
+   *
+   * @return string
+   */
+  public function getCurrencyParameter()
+  {
+    return $this->currency;
   }
 
   /**

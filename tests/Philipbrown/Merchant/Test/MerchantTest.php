@@ -18,7 +18,10 @@ class MerchantTest extends TestCase {
   {
     $m = new Merchant;
     $o = $m->create('England');
+    $this->assertInstanceOf('Philipbrown\Merchant\Order', $o);
+    $this->assertInstanceOf('Philipbrown\Merchant\RegionInterface', $o->region);
     $this->assertEquals('England', $o->region);
+    $this->assertEquals('GBP', $o->region->currency);
   }
 
 }

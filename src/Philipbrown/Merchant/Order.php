@@ -20,7 +20,7 @@ class Order {
   }
 
   /**
-   * Get Name
+   * Get Region
    *
    * @return string
    */

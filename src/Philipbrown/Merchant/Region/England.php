@@ -10,4 +10,9 @@ class England extends AbstractRegion implements RegionInterface {
    */
   protected $name = 'England';
 
+  /**
+   * @var string
+   */
+  protected $currency = 'GBP';
+
 }
