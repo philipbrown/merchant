@@ -15,4 +15,14 @@ class England extends AbstractRegion implements RegionInterface {
    */
   protected $currency = 'GBP';
 
+  /**
+   * @var boolean
+   */
+  protected $tax = true;
+
+  /**
+   * @var integer
+   */
+  protected $taxRate = 20;
+
 }

@@ -13,11 +13,21 @@ abstract class AbstractRegion {
   protected $currency;
 
   /**
+   * @var boolean
+   */
+  protected $tax;
+
+  /**
+   * @var integer
+   */
+  protected $taxRate;
+
+  /**
    * Get Name
    *
    * @return string
    */
-  public function getNameParameter()
+  protected function getNameParameter()
   {
     return $this->name;
   }
@@ -27,9 +37,46 @@ abstract class AbstractRegion {
    *
    * @return string
    */
-  public function getCurrencyParameter()
+  protected function getCurrencyParameter()
   {
     return $this->currency;
+  }
+
+  /**
+   * Has Tax?
+   *
+   * @return boolean
+   */
+  public function hasTax()
+  {
+    return $this->tax;
+  }
+
+  /**
+   * Get Tax Rate
+   *
+   * @return integer
+   */
+  protected function getTaxRateParameter()
+  {
+    return $this->taxRate;
+  }
+
+  /**
+   * Convert a string to camelcase
+   *
+   * e.g hello_world -> helloWorld
+   *
+   * @param string $str
+   * @return string
+   */
+  public static function camelise($str)
+  {
+    return preg_replace_callback('/_([a-z0-9])/', function ($m) {
+        return strtoupper($m[1]);
+      },
+      $str
+    );
   }
 
   /**
@@ -39,7 +86,7 @@ abstract class AbstractRegion {
    */
   public function __get($param)
   {
-    $method = 'get'.ucfirst($param).'Parameter';
+    $method = 'get'.ucfirst(self::camelise($param)).'Parameter';
 
     if(method_exists($this, $method))
 
