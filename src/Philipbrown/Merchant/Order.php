@@ -2,12 +2,17 @@
 
 use Philipbrown\Merchant\RegionInterface;
 
-class Order {
+class Order extends Helper {
 
   /**
    * @var RegionInterface
    */
   protected $region;
+
+  /**
+   * @var array
+   */
+  protected $products;
 
   /**
    * Construct
@@ -17,6 +22,17 @@ class Order {
   public function __construct(RegionInterface $region)
   {
     $this->region = $region;
+  }
+
+  /**
+   * Add
+   *
+   * @param string $sku
+   * @param integer $value
+   */
+  public function add($sku, $value, $action = null)
+  {
+    $this->products[] = new Product($sku, $value, $action);
   }
 
   /**
@@ -30,17 +46,13 @@ class Order {
   }
 
   /**
-   * __get Magic Method
+   * Get Products
    *
-   * @return mixed
+   * @return array
    */
-  public function __get($param)
+  public function getProductsParameter()
   {
-    $method = 'get'.ucfirst($param).'Parameter';
-
-    if(method_exists($this, $method))
-
-    return $this->{$method}();
+    return $this->products;
   }
 
 }
