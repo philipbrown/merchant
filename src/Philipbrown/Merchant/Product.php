@@ -28,4 +28,14 @@ class Product extends Helper {
     $this->value = $value;
   }
 
+  /**
+   * Get SKU
+   *
+   * @return string
+   */
+  protected function getSkuParameter()
+  {
+    return $this->sku;
+  }
+
 }

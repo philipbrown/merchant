@@ -21,7 +21,7 @@ class MerchantTest extends TestCase {
     $this->assertInstanceOf('Philipbrown\Merchant\RegionInterface', $o->region);
     $this->assertEquals('England', $o->region);
     $this->assertEquals('GBP', $o->region->currency);
-    $this->assertTrue($o->region->hasTax());
+    $this->assertTrue($o->region->tax);
     $this->assertEquals(20, $o->region->tax_rate);
   }
 

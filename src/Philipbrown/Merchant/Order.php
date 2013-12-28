@@ -40,7 +40,7 @@ class Order extends Helper {
    *
    * @return string
    */
-  public function getRegionParameter()
+  protected function getRegionParameter()
   {
     return $this->region;
   }
@@ -50,7 +50,7 @@ class Order extends Helper {
    *
    * @return array
    */
-  public function getProductsParameter()
+  protected function getProductsParameter()
   {
     return $this->products;
   }

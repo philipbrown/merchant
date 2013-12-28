@@ -43,11 +43,11 @@ abstract class AbstractRegion extends Helper {
   }
 
   /**
-   * Has Tax?
+   * Get Tax
    *
    * @return boolean
    */
-  public function hasTax()
+  protected function getTaxParameter()
   {
     return $this->tax;
   }
