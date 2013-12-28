@@ -1,32 +1,20 @@
 <?php namespace Philipbrown\Merchant;
 
-use Philipbrown\Merchant\RegionInterface;
-
-class Order {
+abstract class AbstractRegion {
 
   /**
-   * @var RegionInterface
+   * @var string
    */
-  protected $region;
-
-  /**
-   * Construct
-   *
-   * @param RegionInterface $region
-   */
-  public function __construct(RegionInterface $region)
-  {
-    $this->region = $region;
-  }
+  protected $name;
 
   /**
    * Get Name
    *
    * @return string
    */
-  public function getRegionParameter()
+  public function getNameParameter()
   {
-    return $this->region;
+    return $this->name;
   }
 
   /**
@@ -41,6 +29,14 @@ class Order {
     if(method_exists($this, $method))
 
     return $this->{$method}();
+  }
+
+  /**
+   * @return string
+   */
+  public function __toString()
+  {
+    return $this->getNameParameter();
   }
 
 }

@@ -4,12 +4,6 @@ use Philipbrown\Merchant\Merchant;
 
 class MerchantTest extends TestCase {
 
-  public function testInstantiateValidRegion()
-  {
-    $m = new Merchant;
-    $m->create('England');
-  }
-
   /**
    * @expectedException        Philipbrown\Merchant\Exception\InvalidRegionException
    * @expectedExceptionMessage Nuh huh is not a valid region
@@ -18,6 +12,13 @@ class MerchantTest extends TestCase {
   {
     $m = new Merchant;
     $m->create('Nuh huh');
+  }
+
+  public function testInstantiateValidRegion()
+  {
+    $m = new Merchant;
+    $o = $m->create('England');
+    $this->assertEquals('England', $o->region);
   }
 
 }
