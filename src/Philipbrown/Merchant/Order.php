@@ -29,10 +29,21 @@ class Order extends Helper {
    *
    * @param string $sku
    * @param integer $value
+   * @param Closure|array $action
    */
   public function add($sku, $value, $action = null)
   {
-    $this->products[] = new Product($sku, $value, $action);
+    $product = new Product(
+      $sku,
+      $value,
+      $this->region->currency,
+      $this->region->tax,
+      $this->region->taxRate
+    );
+
+    if(!is_null($action)) $product->action($action);
+
+    $this->products[] = $product;
   }
 
   /**
