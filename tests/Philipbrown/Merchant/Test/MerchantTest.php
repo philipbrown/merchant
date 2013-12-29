@@ -189,7 +189,23 @@ class MerchantTest extends TestCase {
   {
     $o = Merchant::order('England');
     $o->add('123', 1000);
-    $this->assertTrue($o->remove('sss was not found in the products list'));
+    $this->assertTrue($o->remove('sss'));
+  }
+
+  public function testUpdateProductFromProductsList()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 1000, function($product){
+      $product->discount(200);
+    });
+    $this->assertEquals(1000, $o->products[0]->value->cents);
+    $this->assertEquals(200, $o->products[0]->discount->cents);
+    $this->assertEquals(1, count($o->products));
+
+    $o->update('123', 800);
+    $this->assertEquals(800, $o->products[0]->value->cents);
+    $this->assertEquals(0, $o->products[0]->discount->cents);
+    $this->assertEquals(1, count($o->products));
   }
 
   /**

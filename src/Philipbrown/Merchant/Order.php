@@ -36,6 +36,7 @@ class Order extends Helper {
    * @param string $sku
    * @param integer $value
    * @param Closure|array $action
+   * @return boolean
    */
   public function add($sku, $value, $action = null)
   {
@@ -52,6 +53,37 @@ class Order extends Helper {
     $this->products[] = $product;
 
     $this->products_cache[] = $sku;
+
+    return true;
+  }
+
+  /**
+   * Update
+   *
+   * @param string $sku
+   * @param integer $value
+   * @param Closure|array $action
+   */
+  public function update($sku, $value, $action = null)
+  {
+    if($this->remove($sku))
+    {
+      $product = new Product(
+        $sku,
+        $value,
+        $this->region->currency,
+        $this->region->tax,
+        $this->region->taxRate
+      );
+
+      if(!is_null($action)) $product->action($action);
+
+      $this->products[] = $product;
+
+      $this->products_cache[] = $sku;
+
+      return true;
+    }
   }
 
   /**
@@ -67,6 +99,8 @@ class Order extends Helper {
       $key = array_search($sku, $this->products_cache);
       unset($this->products[$key]);
       unset($this->products_cache[$key]);
+      $this->products = array_values($this->products);
+      $this->products_cache = array_values($this->products_cache);
       return true;
     }
 
