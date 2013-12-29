@@ -92,7 +92,7 @@ class Product extends Helper {
       return $this->runActionClosure($action);
     }
 
-    throw new InvalidProductException;
+    throw new InvalidProductException('The action must be an array or a closure');
   }
 
   /**
@@ -106,9 +106,7 @@ class Product extends Helper {
     {
       $method = 'set'.ucfirst(self::camelise($k)).'Parameter';
 
-      if(method_exists($this, $method))
-
-      $this->{$method}($v);
+      if(method_exists($this, $method)) $this->{$method}($v);
     }
   }
 
@@ -141,8 +139,10 @@ class Product extends Helper {
   {
     if(is_int($value))
     {
-      $this->quantity = $value;
+      return $this->quantity = $value;
     }
+
+    throw new InvalidProductException('The quantity property must be an integer');
   }
 
   /**
@@ -165,8 +165,10 @@ class Product extends Helper {
     if(is_bool($value))
     {
       $this->taxable = $value;
-      $this->tax = ($this->taxable) ? $this->value->multiply(($this->taxRate / 100)) : Money::init(0, $this->currency);
+      return $this->tax = ($this->taxable) ? $this->value->multiply(($this->taxRate / 100)) : Money::init(0, $this->currency);
     }
+
+    throw new InvalidProductException('The taxable property must be a boolean');
   }
 
   /**
@@ -188,8 +190,10 @@ class Product extends Helper {
   {
     if(is_int($value))
     {
-      $this->discount = Money::init($value, $this->currency);
+      return $this->discount = Money::init($value, $this->currency);
     }
+
+    throw new InvalidProductException('The discount property must be an integer');
   }
 
   /**
@@ -215,8 +219,10 @@ class Product extends Helper {
       $this->value = ($this->freebie) ? Money::init(0, $this->currency) : $this->value;
       $this->tax = ($this->freebie) ? Money::init(0, $this->currency) : $this->tax;
       $this->taxable = ($this->freebie) ? false : $this->taxable;
-      $this->discount = ($this->freebie) ? Money::init(0, $this->currency) : $this->discount;
+      return $this->discount = ($this->freebie) ? Money::init(0, $this->currency) : $this->discount;
     }
+
+    throw new InvalidProductException('The freebie property must be a boolean');
   }
 
   /**
@@ -238,8 +244,10 @@ class Product extends Helper {
   {
     if(is_string($value))
     {
-      $this->coupon = $value;
+      return $this->coupon = $value;
     }
+
+    throw new InvalidProductException('The coupon property must be a string');
   }
 
   /**

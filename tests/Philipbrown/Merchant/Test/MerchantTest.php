@@ -173,4 +173,84 @@ class MerchantTest extends TestCase {
     $this->assertEquals(4, $o->products[0]->quantity);
   }
 
+  /**
+   * @expectedException        Exception
+   * @expectedExceptionMessage fff is not a valid property on this object
+   */
+  public function testInvalidPropertyThroughMagicMethodException()
+  {
+    $o = Merchant::order('England');
+    $o->fff;
+  }
+
+  /**
+   * @expectedException        Philipbrown\Merchant\Exception\InvalidProductException
+   * @expectedExceptionMessage The action must be an array or a closure
+   */
+  public function testInvalidActionTypeException()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 233, 'action');
+  }
+
+  /**
+   * @expectedException        Philipbrown\Merchant\Exception\InvalidProductException
+   * @expectedExceptionMessage The quantity property must be an integer
+   */
+  public function testQuantityMustBeAnInteger()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 1000, array(
+      'quantity' => 'lots'
+    ));
+  }
+
+  /**
+   * @expectedException        Philipbrown\Merchant\Exception\InvalidProductException
+   * @expectedExceptionMessage The taxable property must be a boolean
+   */
+  public function testTaxableMustBeABoolean()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 1000, array(
+      'taxable' => 'yes'
+    ));
+  }
+
+  /**
+   * @expectedException        Philipbrown\Merchant\Exception\InvalidProductException
+   * @expectedExceptionMessage The discount property must be an integer
+   */
+  public function testDiscountMustBeAnInteger()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 1000, array(
+      'discount' => 'lots'
+    ));
+  }
+
+  /**
+   * @expectedException        Philipbrown\Merchant\Exception\InvalidProductException
+   * @expectedExceptionMessage The freebie property must be a boolean
+   */
+  public function testFreebieMustBeABoolean()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 1000, array(
+      'freebie' => 'yes'
+    ));
+  }
+
+  /**
+   * @expectedException        Philipbrown\Merchant\Exception\InvalidProductException
+   * @expectedExceptionMessage The coupon property must be a string
+   */
+  public function testFreebieMustBeAString()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 1000, array(
+      'coupon' => array()
+    ));
+  }
+
 }

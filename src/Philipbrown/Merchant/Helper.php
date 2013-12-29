@@ -1,5 +1,7 @@
 <?php namespace Philipbrown\Merchant;
 
+use Exception;
+
 class Helper {
 
   /**
@@ -28,9 +30,9 @@ class Helper {
   {
     $method = 'get'.ucfirst(self::camelise($param)).'Parameter';
 
-    if(method_exists($this, $method))
+    if(method_exists($this, $method)) return $this->{$method}();
 
-    return $this->{$method}();
+    throw new Exception("$param is not a valid property on this object");
   }
 
 }
