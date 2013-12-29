@@ -1,6 +1,7 @@
 <?php namespace Philipbrown\Merchant;
 
 use Philipbrown\Merchant\RegionInterface;
+use Philipbrown\Merchant\Exception\InvalidOrderException;
 
 class Order extends Helper {
 
@@ -13,6 +14,11 @@ class Order extends Helper {
    * @var array
    */
   protected $products;
+
+  /**
+   * @var array
+   */
+  protected $products_cache;
 
   /**
    * Construct
@@ -44,6 +50,27 @@ class Order extends Helper {
     if(!is_null($action)) $product->action($action);
 
     $this->products[] = $product;
+
+    $this->products_cache[] = $sku;
+  }
+
+  /**
+   * Remove
+   *
+   * @param string $sku
+   * @return boolean
+   */
+  public function remove($sku)
+  {
+    if(in_array($sku, $this->products_cache))
+    {
+      $key = array_search($sku, $this->products_cache);
+      unset($this->products[$key]);
+      unset($this->products_cache[$key]);
+      return true;
+    }
+
+    throw new InvalidOrderException("$sku was not found in the products list");
   }
 
   /**

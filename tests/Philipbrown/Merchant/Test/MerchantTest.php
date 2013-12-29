@@ -173,6 +173,25 @@ class MerchantTest extends TestCase {
     $this->assertEquals(4, $o->products[0]->quantity);
   }
 
+  public function testRemoveProductFromProductsList()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 1000);
+    $this->assertTrue($o->remove('123'));
+    $this->assertEquals(0, count($o->products));
+  }
+
+  /**
+   * @expectedException        Philipbrown\Merchant\Exception\InvalidOrderException
+   * @expectedExceptionMessage sss was not found in the products list
+   */
+  public function testRemoveNotFoundProductFromProductsListException()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 1000);
+    $this->assertTrue($o->remove('sss was not found in the products list'));
+  }
+
   /**
    * @expectedException        Exception
    * @expectedExceptionMessage fff is not a valid property on this object
