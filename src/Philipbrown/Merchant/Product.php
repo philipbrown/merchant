@@ -81,9 +81,14 @@ class Product extends Helper {
    */
   protected function calculateTax()
   {
-    $total = $this->value->subtract($this->discount);
+    if($this->taxable)
+    {
+      $total = $this->value->subtract($this->discount);
 
-    return $total->multiply($this->taxRate / 100);
+      return $total->multiply($this->taxRate / 100);
+    }
+
+    return Money::init(0, $this->currency);
   }
 
   /**
@@ -184,7 +189,7 @@ class Product extends Helper {
     if(is_bool($value))
     {
       $this->taxable = $value;
-      return $this->tax = ($this->taxable) ? $this->calculateTax() : Money::init(0, $this->currency);
+      return $this->tax = $this->calculateTax();
     }
 
     throw new InvalidProductException('The taxable property must be a boolean');
@@ -210,7 +215,7 @@ class Product extends Helper {
     if(is_int($value))
     {
       $this->discount = Money::init($value, $this->currency);
-      return $this->tax = ($this->taxable) ? $this->calculateTax() : Money::init(0, $this->currency);
+      return $this->tax = $this->calculateTax();
     }
 
     throw new InvalidProductException('The discount property must be an integer');
@@ -237,10 +242,10 @@ class Product extends Helper {
     {
       $this->freebie = $value;
       $this->value = ($this->freebie) ? Money::init(0, $this->currency) : $this->value;
-      $this->tax = ($this->freebie) ? Money::init(0, $this->currency) : $this->tax;
       $this->taxable = ($this->freebie) ? false : $this->taxable;
-      $this->calculateTotal();
-      return $this->discount = ($this->freebie) ? Money::init(0, $this->currency) : $this->discount;
+      $this->tax = ($this->freebie) ? Money::init(0, $this->currency) : $this->calculateTax();
+      $this->discount = ($this->freebie) ? Money::init(0, $this->currency) : $this->discount;
+      return $this->calculateTotal();
     }
 
     throw new InvalidProductException('The freebie property must be a boolean');
