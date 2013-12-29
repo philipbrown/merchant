@@ -1,5 +1,5 @@
 # Merchant
-**Ecommerce abstract for dealing with products, orders and sales**
+**Ecommerce abstraction for dealing with products, orders and sales**
 
 [![Build Status](https://travis-ci.org/philipbrown/merchant.png?branch=master)](https://travis-ci.org/philipbrown/merchant)
 
