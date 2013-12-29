@@ -67,6 +67,19 @@ class MerchantTest extends TestCase {
     $this->assertEquals(200, $o->products[0]->discount->cents);
   }
 
+  public function testAddProductWithActionArrayAndFreebieProperty()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 1000, array(
+      'freebie' => true
+    ));
+    $this->assertEquals(0, $o->products[0]->value->cents);
+    $this->assertEquals(0, $o->products[0]->discount->cents);
+    $this->assertEquals(0, $o->products[0]->tax->cents);
+    $this->assertFalse($o->products[0]->taxable);
+    $this->assertTrue($o->products[0]->freebie);
+  }
+
   public function testAddProductWithActionArrayAndMultipleProperties()
   {
     $o = Merchant::order('England');
@@ -110,6 +123,20 @@ class MerchantTest extends TestCase {
       $product->discount(200);
     });
     $this->assertEquals(200, $o->products[0]->discount->cents);
+  }
+
+  public function testAddProductWithActionClosureAndFreebieProperty()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 1000, function($product)
+    {
+      $product->freebie(true);
+    });
+    $this->assertEquals(0, $o->products[0]->value->cents);
+    $this->assertEquals(0, $o->products[0]->discount->cents);
+    $this->assertEquals(0, $o->products[0]->tax->cents);
+    $this->assertFalse($o->products[0]->taxable);
+    $this->assertTrue($o->products[0]->freebie);
   }
 
   public function testAddProductWithActionClosureAndMultipleProperties()

@@ -47,6 +47,11 @@ class Product extends Helper {
   protected $quantity;
 
   /**
+   * @var boolean
+   */
+  protected $freebie;
+
+  /**
    * Construct
    *
    * @param string $sku
@@ -62,6 +67,7 @@ class Product extends Helper {
     $this->discount = Money::init(0, $currency);
     $this->tax = ($taxable) ? $this->value->multiply(($taxRate / 100)) : Money::init(0, $currency);
     $this->quantity = 1;
+    $this->freebie = false;
   }
 
   /**
@@ -182,6 +188,33 @@ class Product extends Helper {
   }
 
   /**
+   * Freebie
+   *
+   * @param boolean $value
+   */
+  public function freebie($value)
+  {
+    $this->setFreebieParameter($value);
+  }
+
+  /**
+   * Set Freebie Parameter
+   *
+   * @param boolean $value
+   */
+  protected function setFreebieParameter($value)
+  {
+    if(is_bool($value))
+    {
+      $this->freebie = $value;
+      $this->value = ($this->freebie) ? Money::init(0, $this->currency) : $this->value;
+      $this->tax = ($this->freebie) ? Money::init(0, $this->currency) : $this->tax;
+      $this->taxable = ($this->freebie) ? false : $this->taxable;
+      $this->discount = ($this->freebie) ? Money::init(0, $this->currency) : $this->discount;
+    }
+  }
+
+  /**
    * Get SKU
    *
    * @return string
@@ -259,6 +292,16 @@ class Product extends Helper {
   protected function getDiscountParameter()
   {
     return $this->discount;
+  }
+
+  /**
+   * Get Freebie
+   *
+   * @return boolean
+   */
+  protected function getFreebieParameter()
+  {
+    return $this->freebie;
   }
 
 }
