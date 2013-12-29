@@ -107,7 +107,31 @@ class OrderTest extends TestCase {
     $o->add('456', 2000, array(
       'discount' => 500
     ));
+    $o->add('789', 600, array(
+      'freebie' => true
+    ));
     $this->assertEquals(3000, $o->subtotal->cents);
+  }
+
+  public function testCorrectTotalProperty()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 1000);
+    $o->add('456', 2000, array(
+      'discount' => 500
+    ));
+    $this->assertEquals(3000, $o->total->cents);
+  }
+
+  public function testCorrectTotalsWithMultipleQuantity()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 1000, array(
+      'quantity' => 5
+    ));
+    $this->assertEquals(5000, $o->subtotal->cents);
+    $this->assertEquals(1000, $o->total_tax->cents);
+    $this->assertEquals(6000, $o->total->cents);
   }
 
 }

@@ -42,6 +42,11 @@ class Order extends Helper {
   protected $subtotal;
 
   /**
+   * @var Money
+   */
+  protected $total;
+
+  /**
    * Construct
    *
    * @param RegionInterface $region
@@ -136,18 +141,27 @@ class Order extends Helper {
     $total_value = 0;
     $total_discount = 0;
     $total_tax = 0;
+    $subtotal = 0;
 
     foreach($this->products as $product)
     {
-      $total_value = $total_value + $product->value->cents;
-      $total_discount = $total_discount + $product->discount->cents;
-      $total_tax = $total_tax + $product->tax->cents;
+      $i = $product->quantity;
+
+      while($i > 0)
+      {
+        $total_value = $total_value + $product->value->cents;
+        $total_discount = $total_discount + $product->discount->cents;
+        $total_tax = $total_tax + $product->tax->cents;
+        $subtotal = $subtotal + $product->total->cents;
+        $i--;
+      }
     }
 
     $this->total_value = Money::init($total_value, $this->region->currency);
     $this->total_discount = Money::init($total_discount, $this->region->currency);
     $this->total_tax = Money::init($total_tax, $this->region->currency);
-    $this->subtotal = Money::init(($this->total_value->cents), $this->region->currency);
+    $this->subtotal = Money::init(($subtotal), $this->region->currency);
+    $this->total = Money::init(($subtotal - $this->total_discount->cents + $this->total_tax->cents), $this->region->currency);
   }
 
   /**
@@ -196,6 +210,18 @@ class Order extends Helper {
     $this->reconcile();
 
     return $this->subtotal;
+  }
+
+  /**
+   * Get Total
+   *
+   * @return Money
+   */
+  protected function getTotalParameter()
+  {
+    $this->reconcile();
+
+    return $this->total;
   }
 
   /**
