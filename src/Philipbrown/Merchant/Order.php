@@ -47,6 +47,11 @@ class Order extends Helper {
   protected $total;
 
   /**
+   * @var boolean
+   */
+  protected $dirty;
+
+  /**
    * Construct
    *
    * @param RegionInterface $region
@@ -54,6 +59,8 @@ class Order extends Helper {
   public function __construct(RegionInterface $region)
   {
     $this->region = $region;
+
+    $this->dirty = true;
   }
 
   /**
@@ -79,6 +86,8 @@ class Order extends Helper {
     $this->products[] = $product;
 
     $this->products_cache[] = $sku;
+
+    $this->dirty = true;
 
     return true;
   }
@@ -108,6 +117,8 @@ class Order extends Helper {
 
       $this->products_cache[] = $sku;
 
+      $this->dirty = true;
+
       return true;
     }
   }
@@ -123,10 +134,15 @@ class Order extends Helper {
     if(in_array($sku, $this->products_cache))
     {
       $key = array_search($sku, $this->products_cache);
+
       unset($this->products[$key]);
       unset($this->products_cache[$key]);
+
       $this->products = array_values($this->products);
       $this->products_cache = array_values($this->products_cache);
+
+      $this->dirty = true;
+
       return true;
     }
 
@@ -138,30 +154,35 @@ class Order extends Helper {
    */
   public function reconcile()
   {
-    $total_value = 0;
-    $total_discount = 0;
-    $total_tax = 0;
-    $subtotal = 0;
-
-    foreach($this->products as $product)
+    if($this->dirty)
     {
-      $i = $product->quantity;
+      $total_value = 0;
+      $total_discount = 0;
+      $total_tax = 0;
+      $subtotal = 0;
 
-      while($i > 0)
+      foreach($this->products as $product)
       {
-        $total_value = $total_value + $product->value->cents;
-        $total_discount = $total_discount + $product->discount->cents;
-        $total_tax = $total_tax + $product->tax->cents;
-        $subtotal = $subtotal + $product->total->cents;
-        $i--;
-      }
-    }
+        $i = $product->quantity;
 
-    $this->total_value = Money::init($total_value, $this->region->currency);
-    $this->total_discount = Money::init($total_discount, $this->region->currency);
-    $this->total_tax = Money::init($total_tax, $this->region->currency);
-    $this->subtotal = Money::init(($subtotal), $this->region->currency);
-    $this->total = Money::init(($subtotal - $this->total_discount->cents + $this->total_tax->cents), $this->region->currency);
+        while($i > 0)
+        {
+          $total_value = $total_value + $product->value->cents;
+          $total_discount = $total_discount + $product->discount->cents;
+          $total_tax = $total_tax + $product->tax->cents;
+          $subtotal = $subtotal + $product->total->cents;
+          $i--;
+        }
+      }
+
+      $this->total_value = Money::init($total_value, $this->region->currency);
+      $this->total_discount = Money::init($total_discount, $this->region->currency);
+      $this->total_tax = Money::init($total_tax, $this->region->currency);
+      $this->subtotal = Money::init(($subtotal), $this->region->currency);
+      $this->total = Money::init(($subtotal - $this->total_discount->cents + $this->total_tax->cents), $this->region->currency);
+
+      $this->dirty = false;
+    }
   }
 
   /**
