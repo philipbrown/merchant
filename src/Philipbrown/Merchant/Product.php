@@ -241,7 +241,6 @@ class Product extends Helper {
     if(is_bool($value))
     {
       $this->freebie = $value;
-      $this->value = ($this->freebie) ? Money::init(0, $this->currency) : $this->value;
       $this->taxable = ($this->freebie) ? false : $this->taxable;
       $this->tax = ($this->freebie) ? Money::init(0, $this->currency) : $this->calculateTax();
       $this->discount = ($this->freebie) ? Money::init(0, $this->currency) : $this->discount;

@@ -134,4 +134,24 @@ class OrderTest extends TestCase {
     $this->assertEquals(6000, $o->total->cents);
   }
 
+  public function testRandomData()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 1000);
+    $o->add('456', 200, array(
+      'freebie' => true
+    ));
+    $o->add('789', 2000, array(
+      'discount' => 500
+    ));
+    $o->add('101112', 1000, array(
+      'taxable' => false
+    ));
+    $this->assertEquals(4200, $o->total_value->cents);
+    $this->assertEquals(500, $o->total_discount->cents);
+    $this->assertEquals(500, $o->total_tax->cents);
+    $this->assertEquals(4000, $o->subtotal->cents);
+    $this->assertEquals(4000, $o->total->cents);
+  }
+
 }

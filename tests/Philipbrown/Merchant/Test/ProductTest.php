@@ -38,7 +38,8 @@ class ProductTest extends TestCase {
     $o->add('123', 1000, array(
       'freebie' => true
     ));
-    $this->assertEquals(0, $o->products[0]->value->cents);
+    $this->assertEquals(1000, $o->products[0]->value->cents);
+    $this->assertEquals(0, $o->products[0]->total->cents);
     $this->assertEquals(0, $o->products[0]->discount->cents);
     $this->assertEquals(0, $o->products[0]->tax->cents);
     $this->assertFalse($o->products[0]->taxable);
@@ -106,7 +107,8 @@ class ProductTest extends TestCase {
     {
       $product->freebie(true);
     });
-    $this->assertEquals(0, $o->products[0]->value->cents);
+    $this->assertEquals(1000, $o->products[0]->value->cents);
+    $this->assertEquals(0, $o->products[0]->total->cents);
     $this->assertEquals(0, $o->products[0]->discount->cents);
     $this->assertEquals(0, $o->products[0]->tax->cents);
     $this->assertFalse($o->products[0]->taxable);
