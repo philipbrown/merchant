@@ -1,5 +1,6 @@
 <?php namespace Philipbrown\Merchant;
 
+use Philipbrown\Money\Money;
 use Philipbrown\Merchant\RegionInterface;
 use Philipbrown\Merchant\Exception\InvalidOrderException;
 
@@ -19,6 +20,26 @@ class Order extends Helper {
    * @var array
    */
   protected $products_cache;
+
+  /**
+   * @var Money
+   */
+  protected $total_value;
+
+  /**
+   * @var Money
+   */
+  protected $total_discount;
+
+  /**
+   * @var Money
+   */
+  protected $total_tax;
+
+  /**
+   * @var Money
+   */
+  protected $subtotal;
 
   /**
    * Construct
@@ -105,6 +126,76 @@ class Order extends Helper {
     }
 
     throw new InvalidOrderException("$sku was not found in the products list");
+  }
+
+  /**
+   * Reconcile
+   */
+  public function reconcile()
+  {
+    $total_value = 0;
+    $total_discount = 0;
+    $total_tax = 0;
+
+    foreach($this->products as $product)
+    {
+      $total_value = $total_value + $product->value->cents;
+      $total_discount = $total_discount + $product->discount->cents;
+      $total_tax = $total_tax + $product->tax->cents;
+    }
+
+    $this->total_value = Money::init($total_value, $this->region->currency);
+    $this->total_discount = Money::init($total_discount, $this->region->currency);
+    $this->total_tax = Money::init($total_tax, $this->region->currency);
+    $this->subtotal = Money::init(($this->total_value->cents), $this->region->currency);
+  }
+
+  /**
+   * Get Total Parameter
+   *
+   * @return Money
+   */
+  protected function getTotalValueParameter()
+  {
+    $this->reconcile();
+
+    return $this->total_value;
+  }
+
+  /**
+   * Get Total Discount
+   *
+   * @return Money
+   */
+  protected function getTotalDiscountParameter()
+  {
+    $this->reconcile();
+
+    return $this->total_discount;
+  }
+
+  /**
+   * Get Total Tax
+   *
+   * @return Money
+   */
+  protected function getTotalTaxParameter()
+  {
+    $this->reconcile();
+
+    return $this->total_tax;
+  }
+
+  /**
+   * Get Subtotal
+   *
+   * @return Money
+   */
+  protected function getSubtotalParameter()
+  {
+    $this->reconcile();
+
+    return $this->subtotal;
   }
 
   /**

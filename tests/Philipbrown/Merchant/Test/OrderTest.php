@@ -63,4 +63,51 @@ class OrderTest extends TestCase {
     $o->fff;
   }
 
+  public function testCorrectTotalValueProperty()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 1000);
+    $o->add('456', 800);
+    $this->assertEquals(1800, $o->total_value->cents);
+    $o->add('789', 2000);
+    $this->assertEquals(3800, $o->total_value->cents);
+    $o->remove('456');
+    $this->assertEquals(3000, $o->total_value->cents);
+  }
+
+  public function testCorrectTotalDiscountProperty()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 1000, array(
+      'discount' => 200
+    ));
+    $o->add('456', 1200, array(
+      'discount' => 100
+    ));
+    $this->assertEquals(300, $o->total_discount->cents);
+    $o->remove('123');
+    $this->assertEquals(100, $o->total_discount->cents);
+  }
+
+  public function testCorrectTotalTaxProperty()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 1000);
+    $o->add('456', 800);
+    $o->add('789', 2000, array(
+      'taxable' => false
+    ));
+    $this->assertEquals(360, $o->total_tax->cents);
+  }
+
+  public function testCorrectSubtotalProperty()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 1000);
+    $o->add('456', 2000, array(
+      'discount' => 500
+    ));
+    $this->assertEquals(3000, $o->subtotal->cents);
+  }
+
 }
