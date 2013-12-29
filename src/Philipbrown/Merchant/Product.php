@@ -52,6 +52,11 @@ class Product extends Helper {
   protected $freebie;
 
   /**
+   * @var string
+   */
+  protected $coupon;
+
+  /**
    * Construct
    *
    * @param string $sku
@@ -215,6 +220,29 @@ class Product extends Helper {
   }
 
   /**
+   * Coupon
+   *
+   * @param string $value
+   */
+  public function coupon($value)
+  {
+    $this->setCouponParameter($value);
+  }
+
+  /**
+   * Set Coupon Parameter
+   *
+   * @param string $value
+   */
+  protected function setCouponParameter($value)
+  {
+    if(is_string($value))
+    {
+      $this->coupon = $value;
+    }
+  }
+
+  /**
    * Get SKU
    *
    * @return string
@@ -302,6 +330,16 @@ class Product extends Helper {
   protected function getFreebieParameter()
   {
     return $this->freebie;
+  }
+
+  /**
+   * Get Coupon
+   *
+   * @return string
+   */
+  protected function getCouponParameter()
+  {
+    return $this->coupon;
   }
 
 }

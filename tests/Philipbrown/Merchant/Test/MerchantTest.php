@@ -94,6 +94,15 @@ class MerchantTest extends TestCase {
     $this->assertEquals(3, $o->products[0]->quantity);
   }
 
+  public function testAddProductWithActionArrayAndCouponProperty()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 1000, array(
+      'coupon' => 'SAVE_10_PERCENT'
+    ));
+    $this->assertEquals('SAVE_10_PERCENT', $o->products[0]->coupon);
+  }
+
   public function testAddProductWithActionClosureAndQuantityProperty()
   {
     $o = Merchant::order('England');
@@ -137,6 +146,16 @@ class MerchantTest extends TestCase {
     $this->assertEquals(0, $o->products[0]->tax->cents);
     $this->assertFalse($o->products[0]->taxable);
     $this->assertTrue($o->products[0]->freebie);
+  }
+
+  public function testAddProductWithActionClosureAndCouponProperty()
+  {
+    $o = Merchant::order('England');
+    $o->add('123', 1000, function($product)
+    {
+      $product->coupon('SAVE_10_PERCENT');
+    });
+    $this->assertEquals('SAVE_10_PERCENT', $o->products[0]->coupon);
   }
 
   public function testAddProductWithActionClosureAndMultipleProperties()
