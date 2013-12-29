@@ -11,12 +11,12 @@ class MerchantTest extends TestCase {
   public function testExceptionOnInvalidRegion()
   {
     $m = new Merchant;
-    $m->create('Nuh huh');
+    $m->order('Nuh huh');
   }
 
   public function testInstantiateValidRegion()
   {
-    $o = Merchant::create('England');
+    $o = Merchant::order('England');
     $this->assertInstanceOf('Philipbrown\Merchant\Order', $o);
     $this->assertInstanceOf('Philipbrown\Merchant\RegionInterface', $o->region);
     $this->assertEquals('England', $o->region);
@@ -27,7 +27,7 @@ class MerchantTest extends TestCase {
 
   public function testAddProductToOrder()
   {
-    $o = Merchant::create('England');
+    $o = Merchant::order('England');
     $o->add('123', 999);
     $this->assertCount(1, $o->products);
     $this->assertEquals('123', $o->products[0]->sku);
@@ -41,7 +41,7 @@ class MerchantTest extends TestCase {
 
   public function testAddProductWithActionArrayAndQuantityProperty()
   {
-    $o = Merchant::create('England');
+    $o = Merchant::order('England');
     $o->add('123', 1000, array(
       'quantity' => 2
     ));
@@ -50,7 +50,7 @@ class MerchantTest extends TestCase {
 
   public function testAddProductWithActionArrayAndTaxableProperty()
   {
-    $o = Merchant::create('England');
+    $o = Merchant::order('England');
     $o->add('123', 1000, array(
       'taxable' => false
     ));
@@ -60,7 +60,7 @@ class MerchantTest extends TestCase {
 
   public function testAddProductWithActionArrayAndDiscountProperty()
   {
-    $o = Merchant::create('England');
+    $o = Merchant::order('England');
     $o->add('123', 1000, array(
       'discount' => 200
     ));
@@ -69,7 +69,7 @@ class MerchantTest extends TestCase {
 
   public function testAddProductWithActionArrayAndMultipleProperties()
   {
-    $o = Merchant::create('England');
+    $o = Merchant::order('England');
     $o->add('123', 1000, array(
       'discount' => 100,
       'quantity' => 3,
@@ -83,7 +83,7 @@ class MerchantTest extends TestCase {
 
   public function testAddProductWithActionClosureAndQuantityProperty()
   {
-    $o = Merchant::create('England');
+    $o = Merchant::order('England');
     $o->add('123', 1000, function($product)
     {
       $product->quantity(10);
@@ -93,7 +93,7 @@ class MerchantTest extends TestCase {
 
   public function testAddProductWithActionClosureAndTaxableProperty()
   {
-    $o = Merchant::create('England');
+    $o = Merchant::order('England');
     $o->add('123', 1000, function($product)
     {
       $product->taxable(false);
@@ -104,7 +104,7 @@ class MerchantTest extends TestCase {
 
   public function testAddProductWithActionClosureAndDiscountProperty()
   {
-    $o = Merchant::create('England');
+    $o = Merchant::order('England');
     $o->add('123', 1000, function($product)
     {
       $product->discount(200);
@@ -114,7 +114,7 @@ class MerchantTest extends TestCase {
 
   public function testAddProductWithActionClosureAndMultipleProperties()
   {
-    $o = Merchant::create('England');
+    $o = Merchant::order('England');
     $o->add('123', 1000, function($product)
     {
       $product->taxable(false);

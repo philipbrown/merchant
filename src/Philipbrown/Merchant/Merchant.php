@@ -9,7 +9,7 @@ class Merchant {
    *
    * @param string $region
    */
-  public static function create($region)
+  public static function order($region)
   {
     $class = 'Philipbrown\Merchant\Region\\'.ucfirst($region);
 
