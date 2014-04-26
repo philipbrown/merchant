@@ -1,8 +1,8 @@
-<?php namespace Philipbrown\Merchant\Test;
+<?php
 
-use Philipbrown\Merchant\Merchant;
+use PhilipBrown\Merchant\Merchant;
 
-class OrderTest extends TestCase {
+class OrderTest extends PHPUnit_Framework_TestCase {
 
   public function testAddProductToOrder()
   {
@@ -27,7 +27,7 @@ class OrderTest extends TestCase {
   }
 
   /**
-   * @expectedException        Philipbrown\Merchant\Exception\InvalidOrderException
+   * @expectedException        PhilipBrown\Merchant\Exception\InvalidOrderException
    * @expectedExceptionMessage sss was not found in the products list
    */
   public function testRemoveNotFoundProductFromProductsListException()

@@ -1,4 +1,4 @@
-<?php namespace Philipbrown\Merchant;
+<?php namespace PhilipBrown\Merchant;
 
 abstract class AbstractRegion extends Helper {
 

@@ -1,7 +1,7 @@
-<?php namespace Philipbrown\Merchant\Region;
+<?php namespace PhilipBrown\Merchant\Region;
 
-use Philipbrown\Merchant\AbstractRegion;
-use Philipbrown\Merchant\RegionInterface;
+use PhilipBrown\Merchant\AbstractRegion;
+use PhilipBrown\Merchant\RegionInterface;
 
 class England extends AbstractRegion implements RegionInterface {
 

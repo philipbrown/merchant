@@ -1,6 +1,6 @@
-<?php namespace Philipbrown\Merchant;
+<?php namespace PhilipBrown\Merchant;
 
-use Philipbrown\Merchant\Exception\InvalidRegionException;
+use PhilipBrown\Merchant\Exception\InvalidRegionException;
 
 class Merchant {
 
@@ -11,7 +11,7 @@ class Merchant {
    */
   public static function order($region)
   {
-    $class = 'Philipbrown\Merchant\Region\\'.ucfirst($region);
+    $class = 'PhilipBrown\Merchant\Region\\'.ucfirst($region);
 
     if(class_exists($class))
     {

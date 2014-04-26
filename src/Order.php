@@ -1,8 +1,8 @@
-<?php namespace Philipbrown\Merchant;
+<?php namespace PhilipBrown\Merchant;
 
-use Philipbrown\Money\Money;
-use Philipbrown\Merchant\RegionInterface;
-use Philipbrown\Merchant\Exception\InvalidOrderException;
+use PhilipBrown\Money\Money;
+use PhilipBrown\Merchant\RegionInterface;
+use PhilipBrown\Merchant\Exception\InvalidOrderException;
 
 class Order extends Helper {
 

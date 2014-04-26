@@ -1,4 +1,4 @@
-<?php namespace Philipbrown\Merchant\Exception;
+<?php namespace PhilipBrown\Merchant\Exception;
 
 use Exception;
 

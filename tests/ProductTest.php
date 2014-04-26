@@ -1,8 +1,8 @@
-<?php namespace Philipbrown\Merchant\Test;
+<?php
 
-use Philipbrown\Merchant\Merchant;
+use PhilipBrown\Merchant\Merchant;
 
-class ProductTest extends TestCase {
+class ProductTest extends PHPUnit_Framework_TestCase {
 
   public function testAddProductWithActionArrayAndQuantityProperty()
   {
@@ -141,7 +141,7 @@ class ProductTest extends TestCase {
   }
 
   /**
-   * @expectedException        Philipbrown\Merchant\Exception\InvalidProductException
+   * @expectedException        PhilipBrown\Merchant\Exception\InvalidProductException
    * @expectedExceptionMessage The action must be an array or a closure
    */
   public function testInvalidActionTypeException()
@@ -151,7 +151,7 @@ class ProductTest extends TestCase {
   }
 
   /**
-   * @expectedException        Philipbrown\Merchant\Exception\InvalidProductException
+   * @expectedException        PhilipBrown\Merchant\Exception\InvalidProductException
    * @expectedExceptionMessage The quantity property must be an integer
    */
   public function testQuantityMustBeAnInteger()
@@ -163,7 +163,7 @@ class ProductTest extends TestCase {
   }
 
   /**
-   * @expectedException        Philipbrown\Merchant\Exception\InvalidProductException
+   * @expectedException        PhilipBrown\Merchant\Exception\InvalidProductException
    * @expectedExceptionMessage The taxable property must be a boolean
    */
   public function testTaxableMustBeABoolean()
@@ -175,7 +175,7 @@ class ProductTest extends TestCase {
   }
 
   /**
-   * @expectedException        Philipbrown\Merchant\Exception\InvalidProductException
+   * @expectedException        PhilipBrown\Merchant\Exception\InvalidProductException
    * @expectedExceptionMessage The discount property must be an integer
    */
   public function testDiscountMustBeAnInteger()
@@ -187,7 +187,7 @@ class ProductTest extends TestCase {
   }
 
   /**
-   * @expectedException        Philipbrown\Merchant\Exception\InvalidProductException
+   * @expectedException        PhilipBrown\Merchant\Exception\InvalidProductException
    * @expectedExceptionMessage The freebie property must be a boolean
    */
   public function testFreebieMustBeABoolean()
@@ -199,7 +199,7 @@ class ProductTest extends TestCase {
   }
 
   /**
-   * @expectedException        Philipbrown\Merchant\Exception\InvalidProductException
+   * @expectedException        PhilipBrown\Merchant\Exception\InvalidProductException
    * @expectedExceptionMessage The coupon property must be a string
    */
   public function testFreebieMustBeAString()

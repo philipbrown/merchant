@@ -1,8 +1,8 @@
-<?php namespace Philipbrown\Merchant;
+<?php namespace PhilipBrown\Merchant;
 
 use Closure;
-use Philipbrown\Money\Money;
-use Philipbrown\Merchant\Exception\InvalidProductException;
+use PhilipBrown\Money\Money;
+use PhilipBrown\Merchant\Exception\InvalidProductException;
 
 class Product extends Helper {
 

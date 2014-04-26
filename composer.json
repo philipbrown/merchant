@@ -1,6 +1,6 @@
 {
     "name": "philipbrown/merchant",
-    "description": "",
+    "description": "Ecommerce abstraction for dealing with products, orders and sales",
     "license": "MIT",
     "authors": [
         {
@@ -9,7 +9,9 @@
         }
     ],
     "autoload": {
-        "psr-0": { "Philipbrown" : "src/" }
+        "psr-4": {
+            "PhilipBrown\\Merchant\\": "src"
+        }
     },
     "require": {
         "php": ">=5.3.2",

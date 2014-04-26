@@ -1,11 +1,11 @@
-<?php namespace Philipbrown\Merchant\Test;
+<?php
 
-use Philipbrown\Merchant\Merchant;
+use PhilipBrown\Merchant\Merchant;
 
-class MerchantTest extends TestCase {
+class MerchantTest extends PHPUnit_Framework_TestCase {
 
   /**
-   * @expectedException        Philipbrown\Merchant\Exception\InvalidRegionException
+   * @expectedException        PhilipBrown\Merchant\Exception\InvalidRegionException
    * @expectedExceptionMessage Nuh huh is not a valid region
    */
   public function testExceptionOnInvalidRegion()
@@ -17,8 +17,8 @@ class MerchantTest extends TestCase {
   public function testInstantiateValidRegion()
   {
     $o = Merchant::order('England');
-    $this->assertInstanceOf('Philipbrown\Merchant\Order', $o);
-    $this->assertInstanceOf('Philipbrown\Merchant\RegionInterface', $o->region);
+    $this->assertInstanceOf('PhilipBrown\Merchant\Order', $o);
+    $this->assertInstanceOf('PhilipBrown\Merchant\RegionInterface', $o->region);
     $this->assertEquals('England', $o->region);
     $this->assertEquals('GBP', $o->region->currency);
     $this->assertTrue($o->region->tax);
