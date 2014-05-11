@@ -7,27 +7,27 @@ interface RegionInterface {
    *
    * @return string
    */
-  protected function getNameParameter();
+  public function getNameParameter();
 
   /**
    * Get Currency
    *
    * @return string
    */
-  protected function getCurrencyParameter();
+  public function getCurrencyParameter();
 
   /**
    * Get Tax
    *
    * @return boolean
    */
-  protected function getTaxParameter();
+  public function getTaxParameter();
 
   /**
    * Get Tax Rate
    *
    * @return integer
    */
-  protected function getTaxRateParameter();
+  public function getTaxRateParameter();
 
 }

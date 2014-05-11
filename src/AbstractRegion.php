@@ -27,7 +27,7 @@ abstract class AbstractRegion extends Helper {
    *
    * @return string
    */
-  protected function getNameParameter()
+  public function getNameParameter()
   {
     return $this->name;
   }
@@ -37,7 +37,7 @@ abstract class AbstractRegion extends Helper {
    *
    * @return string
    */
-  protected function getCurrencyParameter()
+  public function getCurrencyParameter()
   {
     return $this->currency;
   }
@@ -47,7 +47,7 @@ abstract class AbstractRegion extends Helper {
    *
    * @return boolean
    */
-  protected function getTaxParameter()
+  public function getTaxParameter()
   {
     return $this->tax;
   }
@@ -57,7 +57,7 @@ abstract class AbstractRegion extends Helper {
    *
    * @return integer
    */
-  protected function getTaxRateParameter()
+  public function getTaxRateParameter()
   {
     return $this->taxRate;
   }
