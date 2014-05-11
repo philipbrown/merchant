@@ -5,9 +5,10 @@ use PhilipBrown\Merchant\Exception\InvalidRegionException;
 class Merchant {
 
   /**
-   * Create
+   * Create a new Order
    *
    * @param string $region
+   * @return PhilipBrown\Merchant\Order
    */
   public static function order($region)
   {

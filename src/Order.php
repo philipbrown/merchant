@@ -7,64 +7,82 @@ use PhilipBrown\Merchant\Exception\InvalidOrderException;
 class Order extends Helper {
 
   /**
+   * The region of the Order
+   *
    * @var RegionInterface
    */
   protected $region;
 
   /**
+   * The products of the order
+   *
    * @var array
    */
   protected $products;
 
   /**
+   * The cache of the products for easy lookups
+   *
    * @var array
    */
   protected $products_cache;
 
   /**
+   * The total value of the order
+   *
    * @var Money
    */
   protected $total_value;
 
   /**
+   * The total discount of the order
+   *
    * @var Money
    */
   protected $total_discount;
 
   /**
+   * The total tax of the order
+   *
    * @var Money
    */
   protected $total_tax;
 
   /**
+   * The subtotal of the order
+   *
    * @var Money
    */
   protected $subtotal;
 
   /**
+   * The total of the order
+   *
    * @var Money
    */
   protected $total;
 
   /**
+   * Does the order need to be reconciled?
+   *
    * @var boolean
    */
   protected $dirty;
 
   /**
-   * Construct
+   * Create a new Order
    *
    * @param RegionInterface $region
+   * @return void
    */
   public function __construct(RegionInterface $region)
   {
     $this->region = $region;
-
     $this->dirty = true;
   }
 
   /**
-   * Add
+   * Add a product to the order
    *
    * @param string $sku
    * @param integer $value
@@ -93,7 +111,33 @@ class Order extends Helper {
   }
 
   /**
-   * Update
+   * Remove a product from the order
+   *
+   * @param string $sku
+   * @return boolean
+   */
+  public function remove($sku)
+  {
+    if(in_array($sku, $this->products_cache))
+    {
+      $key = array_search($sku, $this->products_cache);
+
+      unset($this->products[$key]);
+      unset($this->products_cache[$key]);
+
+      $this->products = array_values($this->products);
+      $this->products_cache = array_values($this->products_cache);
+
+      $this->dirty = true;
+
+      return true;
+    }
+
+    throw new InvalidOrderException("$sku was not found in the products list");
+  }
+
+  /**
+   * Update an existing product
    *
    * @param string $sku
    * @param integer $value
@@ -124,33 +168,9 @@ class Order extends Helper {
   }
 
   /**
-   * Remove
+   * Reconcile the order if it is dirty
    *
-   * @param string $sku
-   * @return boolean
-   */
-  public function remove($sku)
-  {
-    if(in_array($sku, $this->products_cache))
-    {
-      $key = array_search($sku, $this->products_cache);
-
-      unset($this->products[$key]);
-      unset($this->products_cache[$key]);
-
-      $this->products = array_values($this->products);
-      $this->products_cache = array_values($this->products_cache);
-
-      $this->dirty = true;
-
-      return true;
-    }
-
-    throw new InvalidOrderException("$sku was not found in the products list");
-  }
-
-  /**
-   * Reconcile
+   * @return void
    */
   public function reconcile()
   {
@@ -186,7 +206,7 @@ class Order extends Helper {
   }
 
   /**
-   * Get Total Parameter
+   * Get the total parameter
    *
    * @return Money
    */
@@ -198,7 +218,7 @@ class Order extends Helper {
   }
 
   /**
-   * Get Total Discount
+   * Get the total discount parameter
    *
    * @return Money
    */
@@ -210,7 +230,7 @@ class Order extends Helper {
   }
 
   /**
-   * Get Total Tax
+   * Get the total tax parameter
    *
    * @return Money
    */
@@ -222,7 +242,7 @@ class Order extends Helper {
   }
 
   /**
-   * Get Subtotal
+   * Get the subtotal parameter
    *
    * @return Money
    */
@@ -234,7 +254,7 @@ class Order extends Helper {
   }
 
   /**
-   * Get Total
+   * Get the total parameter
    *
    * @return Money
    */
@@ -246,7 +266,7 @@ class Order extends Helper {
   }
 
   /**
-   * Get Region
+   * Get the region parameter
    *
    * @return string
    */
@@ -256,7 +276,7 @@ class Order extends Helper {
   }
 
   /**
-   * Get Products
+   * Get the products parameter
    *
    * @return array
    */

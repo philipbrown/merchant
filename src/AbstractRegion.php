@@ -3,27 +3,35 @@
 abstract class AbstractRegion extends Helper {
 
   /**
+   * The name of the region
+   *
    * @var string
    */
   protected $name;
 
   /**
+   * The currency of the region
+   *
    * @var string
    */
   protected $currency;
 
   /**
-   * @var boolean
+   * Does this region have tax?
+   *
+   * @var bool
    */
   protected $tax;
 
   /**
+   * The tax rate of the region
+   *
    * @var integer
    */
   protected $taxRate;
 
   /**
-   * Get Name
+   * Get the name of the region
    *
    * @return string
    */
@@ -33,7 +41,7 @@ abstract class AbstractRegion extends Helper {
   }
 
   /**
-   * Get Currency
+   * Get the currency of the region
    *
    * @return string
    */
@@ -43,9 +51,9 @@ abstract class AbstractRegion extends Helper {
   }
 
   /**
-   * Get Tax
+   * Check to see if tax is set in this region
    *
-   * @return boolean
+   * @return bool
    */
   public function getTaxParameter()
   {
@@ -53,7 +61,7 @@ abstract class AbstractRegion extends Helper {
   }
 
   /**
-   * Get Tax Rate
+   * Get the tax rate of the region
    *
    * @return integer
    */
@@ -63,6 +71,8 @@ abstract class AbstractRegion extends Helper {
   }
 
   /**
+   * Return the region as a string
+   *
    * @return string
    */
   public function __toString()

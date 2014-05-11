@@ -7,51 +7,71 @@ use PhilipBrown\Merchant\Exception\InvalidProductException;
 class Product extends Helper {
 
   /**
+   * The product's stock keeping unit
+   *
    * @var string
    */
   protected $sku;
 
   /**
+   * The product's currency
+   *
    * @var string
    */
   protected $currency;
 
   /**
+   * The value of the product
+   *
    * @var Money
    */
   protected $value;
 
   /**
+   * Is this product taxable?
+   *
    * @var boolean
    */
   protected $taxable;
 
   /**
+   * The tax rate of the product
+   *
    * @var integer
    */
   protected $taxRate;
 
   /**
+   * The amount of tax
+   *
    * @var Money
    */
   protected $tax;
 
   /**
+   * The value of the discount
+   *
    * @var Money
    */
   protected $discount;
 
   /**
-   * @var integer
+   * The quantity of the current product
+   *
+   * @var int
    */
   protected $quantity;
 
   /**
-   * @var boolean
+   * Is this product a freebie?
+   *
+   * @var bool
    */
   protected $freebie;
 
   /**
+   * The coupon that is associated with this product
+   *
    * @var string
    */
   protected $coupon;
@@ -65,19 +85,31 @@ class Product extends Helper {
   public function __construct($sku, $value, $currency, $taxable, $taxRate)
   {
     $this->sku = $sku;
-    $this->value = Money::init($value, $currency);
     $this->currency = $currency;
+    $this->value = Money::init($value, $currency);
     $this->taxable = $taxable;
     $this->taxRate = $taxRate;
     $this->discount = Money::init(0, $currency);
-    $this->tax = ($taxable) ? $this->value->multiply(($taxRate / 100)) : Money::init(0, $currency);
     $this->quantity = 1;
     $this->freebie = false;
+    $this->tax = $this->calculateTax();
     $this->total = $this->calculateTotal();
   }
 
   /**
-   * Calculate Tax
+   * Set the total depending on whether this product is a freebie
+   *
+   * @return Money
+   */
+  protected function calculateTotal()
+  {
+    return $this->total = ($this->freebie) ? Money::init(0, $this->currency) : $this->value;
+  }
+
+  /**
+   * Calculate the tax of the product
+   *
+   * @return Money
    */
   protected function calculateTax()
   {
@@ -92,17 +124,10 @@ class Product extends Helper {
   }
 
   /**
-   * Calculate Total
-   */
-  protected function calculateTotal()
-  {
-    return $this->total = ($this->freebie) ? Money::init(0, $this->currency) : $this->value;
-  }
-
-  /**
-   * Action
+   * Accept an array or a Closure of actions to run on the product
    *
    * @param Closure|array $action
+   * @return bool
    */
   public function action($action)
   {
@@ -120,9 +145,10 @@ class Product extends Helper {
   }
 
   /**
-   * Run Action Array
+   * Run an array of actions
    *
    * @param array $action
+   * @return bool
    */
   protected function runActionArray(array $action)
   {
@@ -132,22 +158,28 @@ class Product extends Helper {
 
       if(method_exists($this, $method)) $this->{$method}($v);
     }
+
+    return true;
   }
 
   /**
-   * Run Action Closure
+   * Run a Closure of actions
    *
    * @param Closure $action
+   * @return bool
    */
   protected function runActionClosure($action)
   {
     call_user_func($action, $this);
+
+    return true;
   }
 
   /**
-   * Quantity
+   * Quantity helper method
    *
    * @param integer $value
+   * @return void
    */
   public function quantity($value)
   {
@@ -155,9 +187,10 @@ class Product extends Helper {
   }
 
   /**
-   * Set Quantity Parameter
+   * Set the quantity parameter
    *
-   * @param integer $value
+   * @param int $value
+   * @return int
    */
   protected function setQuantityParameter($value)
   {
@@ -170,9 +203,10 @@ class Product extends Helper {
   }
 
   /**
-   * Taxable
+   * Taxable helper method
    *
    * @param boolean $value
+   * @return void
    */
   public function taxable($value)
   {
@@ -180,9 +214,10 @@ class Product extends Helper {
   }
 
   /**
-   * Set Taxable Parameter
+   * Set the taxable parameter
    *
    * @param boolean $value
+   * @return Money
    */
   protected function setTaxableParameter($value)
   {
@@ -196,9 +231,10 @@ class Product extends Helper {
   }
 
   /**
-   * Discount
+   * Discount helper method
    *
    * @param integer $value
+   * @return void
    */
   public function discount($value)
   {
@@ -206,7 +242,7 @@ class Product extends Helper {
   }
 
   /**
-   * Set Discount Parameter
+   * Set the discount parameter
    *
    * @param integer $value
    */
@@ -222,9 +258,10 @@ class Product extends Helper {
   }
 
   /**
-   * Freebie
+   * Freebie helper method
    *
    * @param boolean $value
+   * @return void
    */
   public function freebie($value)
   {
@@ -232,7 +269,7 @@ class Product extends Helper {
   }
 
   /**
-   * Set Freebie Parameter
+   * Set the freebie parameter
    *
    * @param boolean $value
    */
@@ -251,7 +288,7 @@ class Product extends Helper {
   }
 
   /**
-   * Coupon
+   * Coupon helper method
    *
    * @param string $value
    */
@@ -261,7 +298,7 @@ class Product extends Helper {
   }
 
   /**
-   * Set Coupon Parameter
+   * Set the coupon parameter
    *
    * @param string $value
    */
@@ -276,7 +313,7 @@ class Product extends Helper {
   }
 
   /**
-   * Get SKU
+   * Get the sku parameter
    *
    * @return string
    */
@@ -286,7 +323,7 @@ class Product extends Helper {
   }
 
   /**
-   * Get Currency
+   * Get currency parameter
    *
    * @return string
    */
@@ -296,7 +333,7 @@ class Product extends Helper {
   }
 
   /**
-   * Get Value
+   * Get the value parameter
    *
    * @return integer
    */
@@ -306,7 +343,7 @@ class Product extends Helper {
   }
 
   /**
-   * Get Taxable
+   * Get the taxable parameter
    *
    * @return boolean
    */
@@ -316,7 +353,7 @@ class Product extends Helper {
   }
 
   /**
-   * Get Tax Rate
+   * Get the tax rate parameter
    *
    * @return integer
    */
@@ -326,7 +363,7 @@ class Product extends Helper {
   }
 
   /**
-   * Get Tax
+   * Get the tax parameter
    *
    * @return Money
    */
@@ -336,7 +373,7 @@ class Product extends Helper {
   }
 
   /**
-   * Get Quantity
+   * Get the quantity parameter
    *
    * @return integer
    */
@@ -346,7 +383,7 @@ class Product extends Helper {
   }
 
   /**
-   * Get Discount
+   * Get the discount parameter
    *
    * @return Money
    */
@@ -356,7 +393,7 @@ class Product extends Helper {
   }
 
   /**
-   * Get Freebie
+   * Get the freebie parameter
    *
    * @return boolean
    */
@@ -366,7 +403,7 @@ class Product extends Helper {
   }
 
   /**
-   * Get Coupon
+   * Get the coupon parameter
    *
    * @return string
    */
