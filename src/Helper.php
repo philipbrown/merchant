@@ -2,7 +2,7 @@
 
 use Exception;
 
-class Helper {
+abstract class Helper {
 
   /**
    * Convert a string to camelcase
