@@ -11,7 +11,7 @@ Add `philipbrown/merchant` as a requirement to `composer.json`:
 ```json
 {
   "require": {
-    "philipbrown/merchant": "dev-master"
+    "philipbrown/merchant": "1.0.*"
   }
 }
 ```
