@@ -1,6 +1,5 @@
 {
     "name": "philipbrown/merchant",
-    "description": "Ecommerce abstraction for dealing with products, orders and sales",
     "license": "MIT",
     "authors": [
         {
@@ -14,10 +13,12 @@
         }
     },
     "require": {
-        "php": ">=5.3.2",
-        "philipbrown/money": "1.0.*"
+        "php": ">=5.4",
+        "mathiasverraes/money": "~1.0",
+        "beberlei/assert": "~2.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "3.7.*"
+        "phpunit/phpunit": "~4.0",
+        "mockery/mockery": "~0.9"
     }
 }
