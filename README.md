@@ -66,4 +66,3 @@ interface Country {
 
 Again, feel free to open a pull request if you want to include your country as part of this package.
 
-## Product List
