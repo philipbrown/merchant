@@ -66,3 +66,45 @@ interface Country {
 
 Again, feel free to open a pull request if you want to include your country as part of this package.
 
+## Collections
+Arrays in PHP are pretty shit. PHP claims to be an Object Orientated Programming Language, so instead of using boring arrays, we can use collection objects.
+
+The `Collection` class is used in a couple of places around this package for dealing with collections of items. For example, `ProductList` is a special `Collection` instance that is used internalling in the `Basket` class to hold the current products.
+
+When you create a new `Collection` instance you can optionally pass in an array of items:
+```php
+use PhilipBrown\Merchant\Collection;
+
+$collection = new Collection;
+$collection = new Collection(['dog', 'cat', 'goat']);
+```
+
+The `Collection` class has a number of useful methods for dealing working with a collection of items:
+```php
+// Return all of the items
+$collection->all();
+
+// Get an item by it's key
+$collection->key($key);
+
+// Add an item
+$collection->add($key, $value);
+
+// Remove an item by it's key
+$collection->remove($key);
+
+// Check for an existing item
+$collection->contains($key);
+
+// Count the items
+$collection->count();
+
+// Get the first item
+$collection->first();
+
+// Get the last item
+$collection->last();
+
+// Push an item onto the end of the collection
+$collection->push($item);
+```
