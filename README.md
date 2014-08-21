@@ -6,7 +6,7 @@ Merchant is a simple abstraction for working with products, orders and sales wit
 ## tl;dr
 
 ## Money and Currency
-Dealing with Money and Currency in an ecommerce application can be fraught with difficulties. Instead of passing around dump values, we can use Value Objects that are immuatable and protects the invariant of the items we hope to represent.
+Dealing with Money and Currency in an ecommerce application can be fraught with difficulties. Instead of passing around dumb values, we can use Value Objects that are immuatable and protect the invariants of the items we hope to represent.
 
 This package uses [mathiasverraes/money](https://github.com/mathiasverraes/money) by [@mathiasverraes](https://github.com/mathiasverraes) throughout to represent Money and Currency values.
 
@@ -15,7 +15,7 @@ For further details on how to use these objects, I would recommend taking a look
 ## Tax Rates
 In order to correctly calculate the total value of a transaction and the associated tax we need a way to represent the tax rate that should be applied.
 
-For example the included `TaxRates\UnitedKingdomValueAddedTax` represent the tax rate of the United Kingdom.
+For example the included `TaxRates\UnitedKingdomValueAddedTax` represents the tax rate of the United Kingdom.
 
 To create your own tax rate object you will need to implement the `TaxRate` interface:
 ```php
@@ -79,7 +79,7 @@ $collection = new Collection;
 $collection = new Collection(['dog', 'cat', 'goat']);
 ```
 
-The `Collection` class has a number of useful methods for dealing working with a collection of items:
+The `Collection` class has a number of useful methods for working with a collection of items:
 ```php
 // Return all of the items
 $collection->all();
