@@ -126,7 +126,7 @@ $product =  new Product(
 
 - Product properties are gettable
 - Certain properties are set as default
-
 - Increment and Decrement values
-
 - Status (Freebie & Taxable)
+- Coupons and Tags
+

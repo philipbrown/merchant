@@ -114,4 +114,26 @@ class Product {
     $this->taxable = $status->value;
   }
 
+  /**
+   * Add a coupon
+   *
+   * @param string $coupon
+   * @return void
+   */
+  public function coupon($coupon)
+  {
+    $this->coupons->push($coupon);
+  }
+
+  /**
+   * Add a tag
+   *
+   * @param string $tag
+   * @return void
+   */
+  public function tag($tag)
+  {
+    $this->tags->push($tag);
+  }
+
 }

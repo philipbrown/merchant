@@ -85,4 +85,24 @@ class ProductTest extends PHPUnit_Framework_TestCase {
     $this->product->taxable('false');
   }
 
+  /** @test */
+  public function should_add_coupon()
+  {
+    $this->assertEquals(0, $this->product->coupons->count());
+
+    $this->product->coupon('SUMMERSALE2014');
+
+    $this->assertEquals(1, $this->product->coupons->count());
+  }
+
+  /** @test */
+  public function should_add_tag()
+  {
+    $this->assertEquals(0, $this->product->tags->count());
+
+    $this->product->tag('digital');
+
+    $this->assertEquals(1, $this->product->tags->count());
+  }
+
 }
