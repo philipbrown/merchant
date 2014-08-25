@@ -15,52 +15,14 @@ In order to correctly calculate the total value of a transaction and the associa
 
 For example the included `TaxRates\UnitedKingdomValueAddedTax` represents the tax rate of the United Kingdom.
 
-To create your own tax rate object you will need to implement the `TaxRate` interface:
-```php
-interface TaxRate {
-
-  /**
-   * Return the rate as an float
-   *
-   * @return int
-   */
-  public function asFloat();
-
-  /**
-   * Return the rate as a percentage
-   *
-   * @return float
-   */
-  public function asPercentage();
-
-}
-```
+To create your own tax rate object you will need to implement the `TaxRate` interface.
 
 Feel free to open a pull request to include your country's tax rate as part of this package.
 
 ## Countries
 `Country` objects are used to encapsulate the `Currency` and `TaxRate` of a particular country. An example of a country object can be seen under `Countries\UnitedKingdom`.
 
-To create your own country object you will need to implement the `Country` interface:
-```php
-interface Country {
-
-  /**
-   * Return the currency
-   *
-   * @return Money\Currency
-   */
-  public function currency();
-
-  /**
-   * Return the Tax Rate
-   *
-   * @return PhilipBrown\Merchant\TaxRate
-   */
-  public function tax();
-
-}
-```
+To create your own country object you will need to implement the `Country` interface.
 
 Again, feel free to open a pull request if you want to include your country as part of this package.
 
@@ -187,7 +149,7 @@ To set a discount on a product, pass an object that implements the `Discount` in
 ```php
 use Money\Money;
 use Money\Currency;
-use PhilipBrown\Merchant\Percentage;
+use PhilipBrown\Merchant\Percent;
 use PhilipBrown\Merchant\Discounts\ValueDiscount;
 use PhilipBrown\Merchant\Discounts\PercentageDiscount;
 
@@ -195,7 +157,7 @@ use PhilipBrown\Merchant\Discounts\PercentageDiscount;
 $product->discount(new ValueDiscount(new Money(200, new Currency('GBP'))));
 
 // Set a discount of a percentage of the product price
-$product->discount(new PercentageDiscount(Percentage::set(20)));
+$product->discount(new PercentageDiscount(Percent::set(20)));
 ```
 
 ### Categories
