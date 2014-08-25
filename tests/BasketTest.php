@@ -23,6 +23,18 @@ class BasketTest extends PHPUnit_Framework_TestCase {
   }
 
   /** @test */
+  public function should_get_the_currency()
+  {
+    $this->assertInstanceOf('Money\Currency', $this->basket->currency());
+  }
+
+  /** @test */
+  public function should_get_the_products_collection()
+  {
+    $this->assertInstanceOf('PhilipBrown\Merchant\Collection', $this->basket->products());
+  }
+
+  /** @test */
   public function should_add_product_to_basket()
   {
     $this->assertEquals(0, $this->basket->count());

@@ -41,26 +41,6 @@ class Basket {
   }
 
   /**
-   * Add a product to the basket
-   *
-   * @param string $sku
-   * @param string $name
-   * @param Money $price
-   * @param Closure $action
-   * @return void
-   */
-  public function add($sku, $name, Money $price, Closure $action = null)
-  {
-    $product = new Product($sku, $name, $price, $this->tax);
-
-    if($action) $product->action($action);
-
-    $this->products->add($sku, $product);
-
-    $this->dispatcher->fire('product.added', [$product, $this->products]);
-  }
-
-  /**
    * Count the items in the basket
    *
    * @return int
@@ -79,6 +59,46 @@ class Basket {
   public function pick($sku)
   {
     return $this->products->get($sku);
+  }
+
+  /**
+   * Get the Currency of the Basket
+   *
+   * @return Currency
+   */
+  public function currency()
+  {
+    return $this->currency;
+  }
+
+  /**
+   * Get the products from the basket
+   *
+   * @return Collection
+   */
+  public function products()
+  {
+    return $this->products;
+  }
+
+  /**
+   * Add a product to the basket
+   *
+   * @param string $sku
+   * @param string $name
+   * @param Money $price
+   * @param Closure $action
+   * @return void
+   */
+  public function add($sku, $name, Money $price, Closure $action = null)
+  {
+    $product = new Product($sku, $name, $price, $this->tax);
+
+    if($action) $product->action($action);
+
+    $this->products->add($sku, $product);
+
+    $this->dispatcher->fire('product.added', [$product, $this->products]);
   }
 
   /**

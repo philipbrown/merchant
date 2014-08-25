@@ -145,3 +145,7 @@ $product =  new Product(
 - count the products
 - pick a product
 - remove a product
+
+## Totals
+- Calculate
+- Provide the name of the total
