@@ -69,7 +69,7 @@ Again, feel free to open a pull request if you want to include your country as p
 ## Collections
 Arrays in PHP are pretty shit. PHP claims to be an Object Orientated Programming Language, so instead of using boring arrays, we can use collection objects.
 
-The `Collection` class is used in a couple of places around this package for dealing with collections of items. For example, `ProductList` is a special `Collection` instance that is used internalling in the `Basket` class to hold the current products.
+The `Collection` class is used in a couple of places around this package for dealing with collections of items.
 
 When you create a new `Collection` instance you can optionally pass in an array of items:
 ```php
