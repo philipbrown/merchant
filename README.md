@@ -10,8 +10,6 @@ Dealing with Money and Currency in an ecommerce application can be fraught with 
 
 This package uses [mathiasverraes/money](https://github.com/mathiasverraes/money) by [@mathiasverraes](https://github.com/mathiasverraes) throughout to represent Money and Currency values.
 
-For further details on how to use these objects, I would recommend taking a look at that repository.
-
 ## Tax Rates
 In order to correctly calculate the total value of a transaction and the associated tax we need a way to represent the tax rate that should be applied.
 
@@ -81,13 +79,13 @@ $collection = new Collection(['dog', 'cat', 'goat']);
 
 The `Collection` class has a number of useful methods for working with a collection of items:
 ```php
-// Return all of the items
+// Return all of the items as an array
 $collection->all();
 
 // Get an item by it's key
 $collection->key($key);
 
-// Add an item
+// Add an item with a key
 $collection->add($key, $value);
 
 // Remove an item by it's key
@@ -110,30 +108,112 @@ $collection->push($item);
 ```
 
 ## Products
-Products are encapsulated as instances of `Product`. The `Product` object allows you to add record the properties of the product in an object orientated way.
+Products are encapsulated as instances of `Product`. The `Product` object allows you to work with the properties of the product in an object orientated way.
 
 To create a new `Product`, pass a [SKU](http://en.wikipedia.org/wiki/Stock_keeping_unit), the name of the product, the price of the product and the tax rate:
 ```php
 use PhilipBrown\Merchant\Product;
 
-$product =  new Product(
-  '123',
-  'iPhone',
-  new Money(60000, new Currency('GBP')),
-  new UnitedKingdomValueAddedTax
-);
+$sku    = '123';
+$name   = 'iPhone';
+$price  = new Money(60000, new Currency('GBP'));
+$rate   = new UnitedKingdomValueAddedTax;
+
+$product =  new Product($sku, $name, $price, $rate);
 ```
 
-- Product properties are gettable
-- Certain properties are set as default
-- Quantity
-- Increment and Decrement values
-- Status (Freebie & Taxable)
-- Coupons and Tags
-- Tax Rate
-- Discounts
-- Categories
-- Closure of actions
+The properties of a `Product` instance are set to `private` but the object implements PHP's `__get()` magic method to allow you to get them as if they were `public` class properties:
+```php
+$product->sku;  // 123
+$product->name; // iPhone
+```
+
+The `Product` object also has certain properties that are set as default but cannot be set during instantiation:
+```php
+$product->quantity; // 1
+$product->freebie;  // false
+$product->taxable;  // true
+```
+
+### Quantity
+You can alter the quantity of a `Product` in two ways.
+
+Firstly you can pass an instance of `Quantity` into the `quantity()` method. `Quantity` is a simple immutable Value Object that has a single `static set()` method and a `private __construct()` method:
+```php
+use PhilipBrown\Merchant\Quantity;
+
+$product->quantity(Quantity::set(10));
+```
+
+Alternatively you can increment of decrement the quantity using the respective methods:
+```php
+// Increment the quantity
+$product->increment(); // ++
+
+// Decrement the quantity
+$product->decrement(); // --
+```
+
+### Freebie and Taxable
+The `freebie` and the `taxable` properties can be altered by passing an instance of the `Status` Value Object into the `freebie()` or `taxable()` methods. As with the `Quantity` Value Object, the `Status` Value Object has a single `static set()` method and a `private __construct()` method:
+```php
+use PhilipBrown\Merchant\Status;
+
+// Set the freebie status
+$product->freebie(Status::set(true));
+
+// Set the taxable status
+$product->taxable(Status::set(false));
+```
+
+### Coupons and Tags
+The `Product` object will by default instantiate instances of `Collection` for the `coupon` and `tags` properties. You can add a coupon or a tag to the product by using either the `coupon()` or `tags()` methods:
+```php
+// Add a coupon
+$product->coupon('SUMMERSALE2014');
+
+// Add a tag
+$product->tag('digital');
+```
+
+### Tax Rate
+If you want to apply an alternate tax rate to a product you can do so by passing an object that implements the `TaxRate` interface to the `rate()` method:
+```php
+$product->rate(new SpecialTaxRate);
+```
+
+### Discounts
+To set a discount on a product, pass an object that implements the `Discount` interface to the `discount()` method. Two example discount objects have been provided as part of this package:
+```php
+use Money\Money;
+use Money\Currency;
+use PhilipBrown\Merchant\Percentage;
+use PhilipBrown\Merchant\Discounts\ValueDiscount;
+use PhilipBrown\Merchant\Discounts\PercentageDiscount;
+
+// Set a discount of a fixed value
+$product->discount(new ValueDiscount(new Money(200, new Currency('GBP'))));
+
+// Set a discount of a percentage of the product price
+$product->discount(new PercentageDiscount(Percentage::set(20)));
+```
+
+### Categories
+You can also define a categories so that all products of that category will be set with the same consistent values. To set the category of a product you can pass an object that implements the `Category` interface to the `category()` method. A `PhysicalBook` category has been provided as part of this package as an example:
+```php
+$product->category(new PhysicalBook);
+```
+
+### Actions
+If you want to run a series of actions to all products you can pass a `Closure` to the `action()` method. Inside of the `Closure` you will have access to the currenct `$product` instance:
+```php
+$product->action(function($product)
+{
+  $product->quantity(Quantity::set(3));
+  $product->freebie(Status::set(true));
+  $product->taxable(Status::set(false));
+});
+```
 
 ## Events
 - Dispatcher
@@ -149,3 +229,8 @@ $product =  new Product(
 ## Totals
 - Calculate
 - Provide the name of the total
+
+## Reconciling
+- Reconciling
+- Order
+- Line Items
