@@ -19,7 +19,6 @@ class DiscountTest extends PHPUnit_Framework_TestCase {
     $name   = 'iPhone';
     $price  = new Money(1000, new Currency('GBP'));
     $rate   = new StubTaxRate;
-
     $this->product = new Product($sku, $name, $price, $rate);
   }
 
@@ -28,7 +27,6 @@ class DiscountTest extends PHPUnit_Framework_TestCase {
   {
     $percent  = Percent::set(20);
     $discount = new PercentageDiscount($percent);
-
     $value = $discount->calculate($this->product);
 
     $this->assertInstanceOf('Money\Money', $value);
@@ -40,9 +38,7 @@ class DiscountTest extends PHPUnit_Framework_TestCase {
   public function should_get_value_discount()
   {
     $amount = new Money(200, new Currency('GBP'));
-
     $discount = new ValueDiscount($amount);
-
     $value = $discount->calculate($this->product);
 
     $this->assertInstanceOf('Money\Money', $value);
