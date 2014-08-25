@@ -164,4 +164,19 @@ class ProductTest extends PHPUnit_Framework_TestCase {
     $this->product->category('PhysicalBook');
   }
 
+  /** @test */
+  public function should_run_a_macro_of_actions()
+  {
+    $this->product->action(function($product)
+    {
+      $product->quantity(Quantity::set(3));
+      $product->freebie(Status::set(true));
+      $product->taxable(Status::set(false));
+    });
+
+    $this->assertEquals(3, $this->product->quantity);
+    $this->assertTrue($this->product->freebie);
+    $this->assertFalse($this->product->taxable);
+  }
+
 }

@@ -133,3 +133,4 @@ $product =  new Product(
 - Tax Rate
 - Discounts
 - Categories
+- Closure of actions
