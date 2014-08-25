@@ -3,13 +3,14 @@
 use Money\Money;
 use PhilipBrown\Merchant\Product;
 use PhilipBrown\Merchant\Discount;
+use PhilipBrown\Merchant\AbstractDiscount;
 
-class ValueDiscount implements Discount {
+class ValueDiscount extends AbstractDiscount implements Discount {
 
   /**
    * @var Money
    */
-  private $value;
+  protected $discount;
 
   /**
    * Create a new ValueDiscount instance
@@ -17,9 +18,9 @@ class ValueDiscount implements Discount {
    * @param Money $value
    * @return void
    */
-  public function __construct(Money $value)
+  public function __construct(Money $discount)
   {
-    $this->value = $value;
+    $this->discount = $discount;
   }
 
   /**
@@ -30,7 +31,7 @@ class ValueDiscount implements Discount {
    */
   public function calculate(Product $product)
   {
-    return $product->price->subtract($this->value);
+    return $product->price->subtract($this->discount);
   }
 
 }

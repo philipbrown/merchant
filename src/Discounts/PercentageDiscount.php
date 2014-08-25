@@ -1,27 +1,26 @@
 <?php namespace PhilipBrown\Merchant\Discounts;
 
-use Assert\Assertion;
 use PhilipBrown\Merchant\Product;
 use PhilipBrown\Merchant\Discount;
+use PhilipBrown\Merchant\Percent;
+use PhilipBrown\Merchant\AbstractDiscount;
 
-class PercentageDiscount implements Discount {
+class PercentageDiscount extends AbstractDiscount implements Discount {
 
   /**
-   * @var int
+   * @var Percent
    */
-  private $percentage;
+  protected $discount;
 
   /**
-   * Create a new PercentageDiscount instance
+   * Create a new PercentageDiscount
    *
-   * @param int $percentage
+   * @param Percent $discount
    * @return void
    */
-  public function __construct($percentage)
+  public function __construct(Percent $discount)
   {
-    Assertion::integer($percentage);
-
-    $this->percentage = $percentage;
+    $this->discount = $discount;
   }
 
   /**
@@ -32,7 +31,7 @@ class PercentageDiscount implements Discount {
    */
   public function calculate(Product $product)
   {
-    return $product->price->multiply($this->percentage / 100);
+    return $product->price->multiply($this->discount->value / 100);
   }
 
 }
