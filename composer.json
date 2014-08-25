@@ -10,6 +10,11 @@
             "PhilipBrown\\Merchant\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "PhilipBrown\\Merchant\\Stubs\\": "stubs"
+        }
+    },
     "require": {
         "php": ">=5.4",
         "mathiasverraes/money": "~1.0",
