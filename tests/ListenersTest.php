@@ -4,6 +4,7 @@ use Money\Money;
 use Money\Currency;
 use PhilipBrown\Merchant\Product;
 use PhilipBrown\Merchant\Collection;
+use PhilipBrown\Merchant\Stubs\StubTaxRate;
 use PhilipBrown\Merchant\Listeners\RemoveZeroQuantityProductsFromList;
 
 class ListenersTest extends PHPUnit_Framework_TestCase {
