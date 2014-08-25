@@ -15,8 +15,8 @@ class StubListener implements Listener {
    */
   public function handle(Product $product, Collection $list)
   {
-    $this->product = $product;
-    $this->list = $list;
+    $product = $product;
+    $list = $list;
   }
 
 }
