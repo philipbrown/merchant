@@ -168,4 +168,14 @@ class Product {
     $this->discount = $discount;
   }
 
+  /**
+   * Set a category
+   *
+   * @return void
+   */
+  public function category(Category $category)
+  {
+    return $this->category = $category;
+  }
+
 }

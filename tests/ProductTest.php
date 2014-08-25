@@ -5,6 +5,7 @@ use Money\Currency;
 use PhilipBrown\Merchant\Status;
 use PhilipBrown\Merchant\Product;
 use PhilipBrown\Merchant\Quantity;
+use PhilipBrown\Merchant\Categories\PhysicalBook;
 use PhilipBrown\Merchant\Discounts\PercentageDiscount;
 use PhilipBrown\Merchant\TaxRates\UnitedKingdomValueAddedTax;
 
@@ -145,6 +146,22 @@ class ProductTest extends PHPUnit_Framework_TestCase {
     $this->setExpectedException('Exception');
 
     $this->product->discount('20%');
+  }
+
+  /** @test */
+  public function should_set_category()
+  {
+    $this->product->category(new PhysicalBook);
+
+    $this->assertInstanceOf('PhilipBrown\Merchant\Category', $this->product->category);
+  }
+
+  /** @test */
+  public function category_method_should_only_accept_instances_of_category()
+  {
+    $this->setExpectedException('Exception');
+
+    $this->product->category('PhysicalBook');
   }
 
 }

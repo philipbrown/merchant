@@ -132,3 +132,4 @@ $product =  new Product(
 - Coupons and Tags
 - Tax Rate
 - Discounts
+- Categories
