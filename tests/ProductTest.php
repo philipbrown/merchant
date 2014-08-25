@@ -4,6 +4,7 @@ use Money\Money;
 use Money\Currency;
 use PhilipBrown\Merchant\Status;
 use PhilipBrown\Merchant\Product;
+use PhilipBrown\Merchant\Discounts\PercentageDiscount;
 use PhilipBrown\Merchant\TaxRates\UnitedKingdomValueAddedTax;
 
 class ProductTest extends PHPUnit_Framework_TestCase {
@@ -111,6 +112,22 @@ class ProductTest extends PHPUnit_Framework_TestCase {
     $this->product->rate(new StubTaxRate);
 
     $this->assertEquals(99, $this->product->rate->asPercentage());
+  }
+
+  /** @test */
+  public function should_set_discount()
+  {
+    $this->product->discount(new PercentageDiscount(20));
+
+    $this->assertInstanceOf('PhilipBrown\Merchant\Discount', $this->product->discount);
+  }
+
+  /** @test */
+  public function discount_method_should_only_accept_instances_of_discount()
+  {
+    $this->setExpectedException('Exception');
+
+    $this->product->discount('20%');
   }
 
 }

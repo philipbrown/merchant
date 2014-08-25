@@ -147,4 +147,14 @@ class Product {
     $this->rate = $rate;
   }
 
+  /**
+   * Set a discount
+   *
+   * @return void
+   */
+  public function discount(Discount $discount)
+  {
+    $this->discount = $discount;
+  }
+
 }
