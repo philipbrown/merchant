@@ -108,3 +108,22 @@ $collection->last();
 // Push an item onto the end of the collection
 $collection->push($item);
 ```
+
+## Products
+Products are encapsulated as instances of `Product`. The `Product` object allows you to add record the properties of the product in an object orientated way.
+
+To create a new `Product`, pass a [SKU](http://en.wikipedia.org/wiki/Stock_keeping_unit), the name of the product, the price of the product and the tax rate:
+```php
+use PhilipBrown\Merchant\Product;
+
+$product =  new Product(
+  '123',
+  'iPhone',
+  new Money(60000, new Currency('GBP')),
+  new UnitedKingdomValueAddedTax
+);
+```
+
+
+
+
