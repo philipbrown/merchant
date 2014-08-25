@@ -1,12 +1,10 @@
 {
     "name": "philipbrown/merchant",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Philip Brown",
-            "email": "phil@ipbrown.com"
-        }
-    ],
+    "authors": [{
+        "name": "Philip Brown",
+        "email": "phil@ipbrown.com"
+    }],
     "autoload": {
         "psr-4": {
             "PhilipBrown\\Merchant\\": "src"
