@@ -136,4 +136,15 @@ class Product {
     $this->tags->push($tag);
   }
 
+  /**
+   * Set the Tax Rate
+   *
+   * @param PhilipBrown\Merchant\TaxRate
+   * @return void
+   */
+  public function rate(TaxRate $rate)
+  {
+    $this->rate = $rate;
+  }
+
 }

@@ -129,4 +129,4 @@ $product =  new Product(
 - Increment and Decrement values
 - Status (Freebie & Taxable)
 - Coupons and Tags
-
+- Tax Rate

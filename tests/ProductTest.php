@@ -105,4 +105,12 @@ class ProductTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals(1, $this->product->tags->count());
   }
 
+  /** @test */
+  public function should_set_tax_rate()
+  {
+    $this->product->rate(new StubTaxRate);
+
+    $this->assertEquals(99, $this->product->rate->asPercentage());
+  }
+
 }
