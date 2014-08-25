@@ -10,13 +10,13 @@ class StubListener implements Listener {
    * Hand the event
    *
    * @param Product $product
-   * @param Collection $list
+   * @param Collection $collection
    * @return void
    */
-  public function handle(Product $product, Collection $list)
+  public function handle(Product $product, Collection $collection)
   {
     $this->product = $product;
-    $this->list = $list;
+    $this->collection = $collection;
   }
 
 }
