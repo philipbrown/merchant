@@ -7,7 +7,7 @@ use PhilipBrown\Merchant\Category;
 class PhysicalBook implements Category {
 
   /**
-   * Set the taxable status to false
+   * Categories a product as a physical book
    *
    * @param Product $product
    * @return void

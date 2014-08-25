@@ -1,5 +1,6 @@
 <?php namespace PhilipBrown\Merchant\Discounts;
 
+use Assert\Assertion;
 use PhilipBrown\Merchant\Product;
 use PhilipBrown\Merchant\Discount;
 
@@ -18,6 +19,8 @@ class PercentageDiscount implements Discount {
    */
   public function __construct($percentage)
   {
+    Assertion::integer($percentage);
+
     $this->percentage = $percentage;
   }
 
