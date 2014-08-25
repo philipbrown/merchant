@@ -4,6 +4,7 @@ use Money\Money;
 use Money\Currency;
 use PhilipBrown\Merchant\Status;
 use PhilipBrown\Merchant\Product;
+use PhilipBrown\Merchant\Quantity;
 use PhilipBrown\Merchant\Discounts\PercentageDiscount;
 use PhilipBrown\Merchant\TaxRates\UnitedKingdomValueAddedTax;
 
@@ -34,6 +35,22 @@ class ProductTest extends PHPUnit_Framework_TestCase {
     $this->assertTrue($this->product->taxable);
     $this->assertInstanceOf('PhilipBrown\Merchant\Collection', $this->product->coupons);
     $this->assertInstanceOf('PhilipBrown\Merchant\Collection', $this->product->tags);
+  }
+
+  /** @test */
+  public function should_set_the_quantity()
+  {
+    $this->product->quantity(Quantity::set(10));
+
+    $this->assertEquals(10, $this->product->quantity);
+  }
+
+  /** @test */
+  public function should_only_accept_instance_of_quantity()
+  {
+    $this->setExpectedException('Exception');
+
+    $this->product->quantity(-1);
   }
 
   /** @test */

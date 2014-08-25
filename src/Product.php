@@ -73,6 +73,17 @@ class Product {
   }
 
   /**
+   * Set the quantity
+   *
+   * @param Quantity $quantity
+   * @return void
+   */
+  public function quantity(Quantity $quantity)
+  {
+    $this->quantity = $quantity->value;
+  }
+
+  /**
    * Increment the quantity
    *
    * @return void
