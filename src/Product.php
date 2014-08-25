@@ -53,6 +53,16 @@ class Product {
   private $tags;
 
   /**
+   * @var Discount
+   */
+  private $discount;
+
+  /**
+   * @var Category
+   */
+  private $category;
+
+  /**
    * Create a new Product
    *
    * @param string $sku
@@ -176,7 +186,7 @@ class Product {
    */
   public function category(Category $category)
   {
-    return $this->category = $category;
+    $this->category = $category;
   }
 
   /**

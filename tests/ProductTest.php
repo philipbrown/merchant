@@ -3,8 +3,10 @@
 use Money\Money;
 use Money\Currency;
 use PhilipBrown\Merchant\Status;
+use PhilipBrown\Merchant\Percent;
 use PhilipBrown\Merchant\Product;
 use PhilipBrown\Merchant\Quantity;
+use PhilipBrown\Merchant\Stubs\StubTaxRate;
 use PhilipBrown\Merchant\Categories\PhysicalBook;
 use PhilipBrown\Merchant\Discounts\PercentageDiscount;
 use PhilipBrown\Merchant\TaxRates\UnitedKingdomValueAddedTax;
@@ -16,12 +18,11 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 
   public function setUp()
   {
-    $this->product = new Product(
-      '123',
-      'iPhone',
-      new Money(60000, new Currency('GBP')),
-      new UnitedKingdomValueAddedTax
-    );
+    $sku    = '123';
+    $name   = 'iPhone';
+    $price  = new Money(60000, new Currency('GBP'));
+    $rate   = new StubTaxRate;
+    $this->product = new Product($sku, $name, $price, $rate);
   }
 
   /** @test */
@@ -30,7 +31,7 @@ class ProductTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals('123', $this->product->sku);
     $this->assertEquals('iPhone', $this->product->name);
     $this->assertEquals(new Money(60000, new Currency('GBP')), $this->product->price);
-    $this->assertEquals(new UnitedKingdomValueAddedTax, $this->product->rate);
+    $this->assertEquals(new StubTaxRate, $this->product->rate);
     $this->assertEquals(1, $this->product->quantity);
     $this->assertFalse($this->product->freebie);
     $this->assertTrue($this->product->taxable);
@@ -127,15 +128,15 @@ class ProductTest extends PHPUnit_Framework_TestCase {
   /** @test */
   public function should_set_tax_rate()
   {
-    $this->product->rate(new StubTaxRate);
+    $this->product->rate(new UnitedKingdomValueAddedTax);
 
-    $this->assertEquals(99, $this->product->rate->asPercentage());
+    $this->assertEquals(20, $this->product->rate->asPercentage());
   }
 
   /** @test */
   public function should_set_discount()
   {
-    $this->product->discount(new PercentageDiscount(20));
+    $this->product->discount(new PercentageDiscount(Percent::set(20)));
 
     $this->assertInstanceOf('PhilipBrown\Merchant\Discount', $this->product->discount);
   }
