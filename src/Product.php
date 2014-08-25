@@ -72,4 +72,46 @@ class Product {
     $this->tags     = new Collection;
   }
 
+  /**
+   * Increment the quantity
+   *
+   * @return void
+   */
+  public function increment()
+  {
+    $this->quantity++;
+  }
+
+  /**
+   * Decrement of the quantity
+   *
+   * @return void
+   */
+  public function decrement()
+  {
+    $this->quantity--;
+  }
+
+  /**
+   * Set the freebie status
+   *
+   * @param Status $status
+   * @return void
+   */
+  public function freebie(Status $status)
+  {
+    $this->freebie = $status->value;
+  }
+
+  /**
+   * Set the taxable status
+   *
+   * @param Status $status
+   * @return void
+   */
+  public function taxable(Status $status)
+  {
+    $this->taxable = $status->value;
+  }
+
 }
