@@ -134,3 +134,14 @@ $product =  new Product(
 - Discounts
 - Categories
 - Closure of actions
+
+## Events
+- Dispatcher
+- Listeners
+
+## Basket
+- Set up the basket
+- add a product
+- count the products
+- pick a product
+- remove a product
