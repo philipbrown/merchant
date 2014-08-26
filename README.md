@@ -4,6 +4,7 @@
 Merchant is a simple abstraction for working with products, orders and sales within an ecommerce application. It aims to solve the problem of dealing with multiple product orders and the associated data that you will be required to store and use within the lifecycle of a customer.
 
 Merchant aims to solve the following problems:
+
 1. Tracking products through the order process
 2. Automatically deal with the issue of money and currency
 3. Apply discounts, coupons or special categories to products
