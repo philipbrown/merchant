@@ -2,35 +2,34 @@
 
 use Assert\Assertion;
 
-class Status {
+class Status extends AbstractValueObject implements ValueObject
+{
+    /**
+     * @var bool
+     */
+    protected $value;
 
-  use Gettable;
+    /**
+     * Create a new Status
+     *
+     * @param bool $value
+     * @return void
+     */
+    private function __construct($value)
+    {
+      Assertion::boolean($value);
 
-  /**
-   * @var int
-   */
-  private $value;
+      $this->value = $value;
+    }
 
-  /**
-   * @param int $value
-   * @return void
-   */
-  private function __construct($value)
-  {
-    Assertion::boolean($value);
-
-    $this->value = $value;
-  }
-
-  /**
-   * Set the value
-   *
-   * @param int $value
-   * @return Quantity
-   */
-  public static function set($value)
-  {
-    return new Status($value);
-  }
-
+    /**
+     * Static method to create a new instance
+     *
+     * @param bool $value
+     * @return Status
+     */
+    public static function set($value)
+    {
+      return new Status($value);
+    }
 }
