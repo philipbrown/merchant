@@ -71,14 +71,23 @@ Each Value Object should have a `public static set($value)` method and a `privat
 There are 3 Value Objects in this package:
 ```php
 use PhilipBrown\Merchant\Status;
+use PhilipBrown\Merchant\Percent;
 use PhilipBrown\Merchant\Quantity;
 
 // A `Status` should be a boolean value
 $status = Status::set(true);
+$status->value(); // true
 
 // A `Quantity` should be an integer value
-$quantiy = Quantity::set(10);
+$quantity = Quantity::set(10);
+$quantity->value(); // 10
 
 // A `Percent` should be an integer value
-$percent = Percent::set(25);
+$percent = Percent::set(10);
+$percent->value(); // 10
+
+// You can test for equality between two Value Objects
+$other = Percent::set(10);
+$other->equals($percent);   // true
+$other->equals($quantity);  // false
 ```
