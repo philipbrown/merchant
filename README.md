@@ -92,3 +92,28 @@ $other = Percent::set(10);
 $other->equals($percent);   // true
 $other->equals($quantity);  // false
 ```
+
+## Tax Rates
+When calculating the total cost of an order we need to factor in the tax rate that should be applied on top. Tax Rates are encapsulated as objects so we can provide a consistent interface when retrieving the current value.
+
+Tax Rates should implement the `TaxRate` interface:
+```php
+interface TaxRate
+{
+    /**
+     * Return the rate as an float
+     *
+     * @return float
+     */
+    public function asFloat();
+
+    /**
+     * Return the rate as a percentage
+     *
+     * @return int
+     */
+    public function asPercentage();
+}
+```
+
+An example `UnitedKingdomValueAddedTax` implementation can be found in this package. If you would like to add a Tax Rate to the core Merchant source, please feel free to open a pull request.
