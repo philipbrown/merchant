@@ -20,7 +20,7 @@ class UnitedKingdomValueAddedTax implements TaxRate
     }
 
     /**
-     * Return the rate as an float
+     * Return the rate as a float
      *
      * @return float
      */

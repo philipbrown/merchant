@@ -94,14 +94,14 @@ $other->equals($quantity);  // false
 ```
 
 ## Tax Rates
-When calculating the total cost of an order we need to factor in the tax rate that should be applied on top. Tax Rates are encapsulated as objects so we can provide a consistent interface when retrieving the current value.
+When calculating the total cost of an order we need to factor in the tax rate that should be applied on top. Tax Rates are encapsulated as objects so we can provide a consistent interface when retrieving the current rate of tax.
 
-Tax Rates should implement the `TaxRate` interface:
+Tax rates should implement the `TaxRate` interface:
 ```php
 interface TaxRate
 {
     /**
-     * Return the rate as an float
+     * Return the rate as a float
      *
      * @return float
      */
@@ -116,4 +116,4 @@ interface TaxRate
 }
 ```
 
-An example `UnitedKingdomValueAddedTax` implementation can be found in this package. If you would like to add a Tax Rate to the core Merchant source, please feel free to open a pull request.
+An example `UnitedKingdomValueAddedTax` implementation can be found in this package. If you would like to add a tax rate to the core Merchant source, please feel free to open a pull request.
