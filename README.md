@@ -117,3 +117,29 @@ interface TaxRate
 ```
 
 An example `UnitedKingdomValueAddedTax` implementation can be found in this package. If you would like to add a tax rate to the core Merchant source, please feel free to open a pull request.
+
+## Jurisdictions
+Almost every country in the world has a different combination of currency and tax rates. Countries like the USA have different tax rates within each state.
+
+In order to make it easier to work with currency and tax rate combinations you think of the combination as an encapsulated "jurisdication". This means you can easily specify the current and tax rate to be used depending on the locale of the customer.
+
+Jurisdictions should implement the `Jurisdiction` interface:
+```php
+interface Jurisdiction
+{
+    /**
+     * Return the currency
+     *
+     * @return Money\Currency
+     */
+    public function currency();
+
+    /**
+     * Return the Tax Rate
+     *
+     * @return TaxRate
+     */
+    public function tax();
+}
+```
+Again, if you would like to add a jurisdiction to the core Merchant source, please feel free to open a pull request.
