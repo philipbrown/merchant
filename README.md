@@ -100,7 +100,9 @@ $other->equals($percent);   // true
 $other->equals($quantity);  // false
 ```
 
-Certain Value Object also have extra methods. For example, `string` Value Objects extend the `String` class:
+Certain Value Object also have extra methods. Each method that manipulates the value of the Value Object will return a new instance to ensure immutability.
+
+For example, `string` Value Objects extend the `String` class:
 ```php
 use PhilipBrown\Merchant\String;
 
