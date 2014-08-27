@@ -69,6 +69,8 @@ interface ValueObject
 
 Each Value Object should have a `public static set($value)` method and a `private __construct()` method. The `value()` method and the `equals(Value $object)` method can be inherited from the `AbstractValueObject` class.
 
+This package uses [beberlei/assert](https://github.com/beberlei/assert) by [@beberlei](https://github.com/beberlei) to protect against invalid inputs. If you pass an invalid input to a Value Object a `Assert\AssertionFailedException` will be thrown.
+
 There are 3 Value Objects in this package:
 ```php
 use PhilipBrown\Merchant\Status;
