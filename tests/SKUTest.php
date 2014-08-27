@@ -14,11 +14,11 @@ class SKUTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function should_only_string_value()
+    public function should_only_accept_string_value()
     {
       $this->setExpectedException('Assert\AssertionFailedException');
 
-      $sku = SKU::set(1234);
+      $sku = SKU::set(123);
     }
 
     /** @test */
@@ -27,6 +27,14 @@ class SKUTest extends PHPUnit_Framework_TestCase
       $sku = SKU::set('abc123');
 
       $this->assertEquals('abc123', $sku->value());
+    }
+
+    /** @test */
+    public function test_cast_to_string()
+    {
+      $sku = SKU::set('abc123');
+
+      $this->assertEquals('abc123', (string) $sku);
     }
 
     /** @test */

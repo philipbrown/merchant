@@ -2,7 +2,7 @@
 
 use Assert\Assertion;
 
-class SKU extends AbstractValueObject implements ValueObject
+class SKU extends String implements ValueObject
 {
     /**
      * @var string

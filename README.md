@@ -100,6 +100,14 @@ $other->equals($percent);   // true
 $other->equals($quantity);  // false
 ```
 
+Certain Value Object also have extra methods. For example, `string` Value Objects extend the `String` class:
+```php
+use PhilipBrown\Merchant\String;
+
+$string = String::set('HelloWorld');
+$string->snake(); // hello_world
+```
+
 ## Tax Rates
 When calculating the total cost of an order we need to factor in the tax rate that should be applied on top. Tax Rates are encapsulated as objects so we can provide a consistent interface when retrieving the current rate of tax.
 
