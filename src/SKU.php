@@ -2,22 +2,22 @@
 
 use Assert\Assertion;
 
-class Percent extends AbstractValueObject implements ValueObject
+class SKU extends AbstractValueObject implements ValueObject
 {
     /**
-     * @var int
+     * @var string
      */
     protected $value;
 
     /**
-     * Create a new Percent
+     * Create a new SKU
      *
-     * @param int $value
+     * @param string $value
      * @return void
      */
     private function __construct($value)
     {
-      Assertion::integer($value);
+      Assertion::string($value);
 
       $this->value = $value;
     }
@@ -25,11 +25,11 @@ class Percent extends AbstractValueObject implements ValueObject
     /**
      * Static method to create a new instance
      *
-     * @param int $value
-     * @return Percent
+     * @param string $value
+     * @return SKU
      */
     public static function set($value)
     {
-      return new Percent($value);
+      return new SKU($value);
     }
 }
