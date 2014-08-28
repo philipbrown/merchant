@@ -17,9 +17,9 @@ class Percent extends AbstractValueObject implements ValueObject
      */
     private function __construct($value)
     {
-      Assertion::integer($value);
+        Assertion::integer($value);
 
-      $this->value = $value;
+        $this->value = $value;
     }
 
     /**
@@ -30,6 +30,6 @@ class Percent extends AbstractValueObject implements ValueObject
      */
     public static function set($value)
     {
-      return new Percent($value);
+        return new Percent($value);
     }
 }

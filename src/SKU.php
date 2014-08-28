@@ -17,9 +17,9 @@ class SKU extends String implements ValueObject
      */
     private function __construct($value)
     {
-      Assertion::string($value);
+        Assertion::string($value);
 
-      $this->value = $value;
+        $this->value = $value;
     }
 
     /**
@@ -30,6 +30,6 @@ class SKU extends String implements ValueObject
      */
     public static function set($value)
     {
-      return new SKU($value);
+        return new SKU($value);
     }
 }

@@ -9,7 +9,7 @@ abstract class AbstractJurisdiction
      */
     public function currency()
     {
-      return $this->currency;
+        return $this->currency;
     }
 
     /**
@@ -19,6 +19,6 @@ abstract class AbstractJurisdiction
      */
     public function tax()
     {
-      return $this->tax;
+        return $this->tax;
     }
 }

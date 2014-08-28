@@ -17,9 +17,9 @@ class Status extends AbstractValueObject implements ValueObject
      */
     private function __construct($value)
     {
-      Assertion::boolean($value);
+        Assertion::boolean($value);
 
-      $this->value = $value;
+        $this->value = $value;
     }
 
     /**
@@ -30,6 +30,6 @@ class Status extends AbstractValueObject implements ValueObject
      */
     public static function set($value)
     {
-      return new Status($value);
+        return new Status($value);
     }
 }
