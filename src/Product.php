@@ -167,7 +167,7 @@ class Product
      */
     public function removeTag(String $tag)
     {
-        $this->tags = $this->tags->filter(function ($item)  use ($tag) {
+        $this->tags = $this->tags->filter(function ($item) use ($tag) {
             return $item->value() !== $tag->value();
         });
     }
@@ -181,15 +181,7 @@ class Product
     public function __get($key)
     {
         if (property_exists($this, $key)) {
-            if ($this->$key instanceOf ValueObject) {
-                return $this->$key->value();
-            }
-
-            if ($this->$key instanceOf Collection) {
-                return $this->$key->toArray();
-            }
-
-            return $this->key;
+            return $this->$key;
         }
     }
 }

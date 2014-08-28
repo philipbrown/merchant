@@ -289,12 +289,6 @@ $collection->sort(function ($a, $b) {
 
 $collection->values();
 // ['Bart', 'Homer', 'Lisa', 'Maggie', 'Marge']
-
-// Convert a Collection of Value Objects to an array of values
-$collection = new Collection([SKU::set('abc'), Percent::set(50), Status::set(true)]);
-
-$collection->toArray();
-// ['abc', 50, true];
 ```
 
 ## Products
@@ -331,10 +325,10 @@ $product->quantity(Quantity::set(5));
 Secondly, you can increment or decrement the current quantity value by using the `increment()` or `decrement()` methods. This will increase or decrease the value by 1:
 ```php
 $product->increment();
-$product->quantity; // 6
+$product->quantity->value(); // 6
 
 $product->decrement();
-$product->decrement; // 5
+$product->decrement->value(); // 5
 ```
 
 ### Freebie
@@ -372,10 +366,4 @@ To remove a coupon or a tag you can use the following methods:
 $product->removeCoupon(String::('SUMMER_SALE');
 
 $product->removeTag(String::set('campaign_5742726'));
-```
-
-Accessing the `coupons` or `tags` property will return the items as an array:
-```php
-$product->coupons; // ['SUMMER_SALE'];
-$product->tags;    // ['campaign_5742726'];
 ```
