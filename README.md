@@ -411,3 +411,31 @@ use PhilipBrown\Merchant\Discounts\PercentageDiscount;
 
 $product->discount(new PercentageDiscount(Percent::set(50)));
 ```
+
+### Categories
+A category allows you to categorise a product as a certain type and therefore apply a number of properties to the `Product` instance by default.
+
+For example, if products of a certain category should always be tax free and have a certain tag, you would define a category so you could apply the category to each product.
+
+Categories should implement the `Category` inteface:
+```php
+interface Category
+{
+    /**
+     * Categorise a Product
+     *
+     * @param Product $product
+     * @return void
+     */
+    public function categorise(Product $product);
+}
+```
+
+`PhysicalBook` is an example category that will set the `taxable` status of the product to `false`.
+
+To set a category on a product, pass an instance of an object that implements the `Category` interface to the `category()` method on the `Product` object:
+```php
+use PhilipBrown\Merchant\Categories\PhysicalBook;
+
+$product->category(new PhysicalBook);
+```

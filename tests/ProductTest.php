@@ -10,6 +10,7 @@ use PhilipBrown\Merchant\Percent;
 use PhilipBrown\Merchant\Product;
 use PhilipBrown\Merchant\Quantity;
 use PhilipBrown\Merchant\Stubs\StubTaxRate;
+use PhilipBrown\Merchant\Categories\PhysicalBook;
 use PhilipBrown\Merchant\Discounts\PercentageDiscount;
 use PhilipBrown\Merchant\TaxRates\UnitedKingdomValueAddedTax;
 
@@ -117,5 +118,15 @@ class ProductTest extends PHPUnit_Framework_TestCase
         $this->product->discount(new PercentageDiscount(Percent::set(50)));
 
         $this->assertInstanceOf('PhilipBrown\Merchant\Discounts\PercentageDiscount', $this->product->discount);
+    }
+
+    /** @test */
+    public function should_set_category()
+    {
+        $this->assertEquals(null, $this->product->category);
+
+        $this->product->category(new PhysicalBook);
+
+        $this->assertInstanceOf('PhilipBrown\Merchant\Categories\PhysicalBook', $this->product->category);
     }
 }

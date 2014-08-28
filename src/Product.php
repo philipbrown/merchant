@@ -55,6 +55,11 @@ class Product
     private $discount;
 
     /**
+     * @var Category
+     */
+    private $category;
+
+    /**
      * Create a new Product
      *
      * @param SKU $sku
@@ -197,6 +202,17 @@ class Product
     public function discount(Discount $discount)
     {
         $this->discount = $discount;
+    }
+
+    /**
+     * Set a category
+     *
+     * @param Category $category
+     * @return void
+     */
+    public function category(Category $category)
+    {
+        $this->category = $category;
     }
 
     /**
