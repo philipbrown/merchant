@@ -1,5 +1,6 @@
 <?php namespace PhilipBrown\Merchant;
 
+use Closure;
 use Money\Money;
 
 class Product
@@ -230,6 +231,17 @@ class Product
     public function category(Category $category)
     {
         $this->category = $category;
+    }
+
+    /**
+     * Run a Closure of actions
+     *
+     * @param Closue $actions
+     * @return void
+     */
+    public function action(Closure $actions)
+    {
+        call_user_func($actions, $this);
     }
 
     /**

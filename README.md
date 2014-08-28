@@ -450,3 +450,20 @@ use PhilipBrown\Merchant\Categories\PhysicalBook;
 
 $product->category(new PhysicalBook);
 ```
+
+### Closure of actions
+Finally you can pass a `Closure` to the `action()` method on a `Product` instance to run a series of actions against the product. Inside of the closure you will have access to the current `Product`:
+```php
+use PhilipBrown\Merchant\Status;
+use PhilipBrown\Merchant\Quantity;
+
+$product->action(function ($product) {
+    $product->quantity(Quantity::set(3));
+    $product->freebie(Status::set(true));
+    $product->taxable(Status::set(false));
+});
+
+$product->quantity->value(); // 3
+$product->freebie->value();  // true
+$product->taxable->value();  // false
+```
