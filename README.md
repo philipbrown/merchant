@@ -289,6 +289,7 @@ $collection->sort(function ($a, $b) {
 
 $collection->values();
 // ['Bart', 'Homer', 'Lisa', 'Maggie', 'Marge']
+```
 
 ## Products
 Products in this package are encapsulated as instances of `Product`. A `Product` object requires a couple of dependencies on instanciation and it will set a couple of defaults values.
