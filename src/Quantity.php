@@ -2,7 +2,7 @@
 
 use Assert\Assertion;
 
-class Quantity extends AbstractValueObject implements ValueObject
+class Quantity extends Number implements ValueObject
 {
     /**
      * @var int
@@ -17,9 +17,9 @@ class Quantity extends AbstractValueObject implements ValueObject
      */
     private function __construct($value)
     {
-      Assertion::integer($value);
+        Assertion::integer($value);
 
-      $this->value = $value;
+        $this->value = $value;
     }
 
     /**
@@ -30,7 +30,7 @@ class Quantity extends AbstractValueObject implements ValueObject
      */
     public static function set($value)
     {
-      return new Quantity($value);
+        return new Quantity($value);
     }
 
 }

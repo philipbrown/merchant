@@ -2,7 +2,7 @@
 
 use Assert\Assertion;
 
-class Percent extends AbstractValueObject implements ValueObject
+class Percent extends Number implements ValueObject
 {
     /**
      * @var int

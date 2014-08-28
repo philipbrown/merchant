@@ -41,7 +41,7 @@ class String extends AbstractValueObject implements ValueObject
     public function snake()
     {
       if (ctype_lower($this->value)) {
-        return $this->value;
+        return new String($this->value);
       }
 
       return new String(strtolower(preg_replace('/(.)([A-Z])/', '$1_$2', $this->value)));

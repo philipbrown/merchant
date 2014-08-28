@@ -107,7 +107,21 @@ For example, `string` Value Objects extend the `String` class:
 use PhilipBrown\Merchant\String;
 
 $string = String::set('HelloWorld');
-$string->snake(); // hello_world
+$snaked = $string->snake();
+
+$string->value(); // 'HelloWorld'
+$snaked->value(); // 'hello_world'
+```
+
+And `integer` Value Objects extend the `Number` class:
+```php
+use PhilipBrown\Merchant\Number;
+
+$number = Number::set(10);
+$bigger = $number->increment();
+
+$number->value(); // 10
+$bigger->value(); // 11
 ```
 
 ## Tax Rates
