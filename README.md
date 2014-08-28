@@ -307,3 +307,7 @@ $price    = new Money(100, new Currency('GBP'));
 $rate     = new StubTaxRate;
 $product  = new Product($sku, $name, $price, $rate);
 ```
+
+The `Product` object requires a `SKU` and a `Name` on instantiation. These values cannot be altered once the object is created.
+
+You will also need to pass an instance of `Money` as the base value of the product as well as a default `TaxRate` instance. You can alter both these two values in a number of different ways as explained below.
