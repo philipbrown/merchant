@@ -322,7 +322,7 @@ use PhilipBrown\Merchant\Quantity;
 $product->quantity(Quantity::set(5));
 ```
 
-Secondly, you can increment or decrement the current quantity value by 1 by using the `increment()` or `decrement()` methods:
+Secondly, you can increment or decrement the current quantity value by using the `increment()` or `decrement()` methods. This will increase or decrease the value by 1:
 ```php
 $product->increment();
 $product->quantity; // 6
