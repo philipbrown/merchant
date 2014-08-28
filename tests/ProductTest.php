@@ -53,6 +53,19 @@ class ProductTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function should_set_the_delivery_cost()
+    {
+        $default = new Money(0, new Currency('GBP'));
+        $cost = new Money(100, new Currency('GBP'));
+
+        $this->assertEquals($default, $this->product->delivery);
+
+        $this->product->delivery($cost);
+
+        $this->assertEquals($cost, $this->product->delivery);
+    }
+
+    /** @test */
     public function should_set_freebie_status()
     {
         $this->assertFalse($this->product->freebie->value());

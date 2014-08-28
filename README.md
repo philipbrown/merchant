@@ -351,6 +351,17 @@ use PhilipBrown\Merchant\Status;
 $product->taxable(Status::set(false));
 ```
 
+### Delivery charge
+By default the delivery charge of a product will be set to a new instance of `Money` with a value of `0` and the same currency as the value of the `$price`.
+
+To set a delivery charge, pass an instance of `Money` into the `delivery()` method:
+```php
+use Money\Money;
+use Money\Currency;
+
+$product->delivery(new Money(100, new Currency('GBP')));
+```
+
 ### Coupons and Tags
 Coupons and tags won't directly alter any values of the `Product` before or during the reconciliation process. Both coupons and tags are simply string values that are attached to the product and can be used during your sales process or for customer analytics.
 

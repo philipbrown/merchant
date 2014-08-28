@@ -25,6 +25,11 @@ class Product
     private $rate;
 
     /**
+     * @var Money
+     */
+    private $delivery;
+
+    /**
      * @var Quantity
      */
     private $quantity;
@@ -74,6 +79,7 @@ class Product
         $this->name     = $name;
         $this->price    = $price;
         $this->rate     = $rate;
+        $this->delivery = new Money(0, $price->getCurrency());
         $this->quantity = Quantity::set(1);
         $this->freebie  = Status::set(false);
         $this->taxable  = Status::set(true);
@@ -132,6 +138,17 @@ class Product
     public function taxable(Status $status)
     {
         $this->taxable = $status;
+    }
+
+    /**
+     * Set the delivery charge
+     *
+     * @param Money $cost
+     * @return void
+     */
+    public function delivery(Money $cost)
+    {
+        $this->delivery = $cost;
     }
 
     /**
