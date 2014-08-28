@@ -14,6 +14,6 @@ class PhysicalBook implements Category
      */
     public function categorise(Product $product)
     {
-      $product->taxable(Status::set(false));
+        $product->taxable(Status::set(false));
     }
 }

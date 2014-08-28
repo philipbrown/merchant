@@ -9,7 +9,7 @@ abstract class AbstractTaxRate
      */
     public function asFloat()
     {
-      return $this->rate;
+        return $this->rate;
     }
 
     /**
@@ -19,6 +19,6 @@ abstract class AbstractTaxRate
      */
     public function asPercentage()
     {
-      return $this->rate * 100;
+        return $this->rate * 100;
     }
 }
