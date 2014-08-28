@@ -374,7 +374,7 @@ $product->removeCoupon(String::('SUMMER_SALE');
 $product->removeTag(String::set('campaign_5742726'));
 ```
 
-Accessing the `coupons` or `tags` property will return the items an array:
+Accessing the `coupons` or `tags` property will return the items as an array:
 ```php
 $product->coupons; // ['SUMMER_SALE'];
 $product->tags;    // ['campaign_5742726'];
