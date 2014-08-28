@@ -340,3 +340,13 @@ use PhilipBrown\Merchant\Status;
 
 $product->freebie(Status::set(true));
 ```
+
+### Taxable
+Much like the `freebie` status, the value of the `taxable` status will determine whether the value of the current product is included during any reconciliation processes. By default this value is set to `true`.
+
+To alter the `taxable` status you can pass an instance of `Status` to the `taxable()` method:
+```php
+use PhilipBrown\Merchant\Status;
+
+$product->taxable(Status::set(false));
+```

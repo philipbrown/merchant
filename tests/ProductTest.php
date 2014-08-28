@@ -57,4 +57,13 @@ class ProductTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->product->freebie);
     }
 
+    /** @test */
+    public function should_set_taxable_status()
+    {
+        $this->assertTrue($this->product->taxable);
+
+        $this->product->taxable(Status::set(false));
+
+        $this->assertFalse($this->product->taxable);
+    }
 }

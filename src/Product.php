@@ -35,6 +35,11 @@ class Product
     private $freebie;
 
     /**
+     * @var Status
+     */
+    private $taxable;
+
+    /**
      * Create a new Product
      *
      * @param SKU $sku
@@ -51,6 +56,7 @@ class Product
         $this->rate     = $rate;
         $this->quantity = Quantity::set(1);
         $this->freebie  = Status::set(false);
+        $this->taxable  = Status::set(true);
     }
 
     /**
@@ -93,6 +99,17 @@ class Product
     public function freebie(Status $status)
     {
         $this->freebie = $status;
+    }
+
+    /**
+     * Set the taxable status
+     *
+     * @param Status $status
+     * @return void
+     */
+    public function taxable(Status $status)
+    {
+        $this->taxable = $status;
     }
 
     /**
