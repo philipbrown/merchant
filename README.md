@@ -292,9 +292,7 @@ $collection->values();
 ```
 
 ## Products
-Products in this package are encapsulated as instances of `Product`. A `Product` object requires a couple of dependencies on instanciation and it will set a couple of defaults values.
-
-To create a new `Product`;
+Products in this package are encapsulated as instances of `Product`. To create a new `Product`;
 ```php
 use Money\Money;
 use Money\Currency;
@@ -309,4 +307,3 @@ $price    = new Money(100, new Currency('GBP'));
 $rate     = new StubTaxRate;
 $product  = new Product($sku, $name, $price, $rate);
 ```
-
