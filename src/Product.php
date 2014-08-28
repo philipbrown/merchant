@@ -40,6 +40,16 @@ class Product
     private $taxable;
 
     /**
+     * @var Collection
+     */
+    private $coupons;
+
+    /**
+     * @var Collection
+     */
+    private $tags;
+
+    /**
      * Create a new Product
      *
      * @param SKU $sku
@@ -57,6 +67,8 @@ class Product
         $this->quantity = Quantity::set(1);
         $this->freebie  = Status::set(false);
         $this->taxable  = Status::set(true);
+        $this->coupons  = new Collection;
+        $this->tags     = new Collection;
     }
 
     /**
@@ -113,6 +125,54 @@ class Product
     }
 
     /**
+     * Add a coupon
+     *
+     * @param String $coupon
+     * @return void
+     */
+    public function addCoupon(String $coupon)
+    {
+        $this->coupons->push($coupon);
+    }
+
+    /**
+     * Remove a coupon
+     *
+     * @param String $coupon
+     * @return void
+     */
+    public function removeCoupon(String $coupon)
+    {
+        $this->coupons = $this->coupons->filter(function ($item)  use ($coupon) {
+            return $item->value() !== $coupon->value();
+        });
+    }
+
+    /**
+     * Add a tag
+     *
+     * @param String $tag
+     * @return void
+     */
+    public function addTag(String $tag)
+    {
+        $this->tags->push($tag);
+    }
+
+    /**
+     * Remove a tag
+     *
+     * @param String $tag
+     * @return void
+     */
+    public function removeTag(String $tag)
+    {
+        $this->tags = $this->tags->filter(function ($item)  use ($tag) {
+            return $item->value() !== $tag->value();
+        });
+    }
+
+    /**
     * Get the private attributes
     *
     * @param string $key
@@ -124,6 +184,12 @@ class Product
             if ($this->$key instanceOf ValueObject) {
                 return $this->$key->value();
             }
+
+            if ($this->$key instanceOf Collection) {
+                return $this->$key->toArray();
+            }
+
+            return $this->key;
         }
     }
 }

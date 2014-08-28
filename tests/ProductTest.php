@@ -4,6 +4,7 @@ use Money\Money;
 use Money\Currency;
 use PhilipBrown\Merchant\SKU;
 use PhilipBrown\Merchant\Name;
+use PhilipBrown\Merchant\String;
 use PhilipBrown\Merchant\Status;
 use PhilipBrown\Merchant\Product;
 use PhilipBrown\Merchant\Quantity;
@@ -65,5 +66,33 @@ class ProductTest extends PHPUnit_Framework_TestCase
         $this->product->taxable(Status::set(false));
 
         $this->assertFalse($this->product->taxable);
+    }
+
+    /** @test */
+    public function should_add_and_remove_coupon()
+    {
+        $this->assertEquals(0, count($this->product->coupons));
+
+        $this->product->addCoupon(String::set('SUMMER_SALE'));
+
+        $this->assertEquals(1, count($this->product->coupons));
+
+        $this->product->removeCoupon(String::set('SUMMER_SALE'));
+
+        $this->assertEquals(0, count($this->product->coupons));
+    }
+
+    /** @test */
+    public function should_add_and_remove_tag()
+    {
+        $this->assertEquals(0, count($this->product->tags));
+
+        $this->product->addTag(String::set('campaign_5742726'));
+
+        $this->assertEquals(1, count($this->product->tags));
+
+        $this->product->removeTag(String::set('campaign_5742726'));
+
+        $this->assertEquals(0, count($this->product->tags));
     }
 }

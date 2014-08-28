@@ -289,6 +289,12 @@ $collection->sort(function ($a, $b) {
 
 $collection->values();
 // ['Bart', 'Homer', 'Lisa', 'Maggie', 'Marge']
+
+// Convert a Collection of Value Objects to an array of values
+$collection = new Collection([SKU::set('abc'), Percent::set(50), Status::set(true)]);
+
+$collection->toArray();
+// ['abc', 50, true];
 ```
 
 ## Products
@@ -349,4 +355,27 @@ To alter the `taxable` status you can pass an instance of `Status` to the `taxab
 use PhilipBrown\Merchant\Status;
 
 $product->taxable(Status::set(false));
+```
+
+### Coupons and Tags
+Coupons and tags won't directly alter any values of the `Product` before or during the reconciliation process. Both coupons and tags are simply string values that are attached to the product and can be used during your sales process or for customer analytics.
+
+To add a coupon or a tag you can use the following methods:
+```php
+$product->addCoupon(String::set('SUMMER_SALE'));
+
+$product->addTag(String::set('campaign_5742726'));
+```
+
+To remove a coupon or a tag you can use the following methods:
+```php
+$product->removeCoupon(String::('SUMMER_SALE');
+
+$product->removeTag(String::set('campaign_5742726'));
+```
+
+Accessing the `coupons` or `tags` property will return the items an array:
+```php
+$product->coupons; // ['SUMMER_SALE'];
+$product->tags;    // ['campaign_5742726'];
 ```
