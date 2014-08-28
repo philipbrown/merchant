@@ -173,6 +173,17 @@ class Product
     }
 
     /**
+     * Set a tax rate
+     *
+     * @param TaxRate $rate
+     * @return void
+     */
+    public function rate(TaxRate $rate)
+    {
+        $this->rate = $rate;
+    }
+
+    /**
     * Get the private attributes
     *
     * @param string $key

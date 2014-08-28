@@ -367,3 +367,11 @@ $product->removeCoupon(String::('SUMMER_SALE');
 
 $product->removeTag(String::set('campaign_5742726'));
 ```
+
+### Tax Rate
+If you need to set a specific tax rate for a particular product you can do so using the `rate()` method:
+```php
+use PhilipBrown\Merchant\TaxRates\UnitedKingdomValueAddedTax;
+
+$product->rate(new UnitedKingdomValueAddedTax);
+```

@@ -9,6 +9,7 @@ use PhilipBrown\Merchant\Status;
 use PhilipBrown\Merchant\Product;
 use PhilipBrown\Merchant\Quantity;
 use PhilipBrown\Merchant\Stubs\StubTaxRate;
+use PhilipBrown\Merchant\TaxRates\UnitedKingdomValueAddedTax;
 
 class ProductTest extends PHPUnit_Framework_TestCase
 {
@@ -94,5 +95,15 @@ class ProductTest extends PHPUnit_Framework_TestCase
         $this->product->removeTag(String::set('campaign_5742726'));
 
         $this->assertEquals(0, $this->product->tags->count());
+    }
+
+    /** @test */
+    public function should_set_tax_rate()
+    {
+        $this->assertInstanceOf('PhilipBrown\Merchant\Stubs\StubTaxRate', $this->product->rate);
+
+        $this->product->rate(new UnitedKingdomValueAddedTax);
+
+        $this->assertInstanceOf('PhilipBrown\Merchant\TaxRates\UnitedKingdomValueAddedTax', $this->product->rate);
     }
 }
