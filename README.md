@@ -197,94 +197,88 @@ The `Collection` object has a number of methods for working with a collection of
 ```php
 // Get all items from the collection
 $family = $collection->all();
-// => ['Homer', 'Marge', 'Bart', 'Lisa', 'Maggie'];
+// ['Homer', 'Marge', 'Bart', 'Lisa', 'Maggie'];
 
 // Get a single item by it's key
 $lisa = $this->collection->get(3);
-// => 'Lisa'
+// 'Lisa'
 
 // Add an item
 $collection->add(5, 'Snowball II');
 $collection->get(5);
-// => 'Snowball II'
+// 'Snowball II'
 
 // Check for an item
 $collection->contains('Bart');
-// => bool
+// bool
 
 // Count the number of items
 $collection->count();
-// => 5
+// 5
 
 // Run a callback on each item
 $collection->each(function ($person) {
     is_string($person);
 });
-// => true, true, true, true, true
+// true, true, true, true, true
 
 // Filter a collection with a callback
 $filtered = $collection->filter(function ($person) {
     return substr($person, 0,1) === 'M';
 });
-// => ['Marge', 'Maggie']
+// ['Marge', 'Maggie']
 
 // Check for emptyness
 $other = new Collection;
 $other->isEmpty();
-// => true
+// true
 
 // Get the keys of the items
 $keys = $collection->keys();
-// => [0, 1, 2, 3, 4]
+// [0, 1, 2, 3, 4]
 
 // Get the first item
 $homer = $collection->first();
-// => 'Homer'
+// 'Homer'
 
 // Get the last item
 $maggie = $collection->last();
-// => 'Maggie'
+// 'Maggie'
 
 // Run a map over each item
 $collection->map(function ($person) {
     return $person.' Simpson';
 });
-// [
-//  'Homer Simpson',
-//  'Marge Simpson',
-//  'Bart Simpson',
-//  'Lisa Simpson',
-//  'Maggie Simpson'
-// ]
+// ['Homer Simpson', 'Marge Simpson', 'Bart Simpson', 'Lisa Simpson', 'Maggie Simpson']
 
 // Push an item on to the end
 $collection->push("Santa's Little Helper");
 $collection->get(6);
-// => "Santa's Little Helper"
+// "Santa's Little Helper"
 
 // Pop the last item
 $maggie = $collection->pop();
-// => 'Maggie'
+// 'Maggie'
 
 // Prepend an item to the start of the collection
 $collection->prepend('Abe');
 $collection->get(0);
-// => 'Abe'
+// 'Abe'
 
 // Remove an item
 $collection->remove(0);
 $collection->count();
-// => 4
+// 4
 
 // Seach the items
 $key = $collection->seach('Bart');
-// => 2
+// 2
 
 // Get and remove the first item
 $homer = $collection->shift();
 $collection->count();
 // Homer
-// => 4
+// 4
 
 // Sort the items and reset the keys
 $collection->sort(function ($a, $b) {
@@ -294,10 +288,4 @@ $collection->sort(function ($a, $b) {
 });
 
 $collection->values();
-// [
-//  'Bart'
-//  'Homer'
-//  'Lisa'
-//  'Maggie'
-//  'Marge'
-// ]
+// ['Bart', 'Homer', 'Lisa', 'Maggie', 'Marge']
