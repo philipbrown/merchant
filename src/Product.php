@@ -25,6 +25,11 @@ class Product {
     private $rate;
 
     /**
+     * @var Quantity
+     */
+    private $quantity;
+
+    /**
      * Create a new Product
      *
      * @param SKU $sku
@@ -39,6 +44,53 @@ class Product {
         $this->name     = $name;
         $this->price    = $price;
         $this->rate     = $rate;
+        $this->quantity = Quantity::set(1);
+    }
+
+    /**
+     * Set the quantity
+     *
+     * @param Quantity $quantity
+     * @return void
+     */
+    public function quantity(Quantity $quantity)
+    {
+        $this->quantity = $quantity;
+    }
+
+    /**
+     * Increment the quantity
+     *
+     * @return void
+     */
+    public function increment()
+    {
+        $this->quantity = $this->quantity->increment();
+    }
+
+    /**
+     * Decrement the quantity
+     *
+     * @return void
+     */
+    public function decrement()
+    {
+        $this->quantity = $this->quantity->decrement();
+    }
+
+    /**
+    * Get the private attributes
+    *
+    * @param string $key
+    * @return mixed
+    */
+    public function __get($key)
+    {
+        if (property_exists($this, $key)) {
+            if ($this->$key instanceOf ValueObject) {
+                return $this->$key->value();
+            }
+        }
     }
 
 }

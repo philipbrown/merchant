@@ -311,3 +311,22 @@ $product  = new Product($sku, $name, $price, $rate);
 The `Product` object requires a `SKU` and a `Name` on instantiation. These values cannot be altered once the object is created.
 
 You will also need to pass an instance of `Money` as the base value of the product as well as a default `TaxRate` instance. You can alter both these two values in a number of different ways as explained below.
+
+### Quantity
+By default the quantity of the `Product` object will be set to 1. There are two ways of altering the quantity of a `Product` object.
+
+Firstly, you can pass an instance of `Quantity` to the `quantity()` method:
+```php
+use PhilipBrown\Merchant\Quantity;
+
+$product->quantity(Quantity::set(5));
+```
+
+Secondly, you can increment or decrement the current quantity value by 1 by using the `increment()` or `decrement()` methods:
+```php
+$product->increment();
+$product->quantity; // 6
+
+$product->decrement();
+$product->decrement; // 5
+```
