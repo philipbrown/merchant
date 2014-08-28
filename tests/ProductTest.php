@@ -6,9 +6,11 @@ use PhilipBrown\Merchant\SKU;
 use PhilipBrown\Merchant\Name;
 use PhilipBrown\Merchant\String;
 use PhilipBrown\Merchant\Status;
+use PhilipBrown\Merchant\Percent;
 use PhilipBrown\Merchant\Product;
 use PhilipBrown\Merchant\Quantity;
 use PhilipBrown\Merchant\Stubs\StubTaxRate;
+use PhilipBrown\Merchant\Discounts\PercentageDiscount;
 use PhilipBrown\Merchant\TaxRates\UnitedKingdomValueAddedTax;
 
 class ProductTest extends PHPUnit_Framework_TestCase
@@ -105,5 +107,15 @@ class ProductTest extends PHPUnit_Framework_TestCase
         $this->product->rate(new UnitedKingdomValueAddedTax);
 
         $this->assertInstanceOf('PhilipBrown\Merchant\TaxRates\UnitedKingdomValueAddedTax', $this->product->rate);
+    }
+
+    /** @test */
+    public function should_set_discount()
+    {
+        $this->assertEquals(null, $this->product->discount);
+
+        $this->product->discount(new PercentageDiscount(Percent::set(50)));
+
+        $this->assertInstanceOf('PhilipBrown\Merchant\Discounts\PercentageDiscount', $this->product->discount);
     }
 }

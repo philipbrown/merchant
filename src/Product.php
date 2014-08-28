@@ -50,6 +50,11 @@ class Product
     private $tags;
 
     /**
+     * @var Discount
+     */
+    private $discount;
+
+    /**
      * Create a new Product
      *
      * @param SKU $sku
@@ -181,6 +186,17 @@ class Product
     public function rate(TaxRate $rate)
     {
         $this->rate = $rate;
+    }
+
+    /**
+     * Set a discount
+     *
+     * @param Discount $discount
+     * @return void
+     */
+    public function discount(Discount $discount)
+    {
+        $this->discount = $discount;
     }
 
     /**

@@ -375,3 +375,39 @@ use PhilipBrown\Merchant\TaxRates\UnitedKingdomValueAddedTax;
 
 $product->rate(new UnitedKingdomValueAddedTax);
 ```
+
+### Discounts
+Discounts to be applied to a product should be encapsulated as an object capable of calculating the appropriate discount to apply. This is because the discount is set as an action on the `Product`, but the actual value of the discount is only calculated when the order is reconciled.
+
+Discount objects should provide a `public calculate()` method that accepts an instance of `Product` and a `public value()` method that returns the value of the discount. You can optionally extend the `AbstractDiscount` class.
+
+Discounts should implement the `Discount` interface:
+```php
+interface Discount
+{
+    /**
+     * Calculate the discount
+     *
+     * @param PhilipBrown\Merchant\Product
+     * @return Money\Money
+     */
+    public function calculate(Product $product);
+
+    /**
+     * Return the value of the Discount
+     *
+     * @return mixed
+     */
+    public function value();
+}
+```
+
+There are two provided `Discount` objects as part of the source of this package, `PercentageDiscount` and `ValueDiscount`.
+
+To set a discount on a product, pass an instance of an object that implements the `Discount` interface to the `discount()` method on the `Product` object:
+```php
+use PhilipBrown\Merchant\Percent;
+use PhilipBrown\Merchant\Discounts\PercentageDiscount;
+
+$product->discount(new PercentageDiscount(Percent::set(50)));
+```
