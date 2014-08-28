@@ -71,9 +71,10 @@ Each Value Object should have a `public static set($value)` method and a `privat
 
 This package uses [beberlei/assert](https://github.com/beberlei/assert) by [@beberlei](https://github.com/beberlei) to protect against invalid inputs. If you pass an invalid input to a Value Object a `Assert\AssertionFailedException` will be thrown.
 
-There are 4 Value Objects in this package:
+There are a couple of Value Objects in this package:
 ```php
 use PhilipBrown\Merchant\SKU;
+use PhilipBrown\Merchant\Name;
 use PhilipBrown\Merchant\Status;
 use PhilipBrown\Merchant\Percent;
 use PhilipBrown\Merchant\Quantity;
@@ -81,6 +82,10 @@ use PhilipBrown\Merchant\Quantity;
 // A `SKU` should be a string value
 $sku = SKU::set('abc123');
 $sku->value(); // 'abc123'
+
+// A `Name` should be a string value
+$name = Name::set('iPhone');
+$name->value(); // 'iPhone'
 
 // A `Status` should be a boolean value
 $status = Status::set(true);
