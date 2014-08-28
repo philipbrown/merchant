@@ -20,7 +20,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function __construct(array $items = [])
     {
-      $this->items = $items;
+        $this->items = $items;
     }
 
     /**
@@ -30,7 +30,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function all()
     {
-      return $this->items;
+        return $this->items;
     }
 
     /**
@@ -41,7 +41,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function get($key)
     {
-      return $this->items[$key];
+        return $this->items[$key];
     }
 
     /**
@@ -53,7 +53,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function add($key, $value)
     {
-      $this->items[$key] = $value;
+        $this->items[$key] = $value;
     }
 
     /**
@@ -64,7 +64,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function remove($key)
     {
-      unset($this->items[$key]);
+        unset($this->items[$key]);
     }
 
     /**
@@ -75,7 +75,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function contains($value)
     {
-      return in_array($value, $this->items);
+        return in_array($value, $this->items);
     }
 
     /**
@@ -85,7 +85,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function count()
     {
-      return count($this->items);
+        return count($this->items);
     }
 
     /**
@@ -96,7 +96,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function each(Closure $callback)
     {
-      array_map($callback, $this->items);
+        array_map($callback, $this->items);
     }
 
     /**
@@ -107,7 +107,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function filter(Closure $callback)
     {
-      return new Collection(array_filter($this->items, $callback));
+        return new Collection(array_filter($this->items, $callback));
     }
 
     /**
@@ -117,7 +117,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function isEmpty()
     {
-      return empty($this->items);
+        return empty($this->items);
     }
 
     /**
@@ -127,7 +127,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function keys()
     {
-      return array_keys($this->items);
+        return array_keys($this->items);
     }
 
     /**
@@ -137,7 +137,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function first()
     {
-      return reset($this->items);
+        return reset($this->items);
     }
 
     /**
@@ -147,7 +147,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function last()
     {
-      return end($this->items);
+        return end($this->items);
     }
 
     /**
@@ -158,7 +158,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function map(Closure $callback)
     {
-      return new Collection(array_map($callback, $this->items, array_keys($this->items)));
+        return new Collection(array_map($callback, $this->items, array_keys($this->items)));
     }
 
     /**
@@ -168,7 +168,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function pop()
     {
-      return array_pop($this->items);
+        return array_pop($this->items);
     }
 
     /**
@@ -179,7 +179,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function prepend($value)
     {
-      array_unshift($this->items, $value);
+        array_unshift($this->items, $value);
     }
 
     /**
@@ -190,7 +190,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function push($value)
     {
-      $this->items[] = $value;
+        $this->items[] = $value;
     }
 
     /**
@@ -201,7 +201,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function search($value)
     {
-      return array_search($value, $this->items, true);
+        return array_search($value, $this->items, true);
     }
 
     /**
@@ -211,7 +211,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function shift()
     {
-      return array_shift($this->items);
+        return array_shift($this->items);
     }
 
     /**
@@ -222,7 +222,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function sort(Closure $callback)
     {
-      uasort($this->items, $callback);
+        uasort($this->items, $callback);
     }
 
     /**
@@ -232,7 +232,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function values()
     {
-      $this->items = array_values($this->items);
+        $this->items = array_values($this->items);
     }
 
     /**
@@ -242,6 +242,6 @@ class Collection implements Countable, IteratorAggregate
      */
     public function getIterator()
     {
-      return new ArrayIterator($this->items);
+        return new ArrayIterator($this->items);
     }
 }

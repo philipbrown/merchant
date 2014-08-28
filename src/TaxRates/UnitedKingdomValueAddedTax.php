@@ -17,6 +17,6 @@ class UnitedKingdomValueAddedTax extends AbstractTaxRate implements TaxRate
      */
     public function __construct()
     {
-      $this->rate = 0.20;
+        $this->rate = 0.20;
     }
 }

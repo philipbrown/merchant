@@ -17,9 +17,9 @@ class String extends AbstractValueObject implements ValueObject
      */
     private function __construct($value)
     {
-      Assertion::string($value);
+        Assertion::string($value);
 
-      $this->value = $value;
+        $this->value = $value;
     }
 
     /**
@@ -30,7 +30,7 @@ class String extends AbstractValueObject implements ValueObject
      */
     public static function set($value)
     {
-      return new String($value);
+        return new String($value);
     }
 
     /**
@@ -40,11 +40,11 @@ class String extends AbstractValueObject implements ValueObject
      */
     public function snake()
     {
-      if (ctype_lower($this->value)) {
-        return new String($this->value);
-      }
+        if (ctype_lower($this->value)) {
+            return new String($this->value);
+        }
 
-      return new String(strtolower(preg_replace('/(.)([A-Z])/', '$1_$2', $this->value)));
+        return new String(strtolower(preg_replace('/(.)([A-Z])/', '$1_$2', $this->value)));
     }
 
     /**
@@ -54,6 +54,6 @@ class String extends AbstractValueObject implements ValueObject
      */
     public function __toString()
     {
-      return $this->value;
+        return $this->value;
     }
 }

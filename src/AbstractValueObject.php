@@ -9,7 +9,7 @@ abstract class AbstractValueObject
      */
     public function value()
     {
-      return $this->value;
+        return $this->value;
     }
 
     /**
@@ -20,6 +20,6 @@ abstract class AbstractValueObject
      */
     public function equals(ValueObject $object)
     {
-      return get_class($this) === get_class($object) && $this->value() === $object->value();
+        return get_class($this) === get_class($object) && $this->value() === $object->value();
     }
 }

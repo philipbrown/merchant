@@ -24,7 +24,7 @@ class UnitedKingdom extends AbstractJurisdiction implements Jurisdiction
      */
     public function __construct()
     {
-      $this->tax      = new UnitedKingdomValueAddedTax;
-      $this->currency = new Currency('GBP');
+        $this->tax      = new UnitedKingdomValueAddedTax;
+        $this->currency = new Currency('GBP');
     }
 }
