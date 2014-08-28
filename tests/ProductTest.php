@@ -4,6 +4,7 @@ use Money\Money;
 use Money\Currency;
 use PhilipBrown\Merchant\SKU;
 use PhilipBrown\Merchant\Name;
+use PhilipBrown\Merchant\Status;
 use PhilipBrown\Merchant\Product;
 use PhilipBrown\Merchant\Quantity;
 use PhilipBrown\Merchant\Stubs\StubTaxRate;
@@ -44,6 +45,16 @@ class ProductTest extends PHPUnit_Framework_TestCase
         $this->product->decrement();
 
         $this->assertEquals(5, $this->product->quantity);
+    }
+
+    /** @test */
+    public function should_set_freebie_status()
+    {
+        $this->assertFalse($this->product->freebie);
+
+        $this->product->freebie(Status::set(true));
+
+        $this->assertTrue($this->product->freebie);
     }
 
 }

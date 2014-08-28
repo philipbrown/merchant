@@ -2,8 +2,8 @@
 
 use Money\Money;
 
-class Product {
-
+class Product
+{
     /**
      * @var SKU
      */
@@ -30,6 +30,11 @@ class Product {
     private $quantity;
 
     /**
+     * @var Status
+     */
+    private $freebie;
+
+    /**
      * Create a new Product
      *
      * @param SKU $sku
@@ -45,6 +50,7 @@ class Product {
         $this->price    = $price;
         $this->rate     = $rate;
         $this->quantity = Quantity::set(1);
+        $this->freebie  = Status::set(false);
     }
 
     /**
@@ -79,6 +85,17 @@ class Product {
     }
 
     /**
+     * Set the freebie status
+     *
+     * @param Status $status
+     * @return void
+     */
+    public function freebie(Status $status)
+    {
+        $this->freebie = $status;
+    }
+
+    /**
     * Get the private attributes
     *
     * @param string $key
@@ -92,5 +109,4 @@ class Product {
             }
         }
     }
-
 }

@@ -330,3 +330,13 @@ $product->quantity; // 6
 $product->decrement();
 $product->decrement; // 5
 ```
+
+### Freebie
+The `freebie` status will determine if the value of the current product is included in any reconciliation processes. By default this value is set to `false`.
+
+To alter the `freebie` status you can pass an instance of `Status` to the `freebie()` method:
+```php
+use PhilipBrown\Merchant\Status;
+
+$product->freebie(Status::set(true));
+```
