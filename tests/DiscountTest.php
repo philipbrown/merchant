@@ -44,7 +44,7 @@ class DiscountTest extends PHPUnit_Framework_TestCase
         $value = $discount->calculate($this->product);
 
         $this->assertInstanceOf('Money\Money', $value);
-        $this->assertEquals(new Money(800, new Currency('GBP')), $value);
+        $this->assertEquals(new Money(200, new Currency('GBP')), $value);
         $this->assertEquals($amount, $discount->value());
     }
 }

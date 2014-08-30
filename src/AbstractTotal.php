@@ -13,6 +13,6 @@ abstract class AbstractTotal
     {
         $reflection = new ReflectionClass($this);
 
-        return String::set($reflection->getShortName())->snake();
+        return String::set($reflection->getShortName())->snake()->value();
     }
 }

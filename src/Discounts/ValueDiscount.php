@@ -31,6 +31,6 @@ class ValueDiscount extends AbstractDiscount implements Discount
      */
     public function calculate(Product $product)
     {
-        return $product->price->subtract($this->discount);
+        return $this->discount;
     }
 }
