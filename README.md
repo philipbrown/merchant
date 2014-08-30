@@ -513,3 +513,68 @@ To fire events, call the `fire()` method on the `Dispatcher` instance and pass t
 ```php
 $dispatcher->fire('product.remove', [$product, $list]);
 ```
+
+## Basket
+The main interface of interaction inside your application with Merchant will be through the `Basket` object. The `Basket` object manages the adding and removing of products from the product list internally as well as firing events on the appropriate actions.
+
+To create a new `Basket` instance, pass the current `Jurisdiction` and an instance of the `Dispatcher`:
+```php
+use PhilipBrown\Merchant\Basket;
+use PhilipBrown\Merchant\Dispatcher;
+use PhilipBrown\Merchant\Jurisdictions\UnitedKingdom;
+
+$basket = new Basket(new UnitedKingdom, new Dispatcher);
+```
+
+The `Basket` accepts the `Jurisdiction` instance but manages the tax rate and the currency as two seperate properties. Those two objects are available through the following two methods:
+```php
+$basket->rate();     // PhilipBrown\Merchant\TaxRate
+$basket->currency(); // PhilipBrown\Merchant\Currency
+```
+
+The `Basket` will automatically create a new `Collection` instance to internally manage the `Product` instances of the current order.
+
+You can interact with the product list using the following methods:
+```php
+// Get the count of the products
+$basket->count();
+
+// Pick a product from the basket via it's SKU
+$product = $basket->pick(SKU::set('abc123'));
+
+// Return the Collection of products
+$products = $basket->products();
+```
+
+To add a product to the basket, pass the SKU, name and price to the `add()` method:
+```php
+use Money\Money;
+use Money\Currency;
+
+$sku    = SKU::set('abc123');
+$name   = SKU::name('iPhone');
+$price  = new Money(100, new Currency('GBP'));
+
+$basket->add($sku, $name, $price);
+```
+
+You can also optionally pass a fourth parameter of a `Closure` to run actions on the new product:
+$basket->add(SKU::set('abc123'), Name::set('iPhone'), new Money(100, new Currency('GBP')));
+```php
+use Money\Money;
+use Money\Currency;
+use PhilipBrown\Merchant\Status;
+
+$sku    = SKU::set('abc123');
+$name   = SKU::name('iPhone');
+$price  = new Money(100, new Currency('GBP'));
+
+$basket->add($sku, $name, $price, function ($product) {
+    $product->taxable(Status::set(false));
+});
+```
+
+You can remove a product from the basket by passing a SKU to the `remove()` method:
+```php
+$basket->remove(SKU::set('abc123'));
+```
