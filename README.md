@@ -578,3 +578,39 @@ You can remove a product from the basket by passing a SKU to the `remove()` meth
 ```php
 $basket->remove(SKU::set('abc123'));
 ```
+
+## Totals
+When working with an order of products, there will be certain bits of meta data that you want to collection such as the total number of products, the total value of the products or the total tax of the order.
+
+Certain types of ecommerce applications will require a limited amount of meta data, whilst others will require much more indepth meta data that would be out of the scope for the majority of cases.
+
+Each calculation process should be encapsulated as a class and should implement the `Total` interface:
+```php
+interface Total
+{
+    /**
+     * Run calculation
+     *
+     * @param Basket $basket
+     * @return mixed
+     */
+    public function calculate(Basket $basket);
+
+    /**
+     * Get the name of the Total
+     *
+     * @return string
+     */
+    public function name();
+}
+```
+The `calculate()` method accepts an instance of the `Basket` and should return the value of the meta item you want to return.
+
+The `name()` method can be implement by extending the `AbstractTotal` abstract class.
+
+Merchant includes the following `Total` classes:
+
+- `TotalProducts`
+- `TotalValue`
+
+If you would like to include a `Total` class as part of the main Merchant source code, please feel free to open a pull request.

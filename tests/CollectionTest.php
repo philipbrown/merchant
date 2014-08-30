@@ -180,16 +180,4 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Maggie', $this->collection->get(3));
         $this->assertEquals('Marge', $this->collection->get(4));
     }
-
-    /** @test */
-    public function should_convert_collection_to_array()
-    {
-        $collection = new Collection([
-            Quantity::set(100),
-            Status::set(true),
-            String::set('Hello World')
-        ]);
-
-        $this->assertEquals([100, true, 'Hello World'], $collection->toArray());
-    }
 }

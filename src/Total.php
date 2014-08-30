@@ -1,20 +1,19 @@
 <?php namespace PhilipBrown\Merchant;
 
-interface Total {
+interface Total
+{
+    /**
+     * Run calculation
+     *
+     * @param Basket $basket
+     * @return mixed
+     */
+    public function calculate(Basket $basket);
 
-  /**
-   * Run calculation
-   *
-   * @param Basket $basket
-   * @return mixed
-   */
-  public function calculate(Basket $basket);
-
-  /**
-   * Get the name of the Total
-   *
-   * @return string
-   */
-  public function name();
-
+    /**
+     * Get the name of the Total
+     *
+     * @return string
+     */
+    public function name();
 }
