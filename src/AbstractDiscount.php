@@ -7,8 +7,8 @@ abstract class AbstractDiscount
      *
      * @return mixed
      */
-     public function value()
-     {
+    public function value()
+    {
         return $this->discount;
-     }
+    }
 }

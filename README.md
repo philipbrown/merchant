@@ -467,3 +467,49 @@ $product->quantity->value(); // 3
 $product->freebie->value();  // true
 $product->taxable->value();  // false
 ```
+
+## Events
+Merchant includes a lightweight event dispatcher for hooking on to events during the lifecycle of the order process. This allows you run certain actions as a consequence of events occuring within the package:
+```php
+use PhilipBrown\Merchant\Dispatcher;
+
+$dispatcher = new Dispatcher;
+```
+
+The `Dispatcher` object is passed into the `Basket` class as a dependency (see below) and will fire events on certain actions.
+
+The list of events are:
+
+- `product.added`
+- `product.removed`
+
+To register a listener for an event you should create a new listener class that implements the `Listener` interface:
+```php
+interface Listener
+{
+    /**
+     * Listen for a Basket Event
+     *
+     * @param Product $product
+     * @param Collection $list
+     * @return void
+     */
+    public function handle(Product $product, Collection $list);
+}
+```
+
+`RemoveZeroQuantityProductsFromList` is an example listener that is included in the source of Merchant. This listenr will automatically clean up the product list when a product is set to 0 quantity.
+
+To register a listener with the dispatcher, use the `listen()` method and pass the event name and an instance of the `Listener` class:
+```php
+use PhilipBrown\Merchant\Dispatcher;
+use PhilipBrown\Merchant\Listeners\RemoveZeroQuantityProductsFromList;
+
+$dispatcher = new Dispatcher;
+$dispatcher->listen('product.remove', new RemoveZeroQuantityProductsFromList);
+```
+
+To fire events, call the `fire()` method on the `Dispatcher` instance and pass the name of the event and the payload.
+```php
+$dispatcher->fire('product.remove', [$product, $list]);
+```
