@@ -17,6 +17,7 @@ use PhilipBrown\Merchant\Totals\TotalDelivery;
 use PhilipBrown\Merchant\Totals\TotalDiscount;
 use PhilipBrown\Merchant\Totals\TotalProducts;
 use PhilipBrown\Merchant\Discounts\ValueDiscount;
+use PhilipBrown\Merchant\Totals\TotalTaxableItems;
 use PhilipBrown\Merchant\Jurisdictions\UnitedKingdom;
 
 class TotalsTest extends PHPUnit_Framework_TestCase {
@@ -111,5 +112,15 @@ class TotalsTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEquals('total', $total->name());
         $this->assertEquals(new Money(12480, new Currency('GBP')), $value);
+    }
+
+    /** @test */
+    public function should_count_total_taxable_items()
+    {
+        $total = new TotalTaxableItems;
+        $value = $total->calculate($this->basket);
+
+        $this->assertEquals('total_taxable_items', $total->name());
+        $this->assertEquals(Number::set(6), $value);
     }
 }
