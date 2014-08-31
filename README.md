@@ -705,3 +705,20 @@ Merchant includes the following `Total` classes:
 - `TotalTaxableItems`
 
 If you would like to include a `Total` class as part of the main Merchant source code, please feel free to open a pull request.
+
+## Processing an Order
+After you have finished interacting with the `Basket` it is time to process it and turn it into an immutable `Order` object. The `Processor` class will simply iterate through the `Total` classes you have injected and return a new `Order` instance:
+```php
+use PhilipBrown\Merchant\Processor;
+use PhilipBrown\Merchant\Totals\TotalProducts;
+
+$processor = new Processor([new TotalProducts]);
+
+$order = $processor->process($basket);
+```
+
+`Order` is a simple immutable object with two `public` methods for returning the `totals` and the `products` of the order:
+```php
+$order->totals();   // Collection
+$order->products(); // Collection
+```

@@ -1,7 +1,7 @@
 <?php namespace PhilipBrown\Merchant;
 
-class Order {
-
+class Order
+{
     /**
      * @var Collection
      */
@@ -25,4 +25,23 @@ class Order {
         $this->products = $products;
     }
 
+    /**
+     * Get the totals of the order
+     *
+     * @return Collection
+     */
+    public function totals()
+    {
+        return $this->totals;
+    }
+
+    /**
+     * Get the products of the order
+     *
+     * @return Collection
+     */
+    public function products()
+    {
+        return $this->products;
+    }
 }
