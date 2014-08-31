@@ -511,41 +511,47 @@ $product->freebie()->value();  // true
 $product->taxable()->value();  // false
 ```
 
-### Totals
-The `Product` class also has a number of methods to determine various totals. This encapsulates the logic around calculating these totals internal to the `Product` object.
+## Product Reconciliation
+The process for reconciliating products, calculating tax, applying discounts etc, etc is such a fragmented process that it would be impossible to encapsulate a set of rules within a single object.
 
-#### Value
-The value of the `Product` is calculated by multiplying the price by the quantity:
+Instead I've provided an interface where you can define your own rules for how you want to reconcile products.
+
+Your reconciler class should implement the following interface:
 ```php
-$product->value(); // 100 GBP
-$product->increment();
-$product->value(); // 200 GBP
+interface Reconciler {
+
+    /**
+     * Return the value of the Product
+     *
+     * @return Money
+     */
+    public function value(Product $product);
+
+    /**
+     * Return the tax of the Product
+     *
+     * @return Money
+     */
+    public function tax(Product $product);
+
+    /**
+     * Return the subtotal of the Product
+     *
+     * @return Money
+     */
+    public function subtotal(Product $product);
+
+    /**
+     * Return the total of the Product
+     *
+     * @return Money
+     */
+    public function total(Product $product);
+
+}
 ```
 
-#### Tax
-The `tax()` method will calculate the tax that should be applied to the current product.
-
-The following calculation is used to determine the tax value
-
-1. Is the product taxable?
-2. Is the product not a freebie?
-3. Get the total value by multplying the price by the quantity
-4. If there is a discount, subtract it from the value
-5. Add the delivery charge
-6. Calculate the tax by multplying the total by the tax rate as a float
-
-#### Subtotal
-The `subtotal()` method will calculate the total before tax.
-
-The following calculation is sued to determine the subtotal:
-
-1. Is the product not a freebie?
-2. Get the total value by multplying the price by the quantity
-3. If there is a discount, subtract it from the value
-4. Add the delivery charge
-
-#### Total
-The `total()` method will return the `subtotal` plus the `tax`.
+`UnitedKingdomReconciler` is an example of the general rules that should be following in the United Kingdom.
 
 ## Events
 Merchant includes a lightweight event dispatcher for hooking on to events during the lifecycle of the order process. This allows you run certain actions as a consequence of events occuring within the package:
