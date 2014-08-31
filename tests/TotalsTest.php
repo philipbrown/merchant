@@ -26,21 +26,38 @@ class TotalsTest extends PHPUnit_Framework_TestCase {
     /** @var Basket */
     private $basket;
 
+    /** @var Currency */
+    private $currency;
+
     public function setUp()
     {
+        $name = Name::set('');
+        $this->currency = new Currency('GBP');
+
         $this->basket = new Basket(new UnitedKingdom, new Dispatcher);
-        $this->basket->add(SKU::set('1'), Name::set(''), new Money(1000, new Currency('GBP')));
-        $this->basket->add(SKU::set('2'), Name::set(''), new Money(1200, new Currency('GBP')), function ($product) {
+
+        // Product 1
+        $this->basket->add(SKU::set('1'), $name, new Money(1000, $this->currency));
+        // Product 2
+        // - not taxable
+        $this->basket->add(SKU::set('2'), $name, new Money(1200, $this->currency), function ($product) {
             $product->setTaxable(Status::set(false));
         });
-        $this->basket->add(SKU::set('3'), Name::set(''), new Money(2500, new Currency('GBP')), function ($product) {
+        // Product 3
+        // - quantity x 3
+        $this->basket->add(SKU::set('3'), $name, new Money(2500, $this->currency), function ($product) {
             $product->setQuantity(Quantity::set(3));
         });
-        $this->basket->add(SKU::set('4'), Name::set(''), new Money(1000, new Currency('GBP')), function ($product) {
-            $product->setDiscount(new ValueDiscount(new Money(200, new Currency('GBP'))));
+        // Product 4
+        // - Value Discount
+        // - delivery charge
+        $this->basket->add(SKU::set('4'), $name, new Money(1000, $this->currency), function ($product) {
+            $product->setDiscount(new ValueDiscount(new Money(200, $this->currency)));
             $product->setDelivery(new Money(100, new Currency('GBP')));
         });
-        $this->basket->add(SKU::set('5'), Name::set(''), new Money(550, new Currency('GBP')), function ($product) {
+        // Product 5
+        // - freebie
+        $this->basket->add(SKU::set('5'), $name, new Money(550, $this->currency), function ($product) {
             $product->setFreebie(Status::set(true));
         });
     }
@@ -62,7 +79,7 @@ class TotalsTest extends PHPUnit_Framework_TestCase {
         $value = $total->calculate($this->basket);
 
         $this->assertEquals('total_value', $total->name());
-        $this->assertEquals(new Money(11250 , new Currency('GBP')), $value);
+        $this->assertEquals(new Money(11250 , $this->currency), $value);
     }
 
     /** @test */
@@ -72,7 +89,7 @@ class TotalsTest extends PHPUnit_Framework_TestCase {
         $value = $total->calculate($this->basket);
 
         $this->assertEquals('total_discount', $total->name());
-        $this->assertEquals(new Money(200, new Currency('GBP')), $value);
+        $this->assertEquals(new Money(200, $this->currency), $value);
     }
 
     /** @test */
@@ -82,7 +99,7 @@ class TotalsTest extends PHPUnit_Framework_TestCase {
         $value = $total->calculate($this->basket);
 
         $this->assertEquals('total_delivery', $total->name());
-        $this->assertEquals(new Money(100, new Currency('GBP')), $value);
+        $this->assertEquals(new Money(100, $this->currency), $value);
     }
 
     /** @test */
@@ -92,7 +109,7 @@ class TotalsTest extends PHPUnit_Framework_TestCase {
         $value = $total->calculate($this->basket);
 
         $this->assertEquals('total_tax', $total->name());
-        $this->assertEquals(new Money(1880, new Currency('GBP')), $value);
+        $this->assertEquals(new Money(1880, $this->currency), $value);
     }
 
     /** @test */
@@ -102,7 +119,7 @@ class TotalsTest extends PHPUnit_Framework_TestCase {
         $value = $total->calculate($this->basket);
 
         $this->assertEquals('subtotal', $total->name());
-        $this->assertEquals(new Money(10600, new Currency('GBP')), $value);
+        $this->assertEquals(new Money(10600, $this->currency), $value);
     }
 
     /** @test */
@@ -112,7 +129,7 @@ class TotalsTest extends PHPUnit_Framework_TestCase {
         $value = $total->calculate($this->basket);
 
         $this->assertEquals('total', $total->name());
-        $this->assertEquals(new Money(12480, new Currency('GBP')), $value);
+        $this->assertEquals(new Money(12480, $this->currency), $value);
     }
 
     /** @test */
