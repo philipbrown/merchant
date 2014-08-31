@@ -516,7 +516,7 @@ The `Product` class also has a number of methods to determine various totals. Th
 
 #### Value
 The value of the `Product` is calculated by multiplying the price by the quantity:
-```
+```php
 $product->value(); // 100 GBP
 $product->increment();
 $product->value(); // 200 GBP
