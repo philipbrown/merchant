@@ -18,7 +18,7 @@ class TotalValue extends AbstractTotal implements Total
         $total = new Money(0, $basket->currency());
 
         foreach ($basket->products() as $product) {
-          $total = $total->add($product->price);
+          $total = $total->add($product->price());
         }
 
         return $total;
