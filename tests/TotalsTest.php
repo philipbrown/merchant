@@ -19,6 +19,7 @@ use PhilipBrown\Merchant\Totals\TotalProducts;
 use PhilipBrown\Merchant\Discounts\ValueDiscount;
 use PhilipBrown\Merchant\Totals\TotalTaxableItems;
 use PhilipBrown\Merchant\Jurisdictions\UnitedKingdom;
+use PhilipBrown\Merchant\Reconcilers\UnitedKingdomReconciler;
 
 class TotalsTest extends PHPUnit_Framework_TestCase {
 
@@ -57,7 +58,7 @@ class TotalsTest extends PHPUnit_Framework_TestCase {
     /** @test */
     public function should_total_the_value_of_the_products()
     {
-        $total = new TotalValue;
+        $total = new TotalValue(new UnitedKingdomReconciler);
         $value = $total->calculate($this->basket);
 
         $this->assertEquals('total_value', $total->name());
@@ -87,7 +88,7 @@ class TotalsTest extends PHPUnit_Framework_TestCase {
     /** @test */
     public function should_calculate_total_tax()
     {
-        $total = new TotalTax;
+        $total = new TotalTax(new UnitedKingdomReconciler);
         $value = $total->calculate($this->basket);
 
         $this->assertEquals('total_tax', $total->name());
@@ -97,7 +98,7 @@ class TotalsTest extends PHPUnit_Framework_TestCase {
     /** @test */
     public function should_calculate_subtotal()
     {
-        $total = new Subtotal;
+        $total = new Subtotal(new UnitedKingdomReconciler);
         $value = $total->calculate($this->basket);
 
         $this->assertEquals('subtotal', $total->name());
@@ -107,7 +108,7 @@ class TotalsTest extends PHPUnit_Framework_TestCase {
     /** @test */
     public function should_calculate_the_total()
     {
-        $total = new Total;
+        $total = new Total(new UnitedKingdomReconciler);
         $value = $total->calculate($this->basket);
 
         $this->assertEquals('total', $total->name());
