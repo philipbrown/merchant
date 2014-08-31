@@ -355,6 +355,14 @@ $product->decrement();
 $product->decrement()->value(); // 5
 ```
 
+### Value
+The value of the `Product` is calculated by multiplying the price by the quantity:
+```
+$product->value(); // 100 GBP
+$product->increment();
+$product->value(); // 200 GBP
+```
+
 ### Freebie
 The `freebie` status will determine if the value of the current product is included in any reconciliation processes. By default this value is set to `false`.
 

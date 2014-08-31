@@ -40,4 +40,14 @@ class TotalsTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('total_products', $total->name());
         $this->assertEquals(Number::set(5), $value);
     }
+
+    /** @test */
+    public function should_total_the_value_of_the_products()
+    {
+        $total = new TotalValue;
+        $value = $total->calculate($this->basket);
+
+        $this->assertEquals('total_value', $total->name());
+        $this->assertEquals(new Money(9500 , new Currency('GBP')), $value);
+    }
 }

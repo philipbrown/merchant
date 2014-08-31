@@ -53,6 +53,16 @@ class ProductTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function should_return_the_total_value()
+    {
+        $this->assertEquals(new Money(100, new Currency('GBP')), $this->product->value());
+
+        $this->product->increment();
+
+        $this->assertEquals(new Money(200, new Currency('GBP')), $this->product->value());
+    }
+
+    /** @test */
     public function should_set_the_delivery_cost()
     {
         $default = new Money(0, new Currency('GBP'));

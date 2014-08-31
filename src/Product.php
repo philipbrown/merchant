@@ -155,6 +155,16 @@ class Product
     }
 
     /**
+     * Return the value of the product
+     *
+     * @return Money
+     */
+    public function value()
+    {
+        return $this->price->multiply($this->quantity->value());
+    }
+
+    /**
      * Set the freebie status
      *
      * @param Status $status
