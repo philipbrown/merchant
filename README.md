@@ -544,6 +544,9 @@ The following calculation is sued to determine the subtotal:
 3. If there is a discount, subtract it from the value
 4. Add the delivery charge
 
+#### Total
+The `total()` method will return the `subtotal` plus the `tax`.
+
 ## Events
 Merchant includes a lightweight event dispatcher for hooking on to events during the lifecycle of the order process. This allows you run certain actions as a consequence of events occuring within the package:
 ```php

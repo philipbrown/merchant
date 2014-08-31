@@ -402,6 +402,16 @@ class Product
     }
 
     /**
+     * Return the total
+     *
+     * @return Money
+     */
+    public function total()
+    {
+        return $this->subtotal()->add($this->tax());
+    }
+
+    /**
      * Run a Closure of actions
      *
      * @param Closue $actions

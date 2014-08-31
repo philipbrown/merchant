@@ -9,6 +9,7 @@ use PhilipBrown\Merchant\Basket;
 use PhilipBrown\Merchant\Number;
 use PhilipBrown\Merchant\Quantity;
 use PhilipBrown\Merchant\Dispatcher;
+use PhilipBrown\Merchant\Totals\Total;
 use PhilipBrown\Merchant\Totals\SubTotal;
 use PhilipBrown\Merchant\Totals\TotalTax;
 use PhilipBrown\Merchant\Totals\TotalValue;
@@ -100,5 +101,15 @@ class TotalsTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEquals('subtotal', $total->name());
         $this->assertEquals(new Money(10600, new Currency('GBP')), $value);
+    }
+
+    /** @test */
+    public function should_calculate_the_total()
+    {
+        $total = new Total;
+        $value = $total->calculate($this->basket);
+
+        $this->assertEquals('total', $total->name());
+        $this->assertEquals(new Money(12480, new Currency('GBP')), $value);
     }
 }
