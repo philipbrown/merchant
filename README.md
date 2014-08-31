@@ -695,7 +695,13 @@ The `name()` method can be implement by extending the `AbstractTotal` abstract c
 
 Merchant includes the following `Total` classes:
 
-- `TotalProducts`
+- `Total`
+- `Subtotal`
+- `TotalTax`
 - `TotalValue`
+- `TotalDiscount`
+- `TotalDelivery`
+- `TotalProducts`
+- `TotalTaxableItems`
 
 If you would like to include a `Total` class as part of the main Merchant source code, please feel free to open a pull request.
