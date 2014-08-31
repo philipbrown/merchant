@@ -18,7 +18,7 @@ class TotalDelivery extends AbstractTotal implements Total
         $delivery = new Money(0, $basket->currency());
 
         foreach ($basket->products() as $product) {
-            $delivery = $delivery->add($product->delivery);
+            $delivery = $delivery->add($product->delivery());
         }
 
         return $delivery;

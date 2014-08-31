@@ -155,16 +155,6 @@ class Product
     }
 
     /**
-     * Return the value of the product
-     *
-     * @return Money
-     */
-    public function value()
-    {
-        return $this->price->multiply($this->quantity->value());
-    }
-
-    /**
      * Set the freebie status
      *
      * @param Status $status
@@ -349,6 +339,66 @@ class Product
     public function setCategory(Category $category)
     {
         $category->categorise($this);
+    }
+
+    /**
+     * Return the value of the product
+     *
+     * @return Money
+     */
+    public function value()
+    {
+        return $this->price->multiply($this->quantity->value());
+    }
+
+    /**
+     * Return the tax
+     *
+     * @return Money
+     */
+    public function tax()
+    {
+        $tax = new Money(0, $this->price->getCurrency());
+
+        if (! $this->taxable->value() || $this->freebie->value()) {
+            return $tax;
+        }
+
+        $value = $this->price->multiply($this->quantity->value());
+
+        if ($this->discount) {
+            $value = $value->subtract($this->discount->value);
+        }
+
+        $value = $value->add($this->delivery);
+
+        $tax = $value->multiply($this->rate->asFloat());
+
+        return $tax;
+    }
+
+    /**
+     * Return the subtotal
+     *
+     * @return Money
+     */
+    public function subtotal()
+    {
+        $subtotal = new Money(0, $this->price->getCurrency());
+
+        if ($this->freebie->value()) {
+            return $subtotal;
+        }
+
+        $subtotal = $this->value();
+
+        if ($this->discount) {
+            $subtotal = $subtotal->subtract($this->discount->value);
+        }
+
+        $subtotal = $subtotal->add($this->delivery);
+
+        return $subtotal;
     }
 
     /**

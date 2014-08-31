@@ -18,11 +18,7 @@ class Subtotal extends AbstractTotal implements Total
         $subtotal = new Money(0, $basket->currency());
 
         foreach ($basket->products() as $product) {
-            $subtotal = $subtotal->add($product->price);
-
-            if($product->discount) {
-                $subtotal = $subtotal->subtract($product->discount->calculate($product));
-            }
+            $subtotal = $subtotal->add($product->subtotal());
         }
 
         return $subtotal;

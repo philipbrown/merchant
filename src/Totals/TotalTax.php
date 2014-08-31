@@ -18,8 +18,8 @@ class TotalTax extends AbstractTotal implements Total
         $tax = new Money(0, $basket->currency());
 
         foreach ($basket->products() as $product) {
-            if ($product->taxable) {
-                $tax = $tax->add($product->price->multiply($product->rate->asPercentage() / 100));
+            if ($product->taxable()) {
+                $tax = $tax->add($product->tax());
             }
         }
 

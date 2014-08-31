@@ -355,14 +355,6 @@ $product->decrement();
 $product->decrement()->value(); // 5
 ```
 
-### Value
-The value of the `Product` is calculated by multiplying the price by the quantity:
-```
-$product->value(); // 100 GBP
-$product->increment();
-$product->value(); // 200 GBP
-```
-
 ### Freebie
 The `freebie` status will determine if the value of the current product is included in any reconciliation processes. By default this value is set to `false`.
 
@@ -518,6 +510,39 @@ $product->quantity()->value(); // 3
 $product->freebie()->value();  // true
 $product->taxable()->value();  // false
 ```
+
+### Totals
+The `Product` class also has a number of methods to determine various totals. This encapsulates the logic around calculating these totals internal to the `Product` object.
+
+#### Value
+The value of the `Product` is calculated by multiplying the price by the quantity:
+```
+$product->value(); // 100 GBP
+$product->increment();
+$product->value(); // 200 GBP
+```
+
+#### Tax
+The `tax()` method will calculate the tax that should be applied to the current product.
+
+The following calculation is used to determine the tax value
+
+1. Is the product taxable?
+2. Is the product not a freebie?
+3. Get the total value by multplying the price by the quantity
+4. If there is a discount, subtract it from the value
+5. Add the delivery charge
+6. Calculate the tax by multplying the total by the tax rate as a float
+
+#### Subtotal
+The `subtotal()` method will calculate the total before tax.
+
+The following calculation is sued to determine the subtotal:
+
+1. Is the product not a freebie?
+2. Get the total value by multplying the price by the quantity
+3. If there is a discount, subtract it from the value
+4. Add the delivery charge
 
 ## Events
 Merchant includes a lightweight event dispatcher for hooking on to events during the lifecycle of the order process. This allows you run certain actions as a consequence of events occuring within the package:

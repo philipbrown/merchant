@@ -18,8 +18,8 @@ class TotalDiscount extends AbstractTotal implements Total
         $discount = new Money(0, $basket->currency());
 
         foreach ($basket->products() as $product) {
-            if ($product->discount) {
-                $discount = $discount->add($product->discount->calculate($product));
+            if ($product->discount()) {
+                $discount = $discount->add($product->discount()->value);
             }
         }
 
