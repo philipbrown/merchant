@@ -127,6 +127,19 @@ $bigger = $number->increment();
 
 $number->value(); // 10
 $bigger->value(); // 11
+
+$one = Number::set(10);
+$two = $one->add(Number::set(2));
+$two->value(); // 12
+
+$three = $one->subtract(Number::set(3));
+$three->value(); // 7
+
+$four = $one->multply(Number::set(10));
+$four->value(); // 100
+
+$five = $one->divide(Number::set(5));
+$five->value(); // 2
 ```
 
 Merchant also includes a generic immutable `Object` class that accepts an associative array on instantiation and then provides those values within the context of an object:

@@ -52,4 +52,48 @@ class Number extends AbstractValueObject implements ValueObject
     {
         return new Number($this->value - 1);
     }
+
+    /**
+     * Add a Number
+     *
+     * @param Number $number
+     * @return Number
+     */
+    public function add(Number $number)
+    {
+        return new Number($this->value + $number->value());
+    }
+
+    /**
+     * Subtract a Number
+     *
+     * @param Number $number
+     * @return Number
+     */
+    public function subtract(Number $number)
+    {
+        return new Number($this->value - $number->value());
+    }
+
+    /**
+     * Multiply a Number
+     *
+     * @param Number $number
+     * @return Number
+     */
+    public function multiply(Number $number)
+    {
+        return new Number($this->value * $number->value());
+    }
+
+    /**
+     * Divide a Number
+     *
+     * @param Number $number
+     * @return Number
+     */
+    public function divide(Number $number)
+    {
+        return new Number($this->value / $number->value());
+    }
 }

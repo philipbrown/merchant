@@ -58,4 +58,44 @@ class NumberTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(10, $number->value());
         $this->assertEquals(9, $smaller->value());
     }
+
+    /** @test */
+    public function should_add_number()
+    {
+        $one = Number::set(1);
+        $two = Number::set(2);
+        $three = $one->add($two);
+
+        $this->assertEquals(Number::set(3), $three);
+    }
+
+    /** @test */
+    public function should_subtract_number()
+    {
+        $one = Number::set(10);
+        $two = Number::set(2);
+        $three = $one->subtract($two);
+
+        $this->assertEquals(Number::set(8), $three);
+    }
+
+    /** @test */
+    public function should_multiply_number()
+    {
+        $one = Number::set(3);
+        $two = Number::set(3);
+        $three = $one->multiply($two);
+
+        $this->assertEquals(Number::set(9), $three);
+    }
+
+    /** @test */
+    public function should_divide_number()
+    {
+        $one = Number::set(44);
+        $two = Number::set(4);
+        $three = $one->divide($two);
+
+        $this->assertEquals(Number::set(11), $three);
+    }
 }
