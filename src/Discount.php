@@ -11,9 +11,9 @@ interface Discount
     public function calculate(Product $product);
 
     /**
-     * Return the value of the Discount
+     * Return the rate of the Discount
      *
      * @return mixed
      */
-    public function value();
+    public function rate();
 }

@@ -22,6 +22,6 @@ class CategoriesTest extends PHPUnit_Framework_TestCase
         $category = new PhysicalBook;
         $category->categorise($product);
 
-        $this->assertFalse($product->taxable->value());
+        $this->assertFalse($product->taxable()->value());
     }
 }

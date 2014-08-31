@@ -10,7 +10,7 @@ class PercentageDiscount extends AbstractDiscount implements Discount
     /**
      * @var Percent
      */
-    protected $discount;
+    protected $rate;
 
     /**
      * Create a new PercentageDiscount
@@ -20,7 +20,7 @@ class PercentageDiscount extends AbstractDiscount implements Discount
      */
     public function __construct(Percent $discount)
     {
-        $this->discount = $discount;
+        $this->rate = $discount;
     }
 
     /**
@@ -31,6 +31,6 @@ class PercentageDiscount extends AbstractDiscount implements Discount
      */
     public function calculate(Product $product)
     {
-        return $product->price->multiply($this->discount->value() / 100);
+        return $product->price()->multiply($this->rate->value() / 100);
     }
 }

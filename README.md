@@ -129,6 +129,15 @@ $number->value(); // 10
 $bigger->value(); // 11
 ```
 
+Merchant also includes a generic immutable `Object` class that accepts an associative array on instantiation and then provides those values within the context of an object:
+```php
+use PhilipBrown\Merchant\Object;
+
+$object = new Object(['hello' => 'world']);
+
+$object->hello; // 'world'
+```
+
 ## Tax Rates
 When calculating the total cost of an order we need to factor in the tax rate that should be applied on top. Tax Rates are encapsulated as objects so we can provide a consistent interface when retrieving the current rate of tax.
 
@@ -315,51 +324,59 @@ You will also need to pass an instance of `Money` as the base value of the produ
 ### Quantity
 By default the quantity of the `Product` object will be set to 1. There are two ways of altering the quantity of a `Product` object.
 
-Firstly, you can pass an instance of `Quantity` to the `quantity()` method:
+Firstly, you can pass an instance of `Quantity` to the `setQuantity()` method:
 ```php
 use PhilipBrown\Merchant\Quantity;
 
-$product->quantity(Quantity::set(5));
+$product->setQuantity(Quantity::set(5));
+
+$product->quantity()->value(); // 5
 ```
 
 Secondly, you can increment or decrement the current quantity value by using the `increment()` or `decrement()` methods. This will increase or decrease the value by 1:
 ```php
 $product->increment();
-$product->quantity->value(); // 6
+$product->quantity()->value(); // 6
 
 $product->decrement();
-$product->decrement->value(); // 5
+$product->decrement()->value(); // 5
 ```
 
 ### Freebie
 The `freebie` status will determine if the value of the current product is included in any reconciliation processes. By default this value is set to `false`.
 
-To alter the `freebie` status you can pass an instance of `Status` to the `freebie()` method:
+To alter the `freebie` status you can pass an instance of `Status` to the `setFreebie()` method:
 ```php
 use PhilipBrown\Merchant\Status;
 
-$product->freebie(Status::set(true));
+$product->setFreebie(Status::set(true));
+
+$product->freebie()->value(); // true
 ```
 
 ### Taxable
 Much like the `freebie` status, the value of the `taxable` status will determine whether the value of the current product is included during any reconciliation processes. By default this value is set to `true`.
 
-To alter the `taxable` status you can pass an instance of `Status` to the `taxable()` method:
+To alter the `taxable` status you can pass an instance of `Status` to the `setTaxable()` method:
 ```php
 use PhilipBrown\Merchant\Status;
 
-$product->taxable(Status::set(false));
+$product->setTaxable(Status::set(false));
+
+$product->taxable()->value(); // false
 ```
 
 ### Delivery charge
 By default the delivery charge of a product will be set to a new instance of `Money` with a value of `0` and the same currency as the value of the `$price`.
 
-To set a delivery charge, pass an instance of `Money` into the `delivery()` method:
+To set a delivery charge, pass an instance of `Money` into the `setDelivery()` method:
 ```php
 use Money\Money;
 use Money\Currency;
 
-$product->delivery(new Money(100, new Currency('GBP')));
+$product->setDelivery(new Money(100, new Currency('GBP')));
+
+$product->delivery(); // Money
 ```
 
 ### Coupons and Tags
@@ -379,18 +396,25 @@ $product->removeCoupon(String::('SUMMER_SALE');
 $product->removeTag(String::set('campaign_5742726'));
 ```
 
+To get access to the underlying `Collection` instances you can use the following methods:
+```php
+$product->coupons(); // Collection
+$product->tags();    // Collection
+
 ### Tax Rate
-If you need to set a specific tax rate for a particular product you can do so using the `rate()` method:
+If you need to set a specific tax rate for a particular product you can do so using the `setRate()` method:
 ```php
 use PhilipBrown\Merchant\TaxRates\UnitedKingdomValueAddedTax;
 
-$product->rate(new UnitedKingdomValueAddedTax);
+$product->setRate(new UnitedKingdomValueAddedTax);
+
+$product->rate(); // UnitedKingdomValueAddedTax
 ```
 
 ### Discounts
-Discounts to be applied to a product should be encapsulated as an object capable of calculating the appropriate discount to apply. This is because the discount is set as an action on the `Product`, but the actual value of the discount is only calculated when the order is reconciled.
+Discounts to be applied to a product should be encapsulated as an object capable of calculating the appropriate discount to apply.
 
-Discount objects should provide a `public calculate()` method that accepts an instance of `Product` and a `public value()` method that returns the value of the discount. You can optionally extend the `AbstractDiscount` class.
+Discount objects should provide a `public calculate()` method that accepts an instance of `Product` and a `public rate()` method that returns the rate of the discount. You can optionally extend the `AbstractDiscount` class.
 
 Discounts should implement the `Discount` interface:
 ```php
@@ -405,22 +429,28 @@ interface Discount
     public function calculate(Product $product);
 
     /**
-     * Return the value of the Discount
+     * Return the rate of the Discount
      *
      * @return mixed
      */
-    public function value();
+    public function rate();
 }
 ```
 
 There are two provided `Discount` objects as part of the source of this package, `PercentageDiscount` and `ValueDiscount`.
 
-To set a discount on a product, pass an instance of an object that implements the `Discount` interface to the `discount()` method on the `Product` object:
+To set a discount on a product, pass an instance of an object that implements the `Discount` interface to the `setdDiscount()` method on the `Product` object:
 ```php
 use PhilipBrown\Merchant\Percent;
 use PhilipBrown\Merchant\Discounts\PercentageDiscount;
 
-$product->discount(new PercentageDiscount(Percent::set(50)));
+$product->setDiscount(new PercentageDiscount(Percent::set(50)));
+```
+
+You can access the `value` and the `rate` of the discount through the `discount()` method. This method will return an instance of `PhilipBrown\Merchant\Object`. This is an immutable object that has two `private` properties that are exposed as `__get()` attributes:
+```php
+$product->discount()->value; // Money
+$product->discount()->rate;  // Percent
 ```
 
 ### Categories
@@ -444,11 +474,11 @@ interface Category
 
 `PhysicalBook` is an example category that will set the `taxable` status of the product to `false`.
 
-To set a category on a product, pass an instance of an object that implements the `Category` interface to the `category()` method on the `Product` object:
+To set a category on a product, pass an instance of an object that implements the `Category` interface to the `setCategory()` method on the `Product` object:
 ```php
 use PhilipBrown\Merchant\Categories\PhysicalBook;
 
-$product->category(new PhysicalBook);
+$product->setCategory(new PhysicalBook);
 ```
 
 ### Closure of actions
@@ -458,14 +488,14 @@ use PhilipBrown\Merchant\Status;
 use PhilipBrown\Merchant\Quantity;
 
 $product->action(function ($product) {
-    $product->quantity(Quantity::set(3));
-    $product->freebie(Status::set(true));
-    $product->taxable(Status::set(false));
+    $product->setQuantity(Quantity::set(3));
+    $product->setFreebie(Status::set(true));
+    $product->setTaxable(Status::set(false));
 });
 
-$product->quantity->value(); // 3
-$product->freebie->value();  // true
-$product->taxable->value();  // false
+$product->quantity()->value(); // 3
+$product->freebie()->value();  // true
+$product->taxable()->value();  // false
 ```
 
 ## Events
@@ -570,7 +600,7 @@ $name   = SKU::name('iPhone');
 $price  = new Money(100, new Currency('GBP'));
 
 $basket->add($sku, $name, $price, function ($product) {
-    $product->taxable(Status::set(false));
+    $product->setTaxable(Status::set(false));
 });
 ```
 

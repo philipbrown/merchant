@@ -3,12 +3,12 @@
 abstract class AbstractDiscount
 {
     /**
-     * Return the value of the discount
+     * Return the rate of the discount
      *
      * @return mixed
      */
-    public function value()
+    public function rate()
     {
-        return $this->discount;
+        return $this->rate;
     }
 }

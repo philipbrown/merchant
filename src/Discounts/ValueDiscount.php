@@ -10,7 +10,7 @@ class ValueDiscount extends AbstractDiscount implements Discount
     /**
      * @var Money
      */
-    protected $discount;
+    protected $rate;
 
     /**
      * Create a new ValueDiscount instance
@@ -20,7 +20,7 @@ class ValueDiscount extends AbstractDiscount implements Discount
      */
     public function __construct(Money $discount)
     {
-        $this->discount = $discount;
+        $this->rate = $discount;
     }
 
     /**
@@ -31,6 +31,6 @@ class ValueDiscount extends AbstractDiscount implements Discount
      */
     public function calculate(Product $product)
     {
-        return $this->discount;
+        return $this->rate;
     }
 }

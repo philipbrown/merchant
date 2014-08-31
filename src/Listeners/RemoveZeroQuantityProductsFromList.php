@@ -16,7 +16,7 @@ class RemoveZeroQuantityProductsFromList implements Listener
     public function handle(Product $product, Collection $list)
     {
       foreach ($list as $key => $item) {
-          if (! $item->quantity->value()) {
+          if (! $item->quantity()->value()) {
               $list->remove($key);
           }
       }

@@ -65,8 +65,8 @@ class BasketTest extends PHPUnit_Framework_TestCase
       $product = $this->basket->pick('123');
 
       $this->assertInstanceOf('PhilipBrown\Merchant\Product', $product);
-      $this->assertEquals('123', $product->sku);
-      $this->assertEquals('iPhone', $product->name);
+      $this->assertEquals('123', $product->sku());
+      $this->assertEquals('iPhone', $product->name());
   }
 
   /** @test */

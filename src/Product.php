@@ -56,14 +56,9 @@ class Product
     private $tags;
 
     /**
-     * @var Discount
+     * @var Object
      */
     private $discount;
-
-    /**
-     * @var Category
-     */
-    private $category;
 
     /**
      * Create a new Product
@@ -89,14 +84,54 @@ class Product
     }
 
     /**
+     * Get the SKU
+     *
+     * @return SKU
+     */
+    public function sku()
+    {
+        return $this->sku;
+    }
+
+    /**
+     * Get the name
+     *
+     * @return Name
+     */
+    public function name()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Get the price
+     *
+     * @return Money
+     */
+    public function price()
+    {
+        return $this->price;
+    }
+
+    /**
      * Set the quantity
      *
      * @param Quantity $quantity
      * @return void
      */
-    public function quantity(Quantity $quantity)
+    public function setQuantity(Quantity $quantity)
     {
         $this->quantity = $quantity;
+    }
+
+    /**
+     * Get the quantity
+     *
+     * @return Quantity
+     */
+    public function quantity()
+    {
+        return $this->quantity;
     }
 
     /**
@@ -125,9 +160,19 @@ class Product
      * @param Status $status
      * @return void
      */
-    public function freebie(Status $status)
+    public function setFreebie(Status $status)
     {
         $this->freebie = $status;
+    }
+
+    /**
+     * Get the freebie status
+     *
+     * @return Status
+     */
+    public function freebie()
+    {
+        return $this->freebie;
     }
 
     /**
@@ -136,9 +181,19 @@ class Product
      * @param Status $status
      * @return void
      */
-    public function taxable(Status $status)
+    public function setTaxable(Status $status)
     {
         $this->taxable = $status;
+    }
+
+    /**
+     * Get the taxable status
+     *
+     * @return Status
+     */
+    public function taxable()
+    {
+        return $this->taxable;
     }
 
     /**
@@ -147,9 +202,19 @@ class Product
      * @param Money $cost
      * @return void
      */
-    public function delivery(Money $cost)
+    public function setDelivery(Money $cost)
     {
         $this->delivery = $cost;
+    }
+
+    /**
+     * Get the delivery charge
+     *
+     * @return Money
+     */
+    public function delivery()
+    {
+        return $this->delivery;
     }
 
     /**
@@ -177,6 +242,16 @@ class Product
     }
 
     /**
+     * Get the coupons Collection
+     *
+     * @return Collection
+     */
+    public function coupons()
+    {
+        return $this->coupons;
+    }
+
+    /**
      * Add a tag
      *
      * @param String $tag
@@ -201,14 +276,34 @@ class Product
     }
 
     /**
+     * Get the tags Collection
+     *
+     * @return Collection
+     */
+    public function tags()
+    {
+        return $this->tags;
+    }
+
+    /**
      * Set a tax rate
      *
      * @param TaxRate $rate
      * @return void
      */
-    public function rate(TaxRate $rate)
+    public function setRate(TaxRate $rate)
     {
         $this->rate = $rate;
+    }
+
+    /**
+     * Get the tax rate
+     *
+     * @return TaxRate
+     */
+    public function rate()
+    {
+        return $this->rate;
     }
 
     /**
@@ -217,9 +312,22 @@ class Product
      * @param Discount $discount
      * @return void
      */
-    public function discount(Discount $discount)
+    public function setDiscount(Discount $discount)
     {
-        $this->discount = $discount;
+        $this->discount = new Object([
+            'rate' =>$discount->rate(),
+            'value' => $discount->calculate($this)
+        ]);
+    }
+
+    /**
+     * Get the discount
+     *
+     * @return Object
+     */
+    public function discount()
+    {
+        return $this->discount;
     }
 
     /**
@@ -228,9 +336,9 @@ class Product
      * @param Category $category
      * @return void
      */
-    public function category(Category $category)
+    public function setCategory(Category $category)
     {
-        $this->category = $category;
+        $category->categorise($this);
     }
 
     /**
@@ -242,18 +350,5 @@ class Product
     public function action(Closure $actions)
     {
         call_user_func($actions, $this);
-    }
-
-    /**
-    * Get the private attributes
-    *
-    * @param string $key
-    * @return mixed
-    */
-    public function __get($key)
-    {
-        if (property_exists($this, $key)) {
-            return $this->$key;
-        }
     }
 }

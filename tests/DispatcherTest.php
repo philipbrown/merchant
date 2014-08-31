@@ -38,6 +38,6 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
         $this->dispatcher->listen('event.fired', $listener);
         $this->dispatcher->fire('event.fired', [$this->product, $collection]);
 
-        $this->assertEquals($this->product->name, $listener->product->name);
+        $this->assertEquals($this->product->name(), $listener->product->name());
     }
 }
