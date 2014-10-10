@@ -28,6 +28,16 @@ class UnitedKingdom implements Jurisdiction
     }
 
     /**
+     * Return the Tax Rate
+     *
+     * @return TaxRate
+     */
+    public function rate()
+    {
+        return $this->tax;
+    }
+
+    /**
      * Return the currency
      *
      * @return Money\Currency
@@ -35,15 +45,5 @@ class UnitedKingdom implements Jurisdiction
     public function currency()
     {
         return $this->currency;
-    }
-
-    /**
-     * Return the Tax Rate
-     *
-     * @return TaxRate
-     */
-    public function tax()
-    {
-        return $this->tax;
     }
 }
