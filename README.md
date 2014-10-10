@@ -9,3 +9,5 @@
 ## Collections
 
 ## Products
+
+## Discounts

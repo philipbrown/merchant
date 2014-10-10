@@ -3,112 +3,106 @@
 use Money\Money;
 use Money\Currency;
 use PhilipBrown\Merchant\Product;
+use PhilipBrown\Merchant\Fixtures\ProductFixture;
+use PhilipBrown\Merchant\Discounts\PercentageDiscount;
 use PhilipBrown\Merchant\TaxRates\UnitedKingdomValueAddedTax;
 
 class ProductTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var Product */
-    private $product;
-
-    /** @var Money */
-    private $price;
-
-    /** @var TaxRate */
-    private $rate;
+    /** @var array */
+    private $products;
 
     public function setUp()
     {
-        $this->rate    = new UnitedKingdomValueAddedTax;
-        $this->price   = new Money(1000, new Currency('GBP'));
-        $this->product = new Product('abc', 'Flux Capacitor', $this->price, $this->rate);
+        $this->products = (new ProductFixture)->load();
     }
 
     /** @test */
     public function should_return_the_sku()
     {
-        $this->assertEquals('abc', $this->product->sku);
+        $this->assertEquals('abc', $this->products[0]->sku);
     }
 
     /** @test */
     public function should_return_the_name()
     {
-        $this->assertEquals('Flux Capacitor', $this->product->name);
+        $this->assertEquals('Flux Capacitor', $this->products[0]->name);
     }
 
     /** @test */
     public function should_return_the_price()
     {
-        $this->assertEquals($this->price, $this->product->price);
+        $this->assertEquals(new Money(1000, new Currency('GBP')), $this->products[0]->price);
     }
 
     /** @test */
     public function should_return_the_rate()
     {
-        $this->assertEquals($this->rate, $this->product->rate);
+        $this->assertEquals(new UnitedKingdomValueAddedTax, $this->products[0]->rate);
     }
 
     /** @test */
     public function should_return_the_quantity()
     {
-        $this->assertEquals(1, $this->product->quantity);
+        $this->assertEquals(1, $this->products[0]->quantity);
     }
 
     /** @test */
     public function should_increment_the_quantity()
     {
-        $this->product->increment();
+        $this->products[0]->increment();
 
-        $this->assertEquals(2, $this->product->quantity);
+        $this->assertEquals(2, $this->products[0]->quantity);
     }
 
     /** @test */
     public function should_decrement_the_quantity()
     {
-        $this->product->decrement();
+        $this->products[0]->decrement();
 
-        $this->assertEquals(0, $this->product->quantity);
+        $this->assertEquals(0, $this->products[0]->quantity);
     }
 
     /** @test */
     public function should_set_the_quantity()
     {
-        $this->product->quantity(5);
+        $this->products[0]->quantity(5);
 
-        $this->assertEquals(5, $this->product->quantity);
+        $this->assertEquals(5, $this->products[0]->quantity);
     }
 
     /** @test */
     public function should_return_the_freebie_status()
     {
-        $this->assertFalse($this->product->freebie);
+        $this->assertFalse($this->products[0]->freebie);
     }
 
     /** @test */
     public function should_set_the_freebie_status()
     {
-        $this->product->freebie(true);
+        $this->products[0]->freebie(true);
 
-        $this->assertTrue($this->product->freebie);
+        $this->assertTrue($this->products[0]->freebie);
     }
 
     /** @test */
     public function should_return_the_taxable_status()
     {
-        $this->assertTrue($this->product->taxable);
+        $this->assertTrue($this->products[0]->taxable);
     }
 
     /** @test */
     public function should_set_the_taxable_status()
     {
-        $this->product->taxable(false);
+        $this->products[0]->taxable(false);
 
-        $this->assertFalse($this->product->taxable);
+        $this->assertFalse($this->products[0]->taxable);
     }
 
     /** @test */
     public function should_return_the_delivery_charge()
     {
-        $this->assertInstanceOf('Money\Money', $this->product->delivery);
+        $this->assertInstanceOf('Money\Money', $this->products[0]->delivery);
     }
 
     /** @test */
@@ -116,50 +110,59 @@ class ProductTest extends \PHPUnit_Framework_TestCase
     {
         $delivery = new Money(100, new Currency('GBP'));
 
-        $this->product->delivery($delivery);
+        $this->products[0]->delivery($delivery);
 
-        $this->assertEquals($delivery, $this->product->delivery);
+        $this->assertEquals($delivery, $this->products[0]->delivery);
     }
 
     /** @test */
     public function should_return_the_coupons_collection()
     {
-        $this->assertInstanceOf('PhilipBrown\Merchant\Collection', $this->product->coupons);
+        $this->assertInstanceOf('PhilipBrown\Merchant\Collection', $this->products[0]->coupons);
     }
 
     /** @test */
     public function should_add_a_coupon()
     {
-        $this->product->coupons('FREE99');
+        $this->products[0]->coupons('FREE99');
 
-        $this->assertEquals(1, $this->product->coupons->count());
+        $this->assertEquals(1, $this->products[0]->coupons->count());
     }
 
     /** @test */
     public function should_return_the_tags_collection()
     {
-        $this->assertInstanceOf('PhilipBrown\Merchant\Collection', $this->product->tags);
+        $this->assertInstanceOf('PhilipBrown\Merchant\Collection', $this->products[0]->tags);
     }
 
     /** @test */
     public function should_add_a_tag()
     {
-        $this->product->tags('campaign_123456');
+        $this->products[0]->tags('campaign_123456');
 
-        $this->assertEquals(1, $this->product->tags->count());
+        $this->assertEquals(1, $this->products[0]->tags->count());
+    }
+
+    /** @test */
+    public function should_add_discount()
+    {
+        $this->products[0]->discount(new PercentageDiscount(20));
+
+        $this->assertInstanceOf(
+            'PhilipBrown\Merchant\Discounts\PercentageDiscount', $this->products[0]->discount);
     }
 
     /** @test */
     public function should_run_closure_of_actions()
     {
-        $this->product->action(function ($product) {
+        $this->products[0]->action(function ($product) {
             $product->quantity(3);
             $product->freebie(true);
             $product->taxable(false);
         });
 
-        $this->assertEquals(3, $this->product->quantity);
-        $this->assertTrue($this->product->freebie);
-        $this->assertFalse($this->product->taxable);
+        $this->assertEquals(3, $this->products[0]->quantity);
+        $this->assertTrue($this->products[0]->freebie);
+        $this->assertFalse($this->products[0]->taxable);
     }
 }
