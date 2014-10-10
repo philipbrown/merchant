@@ -12,7 +12,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "PhilipBrown\\Merchant\\Tests\\": "tests"
+            "PhilipBrown\\Merchant\\Tests\\": "tests",
+            "PhilipBrown\\Merchant\\Fixtures\\": "fixtures"
         }
     },
     "require": {
