@@ -10,4 +10,6 @@
 
 ## Products
 
-## Discounts
+### Discounts
+
+### Categories

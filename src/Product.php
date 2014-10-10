@@ -61,6 +61,11 @@ class Product
     private $discount;
 
     /**
+     * @var Category
+     */
+    private $category;
+
+    /**
      * Create a new Product
      *
      * @param string $sku
@@ -196,7 +201,12 @@ class Product
      * @param Category $category
      * @return void
      */
-    //public function category(Category $category){}
+    public function category(Category $category)
+    {
+        $this->category = $category;
+
+        $this->category->categorise($this);
+    }
 
     /**
      * Run a Closure of actions

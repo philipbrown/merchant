@@ -4,6 +4,7 @@ use Money\Money;
 use Money\Currency;
 use PhilipBrown\Merchant\Product;
 use PhilipBrown\Merchant\Fixtures\ProductFixture;
+use PhilipBrown\Merchant\Categories\PhysicalBook;
 use PhilipBrown\Merchant\Discounts\PercentageDiscount;
 use PhilipBrown\Merchant\TaxRates\UnitedKingdomValueAddedTax;
 
@@ -150,6 +151,15 @@ class ProductTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(
             'PhilipBrown\Merchant\Discounts\PercentageDiscount', $this->products[0]->discount);
+    }
+
+    /** @test */
+    public function should_categorise_a_product()
+    {
+        $this->products[0]->category(new PhysicalBook);
+
+        $this->assertInstanceOf('PhilipBrown\Merchant\Categories\PhysicalBook', $this->products[0]->category);
+        $this->assertFalse($this->products[0]->taxable);
     }
 
     /** @test */
