@@ -10,7 +10,7 @@
             "PhilipBrown\\Merchant\\": "src"
         }
     },
-    "autoload": {
+    "autoload-dev": {
         "psr-4": {
             "PhilipBrown\\Merchant\\Tests\\": "tests"
         }
