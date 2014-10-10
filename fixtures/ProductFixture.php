@@ -10,7 +10,7 @@ class ProductFixture {
     public function load()
     {
         return [
-            new Product('abc', 'Flux Capacitor', new Money(1000, new Currency('GBP')), new UnitedKingdomValueAddedTax)
+            new Product('1', 'The 4-Hour Work Week', new Money(1000, new Currency('GBP')), new UnitedKingdomValueAddedTax)
         ];
     }
 }

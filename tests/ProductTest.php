@@ -21,13 +21,13 @@ class ProductTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function should_return_the_sku()
     {
-        $this->assertEquals('abc', $this->products[0]->sku);
+        $this->assertEquals('1', $this->products[0]->sku);
     }
 
     /** @test */
     public function should_return_the_name()
     {
-        $this->assertEquals('Flux Capacitor', $this->products[0]->name);
+        $this->assertEquals('The 4-Hour Work Week', $this->products[0]->name);
     }
 
     /** @test */
