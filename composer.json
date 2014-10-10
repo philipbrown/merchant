@@ -10,18 +10,16 @@
             "PhilipBrown\\Merchant\\": "src"
         }
     },
-    "autoload-dev": {
+    "autoload": {
         "psr-4": {
-            "PhilipBrown\\Merchant\\Stubs\\": "stubs"
+            "PhilipBrown\\Merchant\\Tests\\": "tests"
         }
     },
     "require": {
         "php": ">=5.4",
-        "mathiasverraes/money": "~1.0",
-        "beberlei/assert": "~2.0"
+        "mathiasverraes/money": "~1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.0",
-        "mockery/mockery": "~0.9"
+        "phpunit/phpunit": "~4.0"
     }
 }
