@@ -5,3 +5,5 @@
 ## Tax Rates
 
 ## Jurisdictions
+
+## Collections
