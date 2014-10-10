@@ -20,7 +20,7 @@ class ProductTest extends \PHPUnit_Framework_TestCase
     {
         $this->rate    = new UnitedKingdomValueAddedTax;
         $this->price   = new Money(1000, new Currency('GBP'));
-        $this->product = new Product('abc', 'Flux capacitor', $this->price, $this->rate);
+        $this->product = new Product('abc', 'Flux Capacitor', $this->price, $this->rate);
     }
 
     /** @test */
@@ -32,7 +32,7 @@ class ProductTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function should_return_the_name()
     {
-        $this->assertEquals('Flux capacitor', $this->product->name);
+        $this->assertEquals('Flux Capacitor', $this->product->name);
     }
 
     /** @test */
