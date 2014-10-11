@@ -2,17 +2,20 @@
 
 use Money\Money;
 use Money\Currency;
+use PhilipBrown\Merchant\Product;
 use PhilipBrown\Merchant\Discounts\ValueDiscount;
-use PhilipBrown\Merchant\Fixtures\ProductFixture;
+use PhilipBrown\Merchant\TaxRates\UnitedKingdomValueAddedTax;
 
 class ValueDiscountTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var array */
-    private $products;
+    /** @var Product */
+    private $product;
 
     public function setUp()
     {
-        $this->products = (new ProductFixture)->load();
+        $rate          = new UnitedKingdomValueAddedTax;
+        $price         = new Money(60000, new Currency('GBP'));
+        $this->product = new Product('1', 'iPhone 6', $price, $rate);
     }
 
     /** @test */
@@ -20,7 +23,7 @@ class ValueDiscountTest extends \PHPUnit_Framework_TestCase
     {
         $amount   = new Money(200, new Currency('GBP'));
         $discount = new ValueDiscount($amount);
-        $value    = $discount->calculate($this->products[0]);
+        $value    = $discount->calculate($this->product);
 
         $this->assertInstanceOf('Money\Money', $value);
         $this->assertEquals($amount, $value);

@@ -1,24 +1,29 @@
 <?php namespace PhilipBrown\Merchant\Tests\Categories;
 
-use PhilipBrown\Merchant\Fixtures\ProductFixture;
+use Money\Money;
+use Money\Currency;
+use PhilipBrown\Merchant\Product;
 use PhilipBrown\Merchant\Categories\PhysicalBook;
+use PhilipBrown\Merchant\TaxRates\UnitedKingdomValueAddedTax;
 
 class CategoriesTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var array */
-    private $products;
+    /** @var Product */
+    private $product;
 
     public function setUp()
     {
-        $this->products = (new ProductFixture)->load();
+        $rate          = new UnitedKingdomValueAddedTax;
+        $price         = new Money(1000, new Currency('GBP'));
+        $this->product = new Product('1', 'Fooled By Randomness', $price, $rate);
     }
 
     /** @test */
     public function should_categorise_as_physicalbook()
     {
         $category = new PhysicalBook;
-        $category->categorise($this->products[0]);
+        $category->categorise($this->product);
 
-        $this->assertFalse($this->products[0]->taxable);
+        $this->assertFalse($this->product->taxable);
     }
 }
