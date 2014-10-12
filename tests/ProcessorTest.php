@@ -56,6 +56,6 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
         $payload = $this->processor->process($basket);
 
-        $this->assertTrue(is_array($payload));
+        $this->assertInstanceOf('PhilipBrown\Merchant\Order', $payload);
     }
 }

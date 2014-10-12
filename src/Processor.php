@@ -29,14 +29,14 @@ class Processor
      * Process a Basket into ... ?
      *
      * @param Basket $basket
-     * @return array
+     * @return Order
      */
     public function process(Basket $basket)
     {
         $totals   = $this->totals($basket);
         $products = $this->products($basket);
 
-        return ['totals' => $totals, 'products' => $products];
+        return new Order($totals, $products);
     }
 
     /**
