@@ -30,8 +30,9 @@ class BasketFixture implements Fixture
     /**
      * Product 0
      *
-     * Value: £10.00
-     * Total: £12.00
+     * Value:    £10.00
+     * Delivery: £0
+     * Total:    £12.00
      *
      * @return Basket
      */
@@ -47,8 +48,9 @@ class BasketFixture implements Fixture
     /**
      * Products 1 + 2
      *
-     * Value: £314.97
-     * Total: £374.96
+     * Value:    £314.97
+     * Delivery: £0
+     * Total:    £374.96
      *
      * @return Basket
      */
@@ -65,8 +67,9 @@ class BasketFixture implements Fixture
     /**
      * Products 3 + 4
      *
-     * Value: £1,004.98
-     * Total: £1,079.99
+     * Value:    £1,004.98
+     * Delivery: £0
+     * Total:    £1,079.99
      *
      * @return Basket
      */
@@ -83,8 +86,9 @@ class BasketFixture implements Fixture
     /**
      * Products 4 + 5 + 6
      *
-     * Value: £1,949.48
-     * Total: £2,261.38
+     * Value:    £1,949.48
+     * Delivery: £60.00
+     * Total:    £2,261.38
      *
      * @return Basket
      */
@@ -102,8 +106,9 @@ class BasketFixture implements Fixture
     /**
      * Products 7 + 8
      *
-     * Value: £211.94
-     * Total: £262.43
+     * Value:    £211.94
+     * Delivery: £39.94
+     * Total:    £262.43
      *
      * @return Basket
      */
@@ -120,8 +125,9 @@ class BasketFixture implements Fixture
     /**
      * Products 1 + 4 + 9
      *
-     * Value: £1,089.99
-     * Total: £1,097.96
+     * Value:    £1,089.99
+     * Delivery: £2.97
+     * Total:    £1,097.96
      *
      * @return Basket
      */
@@ -139,8 +145,9 @@ class BasketFixture implements Fixture
     /**
      * Products 0 + 3 + 7
      *
-     * Value: £146.95
-     * Total: £182.47
+     * Value:    £146.95
+     * Delivery: £27.96
+     * Total:    £182.47
      *
      * @return Basket
      */
@@ -158,8 +165,9 @@ class BasketFixture implements Fixture
     /**
      * Products 5 + 6 + 7
      *
-     * Value: £1,081.45
-     * Total: £1,351.86
+     * Value:    £1,081.45
+     * Delivery: £87.96
+     * Total:    £1,351.86
      *
      * @return Basket
      */
@@ -177,8 +185,9 @@ class BasketFixture implements Fixture
     /**
      * Products 2 + 3 + 4
      *
-     * Value: £1,304.95
-     * Total: £1,439.95
+     * Value:    £1,304.95
+     * Delivery: £0
+     * Total:    £1,439.95
      *
      * @return Basket
      */
@@ -196,8 +205,9 @@ class BasketFixture implements Fixture
     /**
      * Products 0 + 5 + 8 + 9
      *
-     * Value: £214.48
-     * Total: £148.33
+     * Value:    £214.48
+     * Delivery: £14.95
+     * Total:    £148.33
      *
      * @return Basket
      */
