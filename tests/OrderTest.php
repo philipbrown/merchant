@@ -4,14 +4,24 @@ use PhilipBrown\Merchant\Order;
 
 class OrderTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Order */
+    private $order;
+
+    public function setUp()
+    {
+        $this->order = new Order([], []);
+    }
+
     /** @test */
     public function should_have_gettable_totals_and_products_arrays()
     {
-        $totals   = ['products' => 1];
-        $products = [['sku' => '1']];
-        $order    = new Order($totals, $products);
+        $this->assertTrue(is_array($this->order->totals));
+        $this->assertTrue(is_array($this->order->products));
+    }
 
-        $this->assertEquals($totals,   $order->totals);
-        $this->assertEquals($products, $order->products);
+    /** @test */
+    public function should_return_order_as_an_array()
+    {
+        $this->assertTrue(is_array($this->order->toArray()));
     }
 }

@@ -26,6 +26,16 @@ class Order
     }
 
     /**
+     * Return the Order as an array
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return array_merge($this->totals, ['products' => $this->products]);
+    }
+
+    /**
      * Get the private attributes
      *
      * @param string $key
