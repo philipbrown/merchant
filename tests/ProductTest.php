@@ -14,9 +14,11 @@ class ProductTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $rate          = new UnitedKingdomValueAddedTax;
-        $price         = new Money(1000, new Currency('GBP'));
-        $this->product = new Product('1','Four Steps to the Epiphany', $price, $rate);
+        $sku   = '1';
+        $name  = 'Four Steps to the Epiphany';
+        $rate  = new UnitedKingdomValueAddedTax;
+        $price = new Money(1000, new Currency('GBP'));
+        $this->product = new Product($sku, $name, $price, $rate);
     }
 
     /** @test */

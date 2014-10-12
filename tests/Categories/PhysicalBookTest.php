@@ -13,9 +13,11 @@ class CategoriesTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $rate          = new UnitedKingdomValueAddedTax;
-        $price         = new Money(1000, new Currency('GBP'));
-        $this->product = new Product('1', 'Fooled By Randomness', $price, $rate);
+        $sku    = '1';
+        $name   = 'Fooled By Randomness';
+        $rate   = new UnitedKingdomValueAddedTax;
+        $price  = new Money(1000, new Currency('GBP'));
+        $this->product = new Product($sku, $name, $price, $rate);
     }
 
     /** @test */

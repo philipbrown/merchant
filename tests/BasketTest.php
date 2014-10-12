@@ -12,8 +12,10 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $sku  = '1';
+        $name = 'The Lion King';
         $this->basket = new Basket(new UnitedKingdom);
-        $this->basket->add('1', 'The Lion King', new Money(1000, new Currency('GBP')));
+        $this->basket->add($sku, $name, new Money(1000, new Currency('GBP')));
     }
 
     /** @test */

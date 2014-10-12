@@ -13,9 +13,11 @@ class PercentageDiscountTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $rate          = new UnitedKingdomValueAddedTax;
-        $price         = new Money(60000, new Currency('GBP'));
-        $this->product = new Product('1', 'iPhone 6', $price, $rate);
+        $sku   = '1';
+        $name  = 'iPhone 6';
+        $rate  = new UnitedKingdomValueAddedTax;
+        $price = new Money(60000, new Currency('GBP'));
+        $this->product = new Product($sku, $name, $price, $rate);
     }
 
     /** @test */
