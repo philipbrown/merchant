@@ -36,6 +36,6 @@ class UnitedKingdomValueAddedTax implements TaxRate
      */
     public function percentage()
     {
-        return $this->rate * 100;
+        return intval($this->rate * 100);
     }
 }
