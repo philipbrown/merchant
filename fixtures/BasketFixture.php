@@ -34,6 +34,7 @@ class BasketFixture implements Fixture
      * Delivery: £0
      * Discount: £0
      * Tax:      £2.00
+     * Subtotal: £10.00
      * Total:    £12.00
      *
      * @return Basket
@@ -54,6 +55,7 @@ class BasketFixture implements Fixture
      * Delivery: £0
      * Discount: £0
      * Tax:      £59.99
+     * Subtotal: £314.97
      * Total:    £374.96
      *
      * @return Basket
@@ -75,6 +77,7 @@ class BasketFixture implements Fixture
      * Delivery: £0
      * Discount: £100.00
      * Tax:      £180.00
+     * Subtotal: £1,079.99
      * Total:    £1,079.99
      *
      * @return Basket
@@ -96,6 +99,7 @@ class BasketFixture implements Fixture
      * Delivery: £60.00
      * Discount: £115.00
      * Tax:      £366.90
+     * Subtotal: £1,894.48
      * Total:    £2,261.38
      *
      * @return Basket
@@ -118,6 +122,7 @@ class BasketFixture implements Fixture
      * Delivery: £39.94
      * Discount: £13.20
      * Tax:      £23.75
+     * Subtotal: £238.68
      * Total:    £262.43
      *
      * @return Basket
@@ -139,6 +144,7 @@ class BasketFixture implements Fixture
      * Delivery: £2.97
      * Discount: £100.00
      * Tax:      £180.00
+     * Subtotal: £917.96
      * Total:    £1,097.96
      *
      * @return Basket
@@ -161,6 +167,7 @@ class BasketFixture implements Fixture
      * Delivery: £27.96
      * Discount: £13.20
      * Tax:      £25.75
+     * Subtotal: £156.72
      * Total:    £182.47
      *
      * @return Basket
@@ -183,6 +190,7 @@ class BasketFixture implements Fixture
      * Delivery: £87.96
      * Discount: £28.20
      * Tax:      £210.65
+     * Subtotal: £1,141.21
      * Total:    £1,351.86
      *
      * @return Basket
@@ -204,7 +212,8 @@ class BasketFixture implements Fixture
      * Value:    £1,304.95
      * Delivery: £0
      * Discount: £100.00
-     * Tax:      £
+     * Tax:      £239.99
+     * Subtotal: £1,199.96
      * Total:    £1,439.95
      *
      * @return Basket
@@ -226,7 +235,8 @@ class BasketFixture implements Fixture
      * Value:    £214.48
      * Delivery: £14.95
      * Discount: £15.00
-     * Tax:      £
+     * Tax:      £8.90
+     * Subtotal: £
      * Total:    £148.33
      *
      * @return Basket
