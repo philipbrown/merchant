@@ -21,6 +21,15 @@ class ValueDiscountTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function should_get_the_discount_description()
+    {
+        $amount   = new Money(200, new Currency('GBP'));
+        $discount = new ValueDiscount($amount);
+
+        $this->assertEquals('200 discount', $discount->description());
+    }
+
+    /** @test */
     public function should_get_value_discount()
     {
         $amount   = new Money(200, new Currency('GBP'));

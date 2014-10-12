@@ -21,6 +21,14 @@ class PercentageDiscountTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function should_get_the_discount_description()
+    {
+        $discount = new PercentageDiscount(10);
+
+        $this->assertEquals('10% discount', $discount->description());
+    }
+
+    /** @test */
     public function should_get_value_discount()
     {
         $discount = new PercentageDiscount(20);

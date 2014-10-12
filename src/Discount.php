@@ -16,4 +16,11 @@ interface Discount
      * @return mixed
      */
     public function rate();
+
+    /**
+     * Return the description of the Discount
+     *
+     * @return string
+     */
+    public function description();
 }
