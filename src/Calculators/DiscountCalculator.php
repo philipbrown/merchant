@@ -1,11 +1,12 @@
 <?php namespace PhilipBrown\Merchant\Calculators;
 
 use Money\Money;
+use Money\Currency;
 use PhilipBrown\Merchant\Basket;
-use PhilipBrown\Merchant\Reconciler;
 use PhilipBrown\Merchant\Calculator;
+use PhilipBrown\Merchant\Reconciler;
 
-class Value implements Calculator
+class DiscountCalculator implements Calculator
 {
     /**
      * @var Reconciler
@@ -13,7 +14,7 @@ class Value implements Calculator
     private $reconciler;
 
     /**
-     * Create a new Value Calculator
+     * Create a new Discount Calculator
      *
      * @param Reconciler $reconciler
      * @return void
@@ -34,7 +35,7 @@ class Value implements Calculator
         $total = new Money(0, $basket->currency());
 
         foreach ($basket->products() as $product) {
-            $total = $total->add($this->reconciler->value($product));
+            $total = $total->add($this->reconciler->discount($product));
         }
 
         return $total;
@@ -47,6 +48,6 @@ class Value implements Calculator
      */
     public function name()
     {
-        return 'value';
+        return 'discount';
     }
 }

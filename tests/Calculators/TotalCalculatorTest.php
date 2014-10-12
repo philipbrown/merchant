@@ -2,11 +2,11 @@
 
 use Money\Money;
 use Money\Currency;
-use PhilipBrown\Merchant\Calculators\Total;
 use PhilipBrown\Merchant\Fixtures\BasketFixture;
+use PhilipBrown\Merchant\Calculators\TotalCalculator;
 use PhilipBrown\Merchant\Reconcilers\UnitedKingdomReconciler;
 
-class TotalTest extends \PHPUnit_Framework_TestCase
+class TotalCalculatorTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Calculator */
     private $calculator;
@@ -18,7 +18,7 @@ class TotalTest extends \PHPUnit_Framework_TestCase
     {
         $reconciler       = new UnitedKingdomReconciler;
         $this->fixtures   = new BasketFixture;
-        $this->calculator = new Total($reconciler);
+        $this->calculator = new TotalCalculator($reconciler);
     }
 
     /** @test */

@@ -6,7 +6,7 @@ use PhilipBrown\Merchant\Basket;
 use PhilipBrown\Merchant\Calculator;
 use PhilipBrown\Merchant\Reconciler;
 
-class Tax implements Calculator
+class TaxCalculator implements Calculator
 {
     /**
      * @var Reconciler

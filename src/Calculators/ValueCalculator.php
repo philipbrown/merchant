@@ -1,12 +1,11 @@
 <?php namespace PhilipBrown\Merchant\Calculators;
 
 use Money\Money;
-use Money\Currency;
 use PhilipBrown\Merchant\Basket;
-use PhilipBrown\Merchant\Calculator;
 use PhilipBrown\Merchant\Reconciler;
+use PhilipBrown\Merchant\Calculator;
 
-class Delivery implements Calculator
+class ValueCalculator implements Calculator
 {
     /**
      * @var Reconciler
@@ -14,7 +13,7 @@ class Delivery implements Calculator
     private $reconciler;
 
     /**
-     * Create a new Delivery Calculator
+     * Create a new Value Calculator
      *
      * @param Reconciler $reconciler
      * @return void
@@ -35,7 +34,7 @@ class Delivery implements Calculator
         $total = new Money(0, $basket->currency());
 
         foreach ($basket->products() as $product) {
-            $total = $total->add($this->reconciler->delivery($product));
+            $total = $total->add($this->reconciler->value($product));
         }
 
         return $total;
@@ -48,6 +47,6 @@ class Delivery implements Calculator
      */
     public function name()
     {
-        return 'delivery';
+        return 'value';
     }
 }

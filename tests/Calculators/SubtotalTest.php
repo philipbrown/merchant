@@ -2,11 +2,11 @@
 
 use Money\Money;
 use Money\Currency;
-use PhilipBrown\Merchant\Calculators\Subtotal;
 use PhilipBrown\Merchant\Fixtures\BasketFixture;
+use PhilipBrown\Merchant\Calculators\SubtotalCalculator;
 use PhilipBrown\Merchant\Reconcilers\UnitedKingdomReconciler;
 
-class SubtotalTest extends \PHPUnit_Framework_TestCase
+class SubtotalCalculatorTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Calculator */
     private $calculator;
@@ -18,7 +18,7 @@ class SubtotalTest extends \PHPUnit_Framework_TestCase
     {
         $reconciler       = new UnitedKingdomReconciler;
         $this->fixtures   = new BasketFixture;
-        $this->calculator = new Subtotal($reconciler);
+        $this->calculator = new SubtotalCalculator($reconciler);
     }
 
     /** @test */

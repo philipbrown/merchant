@@ -2,11 +2,11 @@
 
 use Money\Money;
 use Money\Currency;
-use PhilipBrown\Merchant\Calculators\Delivery;
 use PhilipBrown\Merchant\Fixtures\BasketFixture;
+use PhilipBrown\Merchant\Calculators\DeliveryCalculator;
 use PhilipBrown\Merchant\Reconcilers\UnitedKingdomReconciler;
 
-class DeliveryTest extends \PHPUnit_Framework_TestCase
+class DeliveryCalculatorTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Calculator */
     private $calculator;
@@ -18,7 +18,7 @@ class DeliveryTest extends \PHPUnit_Framework_TestCase
     {
         $reconciler       = new UnitedKingdomReconciler;
         $this->fixtures   = new BasketFixture;
-        $this->calculator = new Delivery($reconciler);
+        $this->calculator = new DeliveryCalculator($reconciler);
     }
 
     /** @test */

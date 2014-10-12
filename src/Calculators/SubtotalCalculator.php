@@ -6,7 +6,7 @@ use PhilipBrown\Merchant\Basket;
 use PhilipBrown\Merchant\Calculator;
 use PhilipBrown\Merchant\Reconciler;
 
-class Discount implements Calculator
+class SubtotalCalculator implements Calculator
 {
     /**
      * @var Reconciler
@@ -14,7 +14,7 @@ class Discount implements Calculator
     private $reconciler;
 
     /**
-     * Create a new Discount Calculator
+     * Create a new Subtotal Calculator
      *
      * @param Reconciler $reconciler
      * @return void
@@ -35,7 +35,7 @@ class Discount implements Calculator
         $total = new Money(0, $basket->currency());
 
         foreach ($basket->products() as $product) {
-            $total = $total->add($this->reconciler->discount($product));
+            $total = $total->add($this->reconciler->subtotal($product));
         }
 
         return $total;
@@ -48,6 +48,6 @@ class Discount implements Calculator
      */
     public function name()
     {
-        return 'discount';
+        return 'subtotal';
     }
 }

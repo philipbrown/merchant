@@ -6,7 +6,7 @@ use PhilipBrown\Merchant\Basket;
 use PhilipBrown\Merchant\Calculator;
 use PhilipBrown\Merchant\Reconciler;
 
-class Total implements Calculator
+class TotalCalculator implements Calculator
 {
     /**
      * @var Reconciler
