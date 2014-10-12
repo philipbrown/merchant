@@ -28,7 +28,7 @@ class DeliveryTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_zero()
+    public function should_calculate_the_delivery_for_basket_fixture_zero()
     {
         $basket = $this->fixtures->zero();
 
@@ -38,7 +38,7 @@ class DeliveryTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_one()
+    public function should_calculate_the_delivery_for_basket_fixture_one()
     {
         $basket = $this->fixtures->one();
 
@@ -48,7 +48,7 @@ class DeliveryTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_two()
+    public function should_calculate_the_delivery_for_basket_fixture_two()
     {
         $basket = $this->fixtures->two();
 
@@ -58,7 +58,7 @@ class DeliveryTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_three()
+    public function should_calculate_the_delivery_for_basket_fixture_three()
     {
         $basket = $this->fixtures->three();
 
@@ -68,7 +68,7 @@ class DeliveryTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_four()
+    public function should_calculate_the_delivery_for_basket_fixture_four()
     {
         $basket = $this->fixtures->four();
 
@@ -78,7 +78,7 @@ class DeliveryTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_five()
+    public function should_calculate_the_delivery_for_basket_fixture_five()
     {
         $basket = $this->fixtures->five();
 
@@ -88,7 +88,7 @@ class DeliveryTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_six()
+    public function should_calculate_the_delivery_for_basket_fixture_six()
     {
         $basket = $this->fixtures->six();
 
@@ -98,7 +98,7 @@ class DeliveryTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_seven()
+    public function should_calculate_the_delivery_for_basket_fixture_seven()
     {
         $basket = $this->fixtures->seven();
 
@@ -108,7 +108,7 @@ class DeliveryTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_eight()
+    public function should_calculate_the_delivery_for_basket_fixture_eight()
     {
         $basket = $this->fixtures->eight();
 
@@ -118,7 +118,7 @@ class DeliveryTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_nine()
+    public function should_calculate_the_delivery_for_basket_fixture_nine()
     {
         $basket = $this->fixtures->nine();
 
