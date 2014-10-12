@@ -125,7 +125,7 @@ class ProductFixture implements Fixture
      * Rate:     0%
      * Quantity: 1
      * Freebie:  true
-     * Taxable:  false
+     * Taxable:  true
      * Discount: £0
      * Delivery: £0
      *
@@ -267,7 +267,7 @@ class ProductFixture implements Fixture
      * Rate:     0%
      * Quantity: 3
      * Freebie:  true
-     * Taxable:  false
+     * Taxable:  true
      * Discount: £0
      * Delivery: £0.99
      *

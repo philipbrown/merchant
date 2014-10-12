@@ -56,6 +56,7 @@ class BasketFixture implements Fixture
 
     /**
      * Products: 1
+     * Taxable:  1
      * Value:    £10.00
      * Delivery: £0
      * Discount: £0
@@ -76,6 +77,7 @@ class BasketFixture implements Fixture
 
     /**
      * Products: 4
+     * Taxable:  3
      * Value:    £314.97
      * Delivery: £0
      * Discount: £0
@@ -97,6 +99,7 @@ class BasketFixture implements Fixture
 
     /**
      * Products: 2
+     * Taxable:  1
      * Value:    £1,004.98
      * Delivery: £0
      * Discount: £100.00
@@ -118,6 +121,7 @@ class BasketFixture implements Fixture
 
     /**
      * Products: 3
+     * Taxable:  3
      * Value:    £1,949.48
      * Delivery: £60.00
      * Discount: £115.00
@@ -140,6 +144,7 @@ class BasketFixture implements Fixture
 
     /**
      * Products: 6
+     * Taxable:  4
      * Value:    £211.94
      * Delivery: £39.94
      * Discount: £13.20
@@ -161,6 +166,7 @@ class BasketFixture implements Fixture
 
     /**
      * Products: 5
+     * Taxable:  4
      * Value:    £1,089.99
      * Delivery: £2.97
      * Discount: £100.00
@@ -183,6 +189,7 @@ class BasketFixture implements Fixture
 
     /**
      * Products: 6
+     * Taxable:  6
      * Value:    £146.95
      * Delivery: £27.96
      * Discount: £13.20
@@ -205,6 +212,7 @@ class BasketFixture implements Fixture
 
     /**
      * Product:  6
+     * Taxable:  6
      * Value:    £1,081.45
      * Delivery: £87.96
      * Discount: £28.20
@@ -227,6 +235,7 @@ class BasketFixture implements Fixture
 
     /**
      * Products: 5
+     * Taxable:  5
      * Value:    £1,304.95
      * Delivery: £0
      * Discount: £100.00
@@ -249,6 +258,7 @@ class BasketFixture implements Fixture
 
     /**
      * Products: 7
+     * Taxable:  5
      * Value:    £214.48
      * Delivery: £14.95
      * Discount: £15.00
