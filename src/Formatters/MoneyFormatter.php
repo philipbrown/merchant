@@ -19,6 +19,7 @@ class MoneyFormatter implements Formatter
     /**
      * Create a new Money Formatter
      *
+     * @param string $locale
      * @param Money $value
      * @return void
      */
