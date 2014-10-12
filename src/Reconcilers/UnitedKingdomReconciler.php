@@ -9,6 +9,7 @@ class UnitedKingdomReconciler implements Reconciler
     /**
      * Return the value of the Product
      *
+     * @param Product $product
      * @return Money
      */
     public function value(Product $product)
@@ -17,27 +18,55 @@ class UnitedKingdomReconciler implements Reconciler
     }
 
     /**
+     * Return the discount of the Product
+     *
+     * @param Product $product
+     * @return Money
+     */
+    public function discount(Product $product)
+    {
+        $discount = $this->money($product);
+
+        if ($product->discount) {
+            $discount = $product->discount->calculate($product);
+            $discount = $discount->multiply($product->quantity);
+        }
+
+        return $discount;
+    }
+
+    /**
+     * Return the delivery charge of the Product
+     *
+     * @param Product $product
+     * @return Money
+     */
+    public function delivery(Product $product)
+    {
+        $delivery = $product->delivery->multiply($product->quantity);
+
+        return $delivery;
+    }
+
+    /**
      * Return the tax of the Product
      *
+     * @param Product $product
      * @return Money
      */
     public function tax(Product $product)
     {
-        $tax = new Money(0, $product->price->getCurrency());
+        $tax = $this->money($product);
 
-        if (! $product->taxable ||  $product->freebie) {
+        if (! $product->taxable || $product->freebie) {
             return $tax;
         }
 
-        $value = $this->value($product);
+        $value    = $this->value($product);
+        $discount = $this->discount($product);
 
-        if ($product->discount) {
-            $value = $value->subtract($product->discount->calculate());
-        }
-
-        $value = $value->add($product->delivery);
-
-        $tax = $value->multiply($product->rate->float());
+        $value = $value->subtract($discount);
+        $tax   = $value->multiply($product->rate->float());
 
         return $tax;
     }
@@ -45,23 +74,21 @@ class UnitedKingdomReconciler implements Reconciler
     /**
      * Return the subtotal of the Product
      *
+     * @param Product $product
      * @return Money
      */
     public function subtotal(Product $product)
     {
-        $subtotal = new Money(0, $product->price->getCurrency());
+        $subtotal = $this->money($product);
 
-        if ($product->freebie) {
-            return $subtotal;
+        if (! $product->freebie) {
+            $value    = $this->value($product);
+            $discount = $this->discount($product);
+            $subtotal = $subtotal->add($value)->subtract($discount);
         }
 
-        $subtotal = $this->value($product);
-
-        if ($product->discount) {
-            $subtotal = $subtotal->subtract($product->discount->calculate());
-        }
-
-        $subtotal = $subtotal->add($product->delivery);
+        $delivery = $this->delivery($product);
+        $subtotal = $subtotal->add($delivery);
 
         return $subtotal;
     }
@@ -69,10 +96,26 @@ class UnitedKingdomReconciler implements Reconciler
     /**
      * Return the total of the Product
      *
+     * @param Product $product
      * @return Money
      */
     public function total(Product $product)
     {
-        return $this->subtotal($product)->add($this->tax($product));
+        $tax      = $this->tax($product);
+        $subtotal = $this->subtotal($product);
+        $total    = $subtotal->add($tax);
+
+        return $total;
+    }
+
+    /**
+     * Create an initial zero money value
+     *
+     * @param Product $product
+     * @return Money
+     */
+    private function money(Product $product)
+    {
+        return new Money(0, $product->price->getCurrency());
     }
 }
