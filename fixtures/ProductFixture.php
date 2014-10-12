@@ -53,8 +53,6 @@ class ProductFixture implements Fixture
     }
 
     /**
-     * Regular Product
-     *
      * Price:    £10.00
      * Rate:     20%
      * Quantity: 1
@@ -77,8 +75,6 @@ class ProductFixture implements Fixture
     }
 
     /**
-     * Physical Book
-     *
      * Price:    £15.00
      * Rate:     0%
      * Quantity: 1
@@ -102,8 +98,6 @@ class ProductFixture implements Fixture
     }
 
     /**
-     * Multiple Quantity
-     *
      * Price:    £99.99
      * Rate:     20%
      * Quantity: 3
@@ -127,8 +121,6 @@ class ProductFixture implements Fixture
     }
 
     /**
-     * Freebie
-     *
      * Price:    £4.99
      * Rate:     0%
      * Quantity: 1
@@ -152,8 +144,6 @@ class ProductFixture implements Fixture
     }
 
     /**
-     * Percentage Discount
-     *
      * Price:    £999.99
      * Rate:     20%
      * Quantity: 1
@@ -177,8 +167,6 @@ class ProductFixture implements Fixture
     }
 
     /**
-     * Value Discount
-     *
      * Price:    £49.50
      * Rate:     20%
      * Quantity: 1
@@ -202,8 +190,6 @@ class ProductFixture implements Fixture
     }
 
     /**
-     * Delivery
-     *
      * Price:    £899.99
      * Rate:     20%
      * Quantity: 1
@@ -227,8 +213,6 @@ class ProductFixture implements Fixture
     }
 
     /**
-     * Quantity * 4 + 10% Discount + Delivery
-     *
      * Price:    £32.99
      * Rate:     20%
      * Quantity: 4
@@ -254,8 +238,6 @@ class ProductFixture implements Fixture
     }
 
     /**
-     * Quantity * 2 + 0% Rate + Delivery
-     *
      * Price:    £39.99
      * Rate:     0%
      * Quantity: 2
@@ -281,8 +263,6 @@ class ProductFixture implements Fixture
     }
 
     /**
-     * Quantity * 3 + Freebie + Delivery
-     *
      * Price:    £25.00
      * Rate:     0%
      * Quantity: 3

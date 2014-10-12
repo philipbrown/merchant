@@ -6,6 +6,11 @@ use PhilipBrown\Merchant\Jurisdictions\UnitedKingdom;
 class BasketFixture implements Fixture
 {
     /**
+     * @var array
+     */
+    private $methods;
+
+    /**
      * @var ProductFixture
      */
     private $products;
@@ -18,6 +23,19 @@ class BasketFixture implements Fixture
     public function __construct()
     {
         $this->products = new ProductFixture;
+
+        $this->methods = [
+            'zero',
+            'one',
+            'two',
+            'three',
+            'four',
+            'five',
+            'six',
+            'seven',
+            'eight',
+            'nine'
+        ];
     }
 
     /**
@@ -25,11 +43,19 @@ class BasketFixture implements Fixture
      *
      * @return array
      */
-    public function load(){}
+    public function load()
+    {
+        $baskets = [];
+
+        foreach ($this->methods as $method) {
+            $baskets[] = $this->$method();
+        }
+
+        return $baskets;
+    }
 
     /**
-     * Product 0
-     *
+     * Products: 1
      * Value:    £10.00
      * Delivery: £0
      * Discount: £0
@@ -49,8 +75,7 @@ class BasketFixture implements Fixture
     }
 
     /**
-     * Products 1 + 2
-     *
+     * Products: 4
      * Value:    £314.97
      * Delivery: £0
      * Discount: £0
@@ -71,8 +96,7 @@ class BasketFixture implements Fixture
     }
 
     /**
-     * Products 3 + 4
-     *
+     * Products: 2
      * Value:    £1,004.98
      * Delivery: £0
      * Discount: £100.00
@@ -93,8 +117,7 @@ class BasketFixture implements Fixture
     }
 
     /**
-     * Products 4 + 5 + 6
-     *
+     * Products: 3
      * Value:    £1,949.48
      * Delivery: £60.00
      * Discount: £115.00
@@ -116,8 +139,7 @@ class BasketFixture implements Fixture
     }
 
     /**
-     * Products 7 + 8
-     *
+     * Products: 6
      * Value:    £211.94
      * Delivery: £39.94
      * Discount: £13.20
@@ -138,8 +160,7 @@ class BasketFixture implements Fixture
     }
 
     /**
-     * Products 1 + 4 + 9
-     *
+     * Products: 5
      * Value:    £1,089.99
      * Delivery: £2.97
      * Discount: £100.00
@@ -161,8 +182,7 @@ class BasketFixture implements Fixture
     }
 
     /**
-     * Products 0 + 3 + 7
-     *
+     * Products: 6
      * Value:    £146.95
      * Delivery: £27.96
      * Discount: £13.20
@@ -184,8 +204,7 @@ class BasketFixture implements Fixture
     }
 
     /**
-     * Products 5 + 6 + 7
-     *
+     * Product:  6
      * Value:    £1,081.45
      * Delivery: £87.96
      * Discount: £28.20
@@ -207,8 +226,7 @@ class BasketFixture implements Fixture
     }
 
     /**
-     * Products 2 + 3 + 4
-     *
+     * Products: 5
      * Value:    £1,304.95
      * Delivery: £0
      * Discount: £100.00
@@ -230,8 +248,7 @@ class BasketFixture implements Fixture
     }
 
     /**
-     * Products 0 + 5 + 8 + 9
-     *
+     * Products: 7
      * Value:    £214.48
      * Delivery: £14.95
      * Discount: £15.00
