@@ -6,7 +6,7 @@ use PhilipBrown\Merchant\Basket;
 use PhilipBrown\Merchant\Calculator;
 use PhilipBrown\Merchant\Reconciler;
 
-class TotalDelivery implements Calculator
+class Tax implements Calculator
 {
     /**
      * @var Reconciler
@@ -14,7 +14,7 @@ class TotalDelivery implements Calculator
     private $reconciler;
 
     /**
-     * Create a new Total Calculator
+     * Create a new Tax Calculator
      *
      * @param Reconciler $reconciler
      * @return void
@@ -35,7 +35,7 @@ class TotalDelivery implements Calculator
         $total = new Money(0, $basket->currency());
 
         foreach ($basket->products() as $product) {
-            $total = $total->add($this->reconciler->delivery($product));
+            $total = $total->add($this->reconciler->tax($product));
         }
 
         return $total;
@@ -48,6 +48,6 @@ class TotalDelivery implements Calculator
      */
     public function name()
     {
-        return 'total_delivery';
+        return 'tax';
     }
 }

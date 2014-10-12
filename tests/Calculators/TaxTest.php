@@ -2,11 +2,11 @@
 
 use Money\Money;
 use Money\Currency;
+use PhilipBrown\Merchant\Calculators\Tax;
 use PhilipBrown\Merchant\Fixtures\BasketFixture;
-use PhilipBrown\Merchant\Calculators\TotalDelivery;
 use PhilipBrown\Merchant\Reconcilers\UnitedKingdomReconciler;
 
-class TotalDeliveryTest extends \PHPUnit_Framework_TestCase
+class TaxTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Calculator */
     private $calculator;
@@ -18,112 +18,112 @@ class TotalDeliveryTest extends \PHPUnit_Framework_TestCase
     {
         $reconciler       = new UnitedKingdomReconciler;
         $this->fixtures   = new BasketFixture;
-        $this->calculator = new TotalDelivery($reconciler);
+        $this->calculator = new Tax($reconciler);
     }
 
     /** @test */
     public function should_return_the_name_of_the_calculator()
     {
-        $this->assertEquals('total_delivery', $this->calculator->name());
+        $this->assertEquals('tax', $this->calculator->name());
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_zero()
+    public function should_calculate_the_total_tax_for_basket_fixture_zero()
     {
         $basket = $this->fixtures->zero();
 
         $total = $this->calculator->calculate($basket);
 
-        $this->assertEquals(new Money(0, new Currency('GBP')), $total);
+        $this->assertEquals(new Money(200, new Currency('GBP')), $total);
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_one()
+    public function should_calculate_the_total_tax_for_basket_fixture_one()
     {
         $basket = $this->fixtures->one();
 
         $total = $this->calculator->calculate($basket);
 
-        $this->assertEquals(new Money(0, new Currency('GBP')), $total);
+        $this->assertEquals(new Money(5999, new Currency('GBP')), $total);
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_two()
+    public function should_calculate_the_total_tax_for_basket_fixture_two()
     {
         $basket = $this->fixtures->two();
 
         $total = $this->calculator->calculate($basket);
 
-        $this->assertEquals(new Money(0, new Currency('GBP')), $total);
+        $this->assertEquals(new Money(18000, new Currency('GBP')), $total);
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_three()
+    public function should_calculate_the_total_tax_for_basket_fixture_three()
     {
         $basket = $this->fixtures->three();
 
         $total = $this->calculator->calculate($basket);
 
-        $this->assertEquals(new Money(6000, new Currency('GBP')), $total);
+        $this->assertEquals(new Money(36690, new Currency('GBP')), $total);
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_four()
+    public function should_calculate_the_total_tax_for_basket_fixture_four()
     {
         $basket = $this->fixtures->four();
 
         $total = $this->calculator->calculate($basket);
 
-        $this->assertEquals(new Money(3994, new Currency('GBP')), $total);
+        $this->assertEquals(new Money(2375, new Currency('GBP')), $total);
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_five()
+    public function should_calculate_the_total_tax_for_basket_fixture_five()
     {
         $basket = $this->fixtures->five();
 
         $total = $this->calculator->calculate($basket);
 
-        $this->assertEquals(new Money(297, new Currency('GBP')), $total);
+        $this->assertEquals(new Money(18000, new Currency('GBP')), $total);
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_six()
+    public function should_calculate_the_total_tax_for_basket_fixture_six()
     {
         $basket = $this->fixtures->six();
 
         $total = $this->calculator->calculate($basket);
 
-        $this->assertEquals(new Money(2796, new Currency('GBP')), $total);
+        $this->assertEquals(new Money(2575, new Currency('GBP')), $total);
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_seven()
+    public function should_calculate_the_total_tax_for_basket_fixture_seven()
     {
         $basket = $this->fixtures->seven();
 
         $total = $this->calculator->calculate($basket);
 
-        $this->assertEquals(new Money(8796, new Currency('GBP')), $total);
+        $this->assertEquals(new Money(21065, new Currency('GBP')), $total);
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_eight()
+    public function should_calculate_the_total_tax_for_basket_fixture_eight()
     {
         $basket = $this->fixtures->eight();
 
         $total = $this->calculator->calculate($basket);
 
-        $this->assertEquals(new Money(0, new Currency('GBP')), $total);
+        $this->assertEquals(new Money(23999, new Currency('GBP')), $total);
     }
 
     /** @test */
-    public function should_calculate_the_total_delivery_for_basket_fixture_nine()
+    public function should_calculate_the_total_tax_for_basket_fixture_nine()
     {
         $basket = $this->fixtures->nine();
 
         $total = $this->calculator->calculate($basket);
 
-        $this->assertEquals(new Money(1495, new Currency('GBP')), $total);
+        $this->assertEquals(new Money(890, new Currency('GBP')), $total);
     }
 }
