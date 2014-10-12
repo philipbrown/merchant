@@ -8,7 +8,7 @@ use PhilipBrown\Merchant\Discounts\ValueDiscount;
 use PhilipBrown\Merchant\Discounts\PercentageDiscount;
 use PhilipBrown\Merchant\TaxRates\UnitedKingdomValueAddedTax;
 
-class ProductFixture
+class ProductFixture implements Fixture
 {
     /**
      * @var array
