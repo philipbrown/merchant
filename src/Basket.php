@@ -2,6 +2,9 @@
 
 use Closure;
 use Money\Money;
+use PhilipBrown\Merchant\Evenys\ProductWasAddedToBasket;
+use PhilipBrown\Merchant\Evenys\ProductWasUpdatedInBasket;
+use PhilipBrown\Merchant\Evenys\ProductWasRemovedFromBasket;
 
 class Basket
 {
@@ -21,16 +24,22 @@ class Basket
     private $products;
 
     /**
+     * @var Dispatcher
+     */
+    private $dispatcher;
+
+    /**
      * Create a new Basket
      *
      * @param Jurisdiction $jurisdiction
      * @return void
      */
-    public function __construct(Jurisdiction $jurisdiction)
+    public function __construct(Jurisdiction $jurisdiction, Dispatcher $dispatcher = null)
     {
         $this->rate       = $jurisdiction->rate();
         $this->currency   = $jurisdiction->currency();
         $this->products   = new Collection;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -102,6 +111,10 @@ class Basket
         }
 
         $this->products->add($sku, $product);
+
+        if ($this->dispatcher) {
+            $this->dispatcher->fire(new ProductWasAddedToBasket($product, $this->products));
+        }
     }
 
     /**
@@ -116,6 +129,10 @@ class Basket
         $product = $this->pick($sku);
 
         $product->action($action);
+
+        if ($this->dispatcher) {
+            $this->dispatcher->fire(new ProductWasUpdatedInBasket($product, $this->products));
+        }
     }
 
     /**
@@ -126,6 +143,12 @@ class Basket
      */
     public function remove($sku)
     {
+        $product = $this->pick($sku);
+
         $this->products->remove($sku);
+
+        if ($this->dispatcher) {
+            $this->dispatcher->fire(new ProductWasRemovedToBasket($product, $this->products));
+        }
     }
 }
