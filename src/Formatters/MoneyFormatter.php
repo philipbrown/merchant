@@ -17,6 +17,11 @@ class MoneyFormatter implements Formatter
     private $value;
 
     /**
+     * @var array
+     */
+    private static $currencies;
+
+    /**
      * Create a new Money Formatter
      *
      * @param string $locale
@@ -27,6 +32,10 @@ class MoneyFormatter implements Formatter
     {
         $this->locale = $locale;
         $this->value  = $value;
+
+        if (! isset(static::$currencies)) {
+           static::$currencies = json_decode(file_get_contents(__DIR__.'/currencies.json'));
+        }
     }
 
     /**
@@ -38,10 +47,32 @@ class MoneyFormatter implements Formatter
     {
         $formatter = new NumberFormatter($this->locale,  NumberFormatter::CURRENCY);
 
-        $amount   = $this->value->getAmount();
-        $amount   = number_format(($amount / 100), 2, '.', '');
-        $currency = $this->value->getCurrency()->getName();
+        $code     = $this->code($this->value);
+        $divisor  = $this->divisor($code);
+        $amount   = number_format(($this->value->getAmount() / $divisor), 2, '.', '');
 
-        return $formatter->formatCurrency($amount,  $currency);
+        return $formatter->formatCurrency($amount,  $code);
+    }
+
+    /**
+     * Get the currency ISO Code
+     *
+     * @param Money $value
+     * @return string
+     */
+    private function code(Money $value)
+    {
+        return $value->getCurrency()->getName();
+    }
+
+    /**
+     * Get the subunits to units divisor
+     *
+     * @param string $code
+     * @return int
+     */
+    private function divisor($code)
+    {
+        return static::$currencies->$code->subunit_to_unit;
     }
 }
