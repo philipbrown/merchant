@@ -71,15 +71,15 @@ class Processor
                 'sku'      => $product->sku,
                 'name'     => $product->name,
                 'price'    => $product->price,
-                'rate'     => $product->rate->percentage(),
+                'rate'     => $product->rate,
                 'quantity' => $product->quantity,
                 'freebie'  => $product->freebie,
                 'taxable'  => $product->taxable,
                 'delivery' => $product->delivery,
-                'coupons'  => $product->coupons->all(),
-                'tags'     => $product->tags->all(),
-                'discount' => $product->discount ? $product->discount->description() : null,
-                'category' => $product->category ? $product->category->name() : null
+                'coupons'  => $product->coupons,
+                'tags'     => $product->tags,
+                'discount' => $product->discount,
+                'category' => $product->category
             ];
         }
 

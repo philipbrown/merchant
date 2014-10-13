@@ -42,15 +42,4 @@ class ValueDiscount implements Discount
     {
         return $this->rate;
     }
-
-    /**
-     * Return the description of the Discount
-     *
-     * @return string
-     */
-     public function description()
-     {
-        // Need to add formatting to this
-        return $this->rate->getAmount().' discount';
-     }
 }

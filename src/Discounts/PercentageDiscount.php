@@ -41,14 +41,4 @@ class PercentageDiscount implements Discount
     {
         return $this->rate;
     }
-
-    /**
-     * Return the description of the Discount
-     *
-     * @return string
-     */
-     public function description()
-     {
-        return $this->rate.'% discount';
-     }
 }

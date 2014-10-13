@@ -15,14 +15,4 @@ class PhysicalBook implements Category
     {
         $product->taxable(false);
     }
-
-    /**
-     * Return the name of the Category
-     *
-     * @return string
-     */
-    public function name()
-    {
-        return 'Physical Book';
-    }
 }
