@@ -15,4 +15,11 @@ interface Jurisdiction
      * @return Money\Currency
      */
     public function currency();
+
+    /**
+     * Return the locale
+     *
+     * @return string
+     */
+    public function locale();
 }

@@ -1,5 +1,6 @@
 <?php namespace PhilipBrown\Merchant\Tests\Jurisdictions;
 
+use Money\Currency;
 use PhilipBrown\Merchant\Jurisdictions\UnitedKingdom;
 
 class UnitedKingdomTest extends \PHPUnit_Framework_TestCase
@@ -17,7 +18,17 @@ class UnitedKingdomTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf(
             'PhilipBrown\Merchant\TaxRates\UnitedKingdomValueAddedTax', $this->jurisdiction->rate());
+    }
 
-        $this->assertInstanceOf('Money\Currency', $this->jurisdiction->currency());
+    /** @test */
+    public function should_return_the_currency()
+    {
+         $this->assertEquals(new Currency('GBP'), $this->jurisdiction->currency());
+    }
+
+    /** @test */
+    public function should_return_the_locale()
+    {
+        $this->assertEquals('en_GB', $this->jurisdiction->locale());
     }
 }

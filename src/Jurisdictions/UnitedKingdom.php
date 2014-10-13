@@ -46,4 +46,14 @@ class UnitedKingdom implements Jurisdiction
     {
         return $this->currency;
     }
+
+    /**
+     * Return the locale
+     *
+     * @return string
+     */
+    public function locale()
+    {
+        return 'en_GB';
+    }
 }
