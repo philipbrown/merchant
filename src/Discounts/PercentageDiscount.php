@@ -1,6 +1,7 @@
 <?php namespace PhilipBrown\Merchant\Discounts;
 
 use PhilipBrown\Merchant\Product;
+use PhilipBrown\Merchant\Percent;
 use PhilipBrown\Merchant\Discount;
 
 class PercentageDiscount implements Discount
@@ -39,6 +40,6 @@ class PercentageDiscount implements Discount
      */
     public function rate()
     {
-        return $this->rate;
+        return new Percent($this->rate);
     }
 }
