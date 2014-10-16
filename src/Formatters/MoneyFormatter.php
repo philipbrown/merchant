@@ -12,11 +12,6 @@ class MoneyFormatter implements Formatter
     private $locale;
 
     /**
-     * @var Money
-     */
-    private $value;
-
-    /**
      * @var array
      */
     private static $currencies;
@@ -25,13 +20,11 @@ class MoneyFormatter implements Formatter
      * Create a new Money Formatter
      *
      * @param string $locale
-     * @param Money $value
      * @return void
      */
-    public function __construct($locale, Money $value)
+    public function __construct($locale)
     {
         $this->locale = $locale;
-        $this->value  = $value;
 
         if (! isset(static::$currencies)) {
            static::$currencies = json_decode(file_get_contents(__DIR__.'/currencies.json'));
@@ -41,15 +34,16 @@ class MoneyFormatter implements Formatter
     /**
      * Format an input to an output
      *
+     * @param mixed $value
      * @return mixed
      */
-    public function format()
+    public function format($value)
     {
         $formatter = new NumberFormatter($this->locale,  NumberFormatter::CURRENCY);
 
-        $code     = $this->code($this->value);
+        $code     = $this->code($value);
         $divisor  = $this->divisor($code);
-        $amount   = number_format(($this->value->getAmount() / $divisor), 2, '.', '');
+        $amount   = $this->convert($value, $divisor);
 
         return $formatter->formatCurrency($amount,  $code);
     }
@@ -74,5 +68,17 @@ class MoneyFormatter implements Formatter
     private function divisor($code)
     {
         return static::$currencies->$code->subunit_to_unit;
+    }
+
+    /**
+     * Convert subunits to units
+     *
+     * @param Money $money
+     * @param int $divisor
+     * @return float
+     */
+    private function convert(Money $money, $divisor)
+    {
+        return number_format(($money->getAmount() / $divisor), 2, '.', '');
     }
 }
