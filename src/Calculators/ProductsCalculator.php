@@ -29,6 +29,6 @@ class ProductsCalculator implements Calculator
      */
     public function name()
     {
-        return 'products';
+        return 'products_count';
     }
 }

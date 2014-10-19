@@ -1,10 +1,27 @@
 <?php namespace PhilipBrown\Merchant\Transformers;
 
 use PhilipBrown\Merchant\Order;
+use PhilipBrown\Merchant\Converter;
 use PhilipBrown\Merchant\Transformer;
 
 class JSONTransformer implements Transformer
 {
+    /**
+     * @var Converter
+     */
+    private $converter;
+
+    /**
+     * Create a new JSONTransformer
+     *
+     * @param Converter $converter
+     * @return void
+     */
+    public function __construct(Converter $converter)
+    {
+        $this->converter = $converter;
+    }
+
     /**
      * Transform the Order
      *
@@ -13,6 +30,18 @@ class JSONTransformer implements Transformer
      */
     public function transform(Order $order)
     {
-        return json_encode($order->toArray());
+        $payload = ['products' => []];
+
+        foreach ($order->totals() as $key => $total) {
+            $payload[$key] = $this->converter->convert($total);
+        }
+
+        foreach ($order->products() as $product) {
+            $payload['products'] = array_map(function ($value) {
+                return $this->converter->convert($value);
+            }, $product);
+        }
+
+        return json_encode($payload);
     }
 }

@@ -15,8 +15,8 @@ class OrderTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function should_have_gettable_totals_and_products_arrays()
     {
-        $this->assertTrue(is_array($this->order->totals));
-        $this->assertTrue(is_array($this->order->products));
+        $this->assertTrue(is_array($this->order->totals()));
+        $this->assertTrue(is_array($this->order->products()));
     }
 
     /** @test */

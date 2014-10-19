@@ -177,4 +177,10 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Maggie', $this->collection->get(3));
         $this->assertEquals('Marge', $this->collection->get(4));
     }
+
+    /** @test */
+    public function should_return_collection_as_array()
+    {
+        $this->assertEquals($this->items, $this->collection->toArray());
+    }
 }

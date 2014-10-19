@@ -1,27 +1,40 @@
-<?php namespace PhilipBrown\Merchant;
+<?php namespace PhilipBrown\Merchant\Tests;
 
 use PhilipBrown\Merchant\Order;
+use PhilipBrown\Merchant\Converter;
+use PhilipBrown\Merchant\Processor;
+use PhilipBrown\Merchant\Fixtures\BasketFixture;
 use PhilipBrown\Merchant\Transformers\JSONTransformer;
+use PhilipBrown\Merchant\Reconcilers\UnitedKingdomReconciler;
 
 class JSONTransformerTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var Order */
-    private $order;
+    /** @var BasketFixture */
+    private $fixtures;
+
+    /** @var Processor */
+    private $processor;
 
     /** @var Transformer */
     private $transformer;
 
     public function setUp()
     {
-        $this->order = new Order([], []);
-        $this->transformer = new JSONTransformer;
+        $reconciler      = new UnitedKingdomReconciler;
+        $this->fixtures  = new BasketFixture;
+
+        $this->processor   = new Processor($reconciler);
+
+        $this->transformer = new JSONTransformer(new Converter('en_GB'));
     }
 
     /** @test */
-    public function should_transform_to_json()
+    public function should_transform_basket_to_json()
     {
-        $payload = $this->transformer->transform($this->order);
+        $order = $this->processor->process($this->fixtures->zero());
 
-        $this->assertTrue(is_object(json_decode($payload)));
+        $output = $this->transformer->transform($order);
+
+        $this->assertTrue(is_object(json_decode($output)));
     }
 }

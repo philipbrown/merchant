@@ -20,7 +20,7 @@ class ProductsCalculatorTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function should_return_the_name_of_the_calculator()
     {
-        $this->assertEquals('products', $this->calculator->name());
+        $this->assertEquals('products_count', $this->calculator->name());
     }
 
     /** @test */

@@ -236,6 +236,16 @@ class Collection implements Countable, IteratorAggregate
     }
 
     /**
+     * Return the Collection as an array
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->items;
+    }
+
+    /**
      * Get an iterator for the items
      *
      * @return ArrayIterator
