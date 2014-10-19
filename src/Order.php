@@ -26,6 +26,26 @@ class Order
     }
 
     /**
+     * Return the totals
+     *
+     * @return array
+     */
+    public function totals()
+    {
+        return $this->totals;
+    }
+
+    /**
+     * Return the products
+     *
+     * @return array
+     */
+    public function products()
+    {
+        return $this->products;
+    }
+
+    /**
      * Return the Order as an array
      *
      * @return array
@@ -33,18 +53,5 @@ class Order
     public function toArray()
     {
         return array_merge($this->totals, ['products' => $this->products]);
-    }
-
-    /**
-     * Get the private attributes
-     *
-     * @param string $key
-     * @return mixed
-     */
-    public function __get($key)
-    {
-        if (property_exists($this, $key)) {
-            return $this->$key;
-        }
     }
 }
