@@ -49,14 +49,4 @@ class ProductWasRemovedFromBasket extends AbstractEvent implements EventInterfac
     {
         return $this->products;
     }
-
-    /**
-     * Return the name of the Event
-     *
-     * @return string
-     */
-    public function name()
-    {
-        return 'ProductWasRemovedFromBasket';
-    }
 }

@@ -25,12 +25,6 @@ class ProductWasUpdatedInBasketTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function should_return_event_name()
-    {
-        $this->assertEquals('ProductWasUpdatedInBasket', $this->event->name());
-    }
-
-    /** @test */
     public function should_return_product()
     {
         $this->assertInstanceOf('PhilipBrown\Merchant\Product', $this->event->product());

@@ -49,14 +49,4 @@ class ProductWasAddedToBasket extends AbstractEvent implements EventInterface
     {
         return $this->products;
     }
-
-    /**
-     * Return the name of the Event
-     *
-     * @return string
-     */
-    public function name()
-    {
-        return 'ProductWasAddedToBasket';
-    }
 }
