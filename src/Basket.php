@@ -2,6 +2,7 @@
 
 use Closure;
 use Money\Money;
+use League\Event\Emitter;
 use PhilipBrown\Merchant\Evenys\ProductWasAddedToBasket;
 use PhilipBrown\Merchant\Evenys\ProductWasUpdatedInBasket;
 use PhilipBrown\Merchant\Evenys\ProductWasRemovedFromBasket;
@@ -24,9 +25,9 @@ class Basket
     private $products;
 
     /**
-     * @var Dispatcher
+     * @var Emitter
      */
-    private $dispatcher;
+    private $emitter;
 
     /**
      * Create a new Basket
@@ -34,12 +35,12 @@ class Basket
      * @param Jurisdiction $jurisdiction
      * @return void
      */
-    public function __construct(Jurisdiction $jurisdiction, Dispatcher $dispatcher = null)
+    public function __construct(Jurisdiction $jurisdiction, Emitter $emitter = null)
     {
         $this->rate       = $jurisdiction->rate();
         $this->currency   = $jurisdiction->currency();
         $this->products   = new Collection;
-        $this->dispatcher = $dispatcher;
+        $this->emitter = $emitter;
     }
 
     /**
@@ -112,8 +113,8 @@ class Basket
 
         $this->products->add($sku, $product);
 
-        if ($this->dispatcher) {
-            $this->dispatcher->fire(new ProductWasAddedToBasket($product, $this->products));
+        if ($this->emitter) {
+            $this->emitter->fire(new ProductWasAddedToBasket($product, $this->products));
         }
     }
 
@@ -130,8 +131,8 @@ class Basket
 
         $product->action($action);
 
-        if ($this->dispatcher) {
-            $this->dispatcher->fire(new ProductWasUpdatedInBasket($product, $this->products));
+        if ($this->emitter) {
+            $this->emitter->fire(new ProductWasUpdatedInBasket($product, $this->products));
         }
     }
 
@@ -147,8 +148,8 @@ class Basket
 
         $this->products->remove($sku);
 
-        if ($this->dispatcher) {
-            $this->dispatcher->fire(new ProductWasRemovedToBasket($product, $this->products));
+        if ($this->emitter) {
+            $this->emitter->fire(new ProductWasRemovedFromBasket($product, $this->products));
         }
     }
 }

@@ -1,10 +1,11 @@
 <?php namespace PhilipBrown\Merchant\Events;
 
-use PhilipBrown\Merchant\Event;
+use League\Event\AbstractEvent;
+use League\Event\EventInterface;
 use PhilipBrown\Merchant\Product;
 use PhilipBrown\Merchant\Collection;
 
-class ProductWasRemovedFromBasket implements Event
+class ProductWasRemovedFromBasket extends AbstractEvent implements EventInterface
 {
     /**
      * @var Product
